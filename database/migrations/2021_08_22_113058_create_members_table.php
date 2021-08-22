@@ -39,7 +39,7 @@ class CreateMembersTable extends Migration
             $table->string('user_email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('user_type',50)->default('member');
-            $table->string('user_password')->default('');
+            $table->string('password')->default('');
             $table->rememberToken();
             $table->timestamps();
         });
