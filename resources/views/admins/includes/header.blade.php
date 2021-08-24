@@ -46,3 +46,10 @@
 
 <!---Skinmodes css-->
 <link href="{{ asset('adminpage/assets/css/skin-modes.css') }}" rel="stylesheet" />
+
+<!--- Animations css-->
+<link href="{{ asset('adminpage/assets/css/animate.css') }}" rel="stylesheet">
+
+<!-- Sweet-alert js  -->
+<script src="{{ asset('assets/plugins/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2/dist/sweetalert2.min.css') }}" />

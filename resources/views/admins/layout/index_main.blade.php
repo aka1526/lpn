@@ -33,9 +33,8 @@
         <!-- Footer opened -->
         <div class="main-footer ht-40">
             <div class="container-fluid pd-t-0-f ht-100p">
-                <span>Copyright © 2021 <a href="#">Valex</a>. Designed by <a href="https://www.spruko.com/">Spruko</a>
-                    All
-                    rights reserved.</span>
+                <span>Copyright © 2021 <a href="#">
+                    Lumpinee Academy Muaythai</a>. All rights reserved.</span>
             </div>
         </div>
         <!-- Footer closed -->
@@ -70,42 +69,25 @@
     <!-- Rating js-->
     <script src="{{ asset('adminpage/assets/plugins/rating/jquery.rating-stars.js')}}"></script>
     <script src="{{ asset('adminpage/assets/plugins/rating/jquery.barrating.js')}}"></script>
-
-    {{-- <!-- P-scroll js -->
-    <script src="{{ asset('adminpage/assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
-    <script src="{{ asset('adminpage/assets/plugins/perfect-scrollbar/p-scroll.js')}}"></script>
-
-    <!-- Sidemenu js-->
-    <script src="{{ asset('adminpage/assets/plugins/sidebar/sidebar.js') }}"></script>
-    <script src="{{ asset('adminpage/assets/plugins/sidebar/sidebar-custom.js')}}"></script> --}}
-
-    <!-- Eva-icons js -->
     <script src="{{ asset('adminpage/assets/js/eva-icons.min.js')}}"></script>
-
-    <!--Internal Apexchart js-->
-    <script src="{{ asset('adminpage/assets/js/apexcharts.js')}}"></script>
 
     <!-- Horizontalmenu js-->
     <script src="{{ asset('adminpage/assets/plugins/horizontal-menu/horizontal-menu-2/horizontal-menu.js')}}"></script>
 
     <!-- Sticky js -->
     <script src="{{ asset('adminpage/assets/js/sticky.js')}}"></script>
-
-    <!-- Internal Map -->
-    <script src="{{ asset('adminpage/assets/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-    <script src="{{ asset('adminpage/assets/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
-
-    <!-- Internal Chart js -->
-    <script src="{{ asset('adminpage/assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
-
-    <!--Internal  index js -->
-    <script src="{{ asset('adminpage/assets/js/index.js')}}"></script>
-    <script src="{{ asset('adminpage/assets/js/jquery.vmap.sampledata.js')}}"></script>
-
     <!-- custom js -->
     <script src="{{ asset('adminpage/assets/js/custom.js')}}"></script>
-    <script src="{{ asset('adminpage/assets/js/jquery.vmap.sampledata.js')}}"></script>
-
+    <meta name="_token" content="{{{ csrf_token() }}}"/>
+    @yield('adminjs')
+    <script>
+        $('.close').on('click', function() {
+            location.reload();
+        });
+        $.ajaxSetup({
+                headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+            });
+    </script>
 </body>
 
 </html>
