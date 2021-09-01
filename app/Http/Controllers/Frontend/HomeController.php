@@ -26,5 +26,11 @@ class HomeController extends Controller
          return view('frontend.pages.home',compact('slidepage'));
     }
 
+    public function index(Request $request)    {
+        $slidepage = Slidepage::where('slidepages_status', '=', 'Y')
+        ->orderBy('slidepages_index')->paginate($this->paging);
+        dd($slidepage);
+         return view('frontend.pages.home',compact('slidepage'));
+    }
    
 }
