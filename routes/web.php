@@ -9,8 +9,10 @@ use App\Http\Controllers\Admins\CourseItemController;
 use App\Http\Controllers\Admins\CKEditorController;
 use App\Http\Controllers\Admins\SlidepageController;
 
+###### frontend ###################
+Route::get('/', [HomeController::class, 'home'])->name('fn.home');
 
-Route::get('/', [HomeController::class, 'home']);
+###### Backend ###################
 
 Route::get('/pageadmin/dashboard', [AdminHomeController::class, 'admin'])->name('admin_dashboard');
 
