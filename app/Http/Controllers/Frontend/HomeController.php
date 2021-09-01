@@ -16,9 +16,9 @@ class HomeController extends Controller
      */
     public function home()
     {
-        $Slidepage =Slidepage::where('slidepages_status','=','Y')
+        $slidepage =Slidepage::where('slidepages_status','=','Y')
         ->orderBy('slidepages_index')->get();
-        return view('frontend.pages.home',compact('Slidepage'));
+        return view('frontend.pages.home',compact('slidepage'));
     }
 
     /**

@@ -17,7 +17,7 @@
       <span class="dotted dotted-10"></span>
    </div>
    <div id="yl-main-slider-3" class="yl-main-slider-wrap owl-carousel">
-      @foreach ($Slidepage as $item)
+      @foreach ($slidepage as $item)
       <div class="slider-main-item-3 position-relative">
          <div class="slider-main-img img-zooming" data-background="{{ isset($item->slidepages_img) ?  'images/slidepage/'.$item->slidepages_img :''}}"></div>
          <div class="slider-overlay"></div>
@@ -31,7 +31,7 @@
             </div>
          </div>
       </div>
-      @endforeach
+      @endforeach 
     
       {{-- <div class="slider-main-item-3 position-relative">
          <div class="slider-main-img img-zooming" data-background="assets/img//sd2.jpg"></div>
