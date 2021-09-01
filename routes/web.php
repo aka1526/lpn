@@ -1,7 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\frontend\HomeController;
-use App\Http\Controllers\admins\AdminHomeController;
+use App\Http\Controllers\Frontend\HomeController;
+
+use App\Http\Controllers\Admins\AdminHomeController;
 use App\Http\Controllers\Admins\AdminUserController;
 use App\Http\Controllers\Admins\AdminmenuController;
 use App\Http\Controllers\Admins\CourseController;
@@ -10,7 +11,7 @@ use App\Http\Controllers\Admins\CKEditorController;
 use App\Http\Controllers\Admins\SlidepageController;
 
 ###### frontend ###################
-Route::get('/', [HomeController::class, 'index'])->name('fn.home');
+Route::get('/', [HomeController::class, 'index'])->name('fn.index');
 
 ###### Backend ###################
 
