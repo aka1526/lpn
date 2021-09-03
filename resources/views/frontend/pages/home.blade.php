@@ -27,7 +27,7 @@
                <span>{{ isset($item->slidepages_headline) ?  $item->slidepages_headline :''}}</span>
                <h1> {{ isset($item->slidepages_header) ?  $item->slidepages_header :''}}  </h1>
                {!!  $item->slidepages_detail   !!} 
-               <a href="{{ isset($item->slidepages_link) ?  $item->slidepages_link :'#'}} "><i class="fas fa-user"></i> About us</a>
+               <a href="{{  $item->slidepages_link !='' ?  $item->slidepages_link :'#'}} "><i class="fas fa-user"></i> About us</a>
             </div>
          </div>
       </div>
