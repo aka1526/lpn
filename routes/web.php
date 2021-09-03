@@ -12,6 +12,9 @@ use App\Http\Controllers\Admins\SlidepageController;
 use App\Http\Controllers\Admins\NewsController;
 use App\Http\Controllers\Admins\SysinfoController;
 ###### frontend ###################
+Route::fallback(function () {
+  return view('/frontend/pages/404');
+});
 Route::get('/', [HomeController::class, 'index'])->name('fn.index');
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('fn.aboutus');
 Route::get('/contact', [HomeController::class, 'contact'])->name('fn.contact');
