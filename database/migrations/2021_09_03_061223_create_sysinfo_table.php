@@ -18,6 +18,8 @@ class CreateSysinfoTable extends Migration
             $table->string('sys_name',200)->primary();
             $table->string('sys_name_th',300)->nullable()->default('');
             $table->string('sys_address',300)->nullable()->default('');
+            
+            $table->string('sys_country',200)->nullable()->default('');
             $table->string('sys_slogan',300)->nullable()->default('');
             
             $table->string('sys_email1',200)->nullable()->default('');
