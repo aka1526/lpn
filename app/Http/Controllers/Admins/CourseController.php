@@ -12,6 +12,7 @@ use App\Models\Admins\User;
 use App\Models\Admins\Accessuid;
 use App\Models\Admins\Course;
 use App\Models\Admins\CourseItem;
+use App\Models\Admins\Pageheader;
 
 
 class CourseController extends Controller
@@ -58,6 +59,33 @@ class CourseController extends Controller
           
         return view('admins.pages.course_index', compact('course'));
     }
+
+
+    public function home(Request $request)
+    {
+        if( $this->GetUserUid()==''){
+            return  redirect(url('/pageadmin/adminlogin'))  ; 
+          }
+   
+        $courses = Pageheader::where('pageheader_type', '=', 'course')->first();
+          
+        return view('admins.pages.course_home', compact('courses'));
+    }
+
+    public function slide(Request $request)
+    {
+        if( $this->GetUserUid()==''){
+            return  redirect(url('/pageadmin/adminlogin'))  ; 
+          }
+   
+        $courses_slide = Pageheader::where('pageheader_type', '=', 'courses_slide')->first();
+          
+        return view('admins.pages.course_slide', compact('courses_slide'));
+    }
+    
+
+
+    
 
     public function add(Request $request)
     {
@@ -158,7 +186,7 @@ class CourseController extends Controller
         $uid =  $request->course_uid;
         
         $course = Course::where('course_uid', '=', $uid)->first();
-        $course_total= 0;
+       // $course_total= 0;
         $success = false;
         $message = 'fail';
         $response = [];
@@ -173,7 +201,7 @@ class CourseController extends Controller
                 'course_th' => "",
                 'course_description'=> $request->course_description,
                 'course_link' => "",
-                'course_total' =>$course_total,
+                //'course_total' =>$course_total,
                 'course_status' =>$request->course_status,
                 'course_icon' =>$request->course_icon,
                 
@@ -253,6 +281,138 @@ class CourseController extends Controller
         }
         
         return response()->json(['success' => $success, 'message' =>  $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+
+    
+
+    public function header(Request $request)
+    {
+       
+        if( $this->GetUserUid()==''){
+            return  redirect(url('/pageadmin/adminlogin'))  ; 
+          }
+   
+          $fields = $request->validate(
+            [
+
+                'pageheader_title' => 'required|string',
+                'pageheader_header' => 'required|string',
+                'pageheader_detail' => 'required|string',
+               
+            ],
+            [
+                'pageheader_title.required' => 'Title Is Required ',
+                'pageheader_header.required' => 'Header Is Required ',
+                'pageheader_detail.required' => 'Detail Is Required ',
+                
+
+            ]
+        );
+
+
+        $pageheader_type='course';
+
+        $pageheader =Pageheader::where('pageheader_type','=',$pageheader_type)->first();
+       
+        $success = false;
+        $message = 'fail';
+        $response = [];
+        
+        if($pageheader){
+
+            $action =  Pageheader::where('pageheader_uid','=',$request->pageheader_uid)->update([
+                'pageheader_title' =>$request->pageheader_title, 
+                'pageheader_header'=>$request->pageheader_header, 
+                 'pageheader_detail'=>$request->pageheader_detail
+
+            ]);
+
+        } else {
+
+            $pageheader_uid = $this->NewUid();
+            $action = Pageheader::insert([
+                'pageheader_uid' => $pageheader_uid ,
+                'pageheader_type' => $pageheader_type,
+                'pageheader_title' =>$request->pageheader_title, 
+                'pageheader_header'=>$request->pageheader_header, 
+                 'pageheader_detail'=>$request->pageheader_detail,
+                 'pageheader_status' => 'Y',
+
+            ]);
+
+        }
+        
+        $courses =Pageheader::where('pageheader_type','=',$pageheader_type)->first();   
+       
+        return view('admins.pages.course_home', compact('courses'));  
+        
+        //return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+
+    
+
+    public function courses_slide(Request $request)
+    {
+       
+        if( $this->GetUserUid()==''){
+            return  redirect(url('/pageadmin/adminlogin'))  ; 
+          }
+   
+          $fields = $request->validate(
+            [
+
+                'pageheader_title' => 'required|string',
+                'pageheader_header' => 'required|string',
+                
+               
+            ],
+            [
+                'pageheader_title.required' => 'Title Is Required ',
+                'pageheader_header.required' => 'Header Is Required ',
+                 
+                
+
+            ]
+        );
+
+
+        $pageheader_type='courses_slide';
+
+        $pageheader =Pageheader::where('pageheader_type','=',$pageheader_type)->first();
+       
+        $success = false;
+        $message = 'fail';
+        $response = [];
+        
+        if($pageheader){
+
+            $action =  Pageheader::where('pageheader_uid','=',$request->pageheader_uid)->update([
+                'pageheader_title' =>$request->pageheader_title, 
+                'pageheader_header'=>$request->pageheader_header, 
+                 'pageheader_detail'=>$request->pageheader_detail
+
+            ]);
+
+        } else {
+
+            $pageheader_uid = $this->NewUid();
+            $action = Pageheader::insert([
+                'pageheader_uid' => $pageheader_uid ,
+                'pageheader_type' => $pageheader_type,
+                'pageheader_title' =>$request->pageheader_title, 
+                'pageheader_header'=>$request->pageheader_header, 
+                 'pageheader_detail'=>$request->pageheader_detail,
+                 'pageheader_status' => 'Y',
+
+            ]);
+
+        }
+        
+        $courses_slide =Pageheader::where('pageheader_type','=',$pageheader_type)->first();   
+       
+        return view('admins.pages.course_slide', compact('courses_slide'));  
+        
+        //return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
     }
 
 

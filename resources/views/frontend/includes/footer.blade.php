@@ -2,20 +2,22 @@
     <div class="container">
        <div class="yl-footer-content-wrap">
           <div class="row">
+            @foreach(App\Models\Admins\Sysinfo::orderBy('sys_name','asc')->get() as $companyinfo)
              <div class="col-lg-3 col-md-6">
                 <div class="yl-footer-widget">
                    <div class="yl-footer-logo-widget yl-headline pera-content">
                       <div class="yl-footer-logo">
                          <a href="#"><img src="assets/img/logo2.png" alt=""></a>
                       </div>
-                      <p>We work with a passion of taking challenges and creating new ones in advertising sector.</p>
-                      <a class="footer-logo-btn text-center text-uppercase" href="#">About us</a>
+                      <p> {{ $companyinfo->sys_slogan  }}</p>
+                      <a class="footer-logo-btn text-center text-uppercase" href="{{ route('fn.aboutus')}}">About us</a>
                    </div>
                 </div>
              </div>
              <div class="col-lg-3 col-md-6">
                 <div class="yl-footer-widget">
                    <div class="yl-footer-newslatter-widget pera-content">
+                   
                       <h3 class="widget-title">Newsletter</h3>
                       <p>Subscribe our newsletter to get our
                          latest update & news
@@ -39,22 +41,23 @@
                 <div class="yl-footer-widget">
                    <div class="yl-footer-info-widget ul-li">
                       <h3 class="widget-title">Official info:</h3>
+                     
                       <ul>
                          <li>
                             <i class="fas fa-map-marker-alt"></i> 
-                            <a href="#">30 Commercial Road
-                            Fratton, Australia</a>
+                            <a href="#">{{ $companyinfo->sys_address .','.$companyinfo->sys_country }}</a>
                          </li>
                          <li>
-                            <i class="fas fa-phone"></i><a href="#">1-888-452-1505</a>
+                            <i class="fas fa-phone"></i><a href="#">{{ $companyinfo->sys_phone1  }}</a>
                          </li>
                       </ul>
                       <div class="office-open-hour">
                          <span>Open Hours: </span>
-                         <p>Mon - Sat: 8 am - 5 pm,
-                            Sunday: CLOSED
+                         <p> {{ $companyinfo->sys_openday  }}: {{ $companyinfo->sys_openhour  }} 
+                          
                          </p>
                       </div>
+                     
                    </div>
                 </div>
              </div>
@@ -75,6 +78,7 @@
                    </div>
                 </div>
              </div>
+             @endforeach
           </div>
        </div>
        <div class="yl-footer-copyright text-center"><span>© 2021 Lumpinee Academy Muaythai. All rights reserved.</span></div>

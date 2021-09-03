@@ -9,9 +9,12 @@ use App\Http\Controllers\Admins\CourseController;
 use App\Http\Controllers\Admins\CourseItemController;
 use App\Http\Controllers\Admins\CKEditorController;
 use App\Http\Controllers\Admins\SlidepageController;
-
+use App\Http\Controllers\Admins\NewsController;
+use App\Http\Controllers\Admins\SysinfoController;
 ###### frontend ###################
 Route::get('/', [HomeController::class, 'index'])->name('fn.index');
+Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('fn.aboutus');
+Route::get('/contact', [HomeController::class, 'contact'])->name('fn.contact');
 
 ###### Backend ###################
 
@@ -33,6 +36,7 @@ Route::post('/pageadmin/user/updatestatus', [AdminUserController::class, 'update
 Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete'])->name('admin.userdelete');
 
 
+
 //Route::get('/pageadmin/menu', [AminmenuController::class, 'index'])->name('admin.menu.index');
 
 // Route::resources([
@@ -46,6 +50,9 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/menu/update', [AdminmenuController::class, 'update'])->name('menu.update');
 
  Route::get('/pageadmin/course', [CourseController::class, 'index'])->name('course.index');
+ Route::get('/pageadmin/course/home', [CourseController::class, 'home'])->name('course.home');
+ Route::get('/pageadmin/course/slide', [CourseController::class, 'slide'])->name('course.slide');
+ 
  Route::get('/pageadmin/course/get', [CourseController::class, 'get'])->name('course.get');
  Route::get('/pageadmin/course/items/{courseuid}', [CourseController::class, 'items'])->name('course.items');
 
@@ -54,8 +61,9 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/course/update', [CourseController::class, 'update'])->name('course.update'); 
  Route::post('/pageadmin/course/delete', [CourseController::class, 'delete'])->name('course.delete'); 
  Route::post('/pageadmin/course/updatestatus', [CourseController::class, 'updatestatus'])->name('course.updatestatus'); 
-
-
+ Route::post('/pageadmin/course/header', [CourseController::class, 'header'])->name('course.header'); 
+ Route::post('/pageadmin/course/courses_slide', [CourseController::class, 'courses_slide'])->name('course.courses_slide');
+ 
  Route::post('/ckeditor_upload/uploadfunc', [CKEditorController::class, 'upload'] )->name('ckeditor.upload');
 
  Route::get('/pageadmin/course/items/add/{courseuid}', [CourseItemController::class, 'index'])->name('course.itemsindex');
@@ -74,3 +82,12 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/slidepage/update', [SlidepageController::class, 'update'])->name('slidepage.update');
  Route::post('/pageadmin/slidepage/status', [SlidepageController::class, 'status'])->name('slidepage.status');
  Route::post('/pageadmin/slidepage/delete', [SlidepageController::class, 'delete'])->name('slidepage.delete');
+
+
+ Route::get('/pageadmin/news/home', [NewsController::class, 'home'])->name('news.home');
+ Route::post('/pageadmin/news/header', [NewsController::class, 'header'])->name('news.header'); 
+
+ Route::get('/pageadmin/sysinfo', [SysinfoController::class, 'index'])->name('sysinfo.index');
+ Route::post('/pageadmin/sysinfo/add', [SysinfoController::class, 'add'])->name('sysinfo.add'); 
+
+ 

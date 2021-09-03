@@ -4,6 +4,8 @@
             <div class="yl-brand-logo float-left">
                 <a href="#"><img src="assets/img/logo/logo1.png" alt=""></a>
             </div>
+ 
+            @foreach(App\Models\Admins\Sysinfo::orderBy('sys_name','asc')->get() as $companyinfo)
             <div class="yl-header-top-cta float-right clearfix ul-li">
                 <ul>
                     <li>
@@ -12,7 +14,7 @@
                                 <img src="assets/img/icon/mail.png" alt="">
                             </div>
                             <div class="yl-top-cta-text float-right yl-headline">
-                                <a href="#">envato@gmail.com</a>
+                                <a href="#">{{ $companyinfo->sys_email1 }}</a>
                                 <h3>Mail us</h3>
                             </div>
                         </div>
@@ -24,7 +26,7 @@
                             </div>
                             <div class="yl-top-cta-text float-right yl-headline">
                                 <a href="#">Requesting a Call:</a>
-                                <h3>(210) 123 451</h3>
+                                <h3>{{ $companyinfo->sys_phone1 }}</h3>
                             </div>
                         </div>
                     </li>
@@ -34,8 +36,9 @@
                                 <img src="assets/img/icon/clock.png" alt="">
                             </div>
                             <div class="yl-top-cta-text float-right yl-headline">
-                                <a href="#">Sunday - Friday:</a>
-                                <h3>9am - 8pm</h3>
+                                
+                                <a href="#">{{ $companyinfo->sys_openday }}:</a>
+                                <h3>{{ $companyinfo->sys_openhour }}</h3>
                             </div>
                         </div>
                     </li>
@@ -45,13 +48,17 @@
                                 <img src="assets/img/icon/pin.png" alt="">
                             </div>
                             <div class="yl-top-cta-text float-right yl-headline">
-                                <a href="#">122 Albert St, Melbourne</a>
-                                <h3>Australia</h3>
+                                <a href="#">{{ $companyinfo->sys_address }}</a>
+                                <h3>{{ $companyinfo->sys_country }}</h3>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
+ 
+
+            @endforeach
+           
             <div class="yl-mobile-menu-wrap">
                 <div class="yl-mobile_menu position-relative">
                     <div class="yl-mobile_menu_button yl-open_mobile_menu">
@@ -68,11 +75,12 @@
                             </div>
                             <nav class="yl-mobile-main-navigation  clearfix ul-li">
                                 <ul id="m-main-nav" class="navbar-nav text-capitalize clearfix">
-                                    <li><a href="about.html">Home</a></li>
-                                    <li><a href="about.html">About</a></li>
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="{{ route('fn.aboutus')}}">About</a></li>
                                     <li class="dropdown">
                                         <a href="#">Course</a>
                                         <ul class="dropdown-menu clearfix">
+                                          
                                             <li><a target="" href="#">𝐁𝐞𝐠𝐢𝐧𝐧𝐞𝐫 Course </a></li>
                                             <li><a target="" href="#"> Middle Course</a></li>
                                             <li><a target="" href="#"> 𝐀𝐝𝐯𝐚𝐧𝐜𝐞 Course</a></li>
@@ -129,8 +137,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="about.html">News</a></li>
-                                    
-                                   
+                        
                                     
                                     <li class="dropdown">
                                         <a href="#">About us</a>
@@ -138,6 +145,7 @@
                                             <li><a target="" href="#">History</a></li>
                                             <li><a target="" href="#">Committees</a></li>
                                             <li><a target="" href="#">Constitution</a></li>
+                                            <li><a target="" href="#">History</a></li>
                                             
                                         </ul>
                                     </li>
@@ -155,15 +163,15 @@
             <div class="yl-main-nav-wrap  float-left">
                 <nav class="yl-main-navigation ul-li">
                     <ul id="main-nav" class="navbar-nav text-capitalize clearfix">
-                        <li><a href="about.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li class="dropdown">
-                            <a href="#">Course</a>
+                            <a href="#">Courses</a>
                             <ul class="dropdown-menu clearfix">
-                                <li><a target="" href="#">𝐁𝐞𝐠𝐢𝐧𝐧𝐞𝐫 Course </a></li>
-                                <li><a target="" href="#"> Middle Course</a></li>
-                                <li><a target="" href="#"> 𝐀𝐝𝐯𝐚𝐧𝐜𝐞 Course</a></li>
-                                <li><a target="" href="#"> Children Course</a></li>
-                                <li><a target="" href="#"> Normal Course </a></li>
+                               
+                                @foreach(App\Models\Admins\Course::where('course_status','=','Y')->orderBy('course_index','asc')->get() as $_item)
+                                    <li><a target="" href="{{ $_item->course_link =='' ? '#' : $_item->course_link }}">{{ $_item->course_name}}</a></li>
+                                @endforeach
+ 
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -224,9 +232,12 @@
                         <li class="dropdown">
                             <a href="#">About us</a>
                             <ul class="dropdown-menu clearfix">
+                                <li><a target="" href="{{ route('fn.aboutus')}}">About</a></li>
                                 <li><a target="" href="#">History</a></li>
                                 <li><a target="" href="#">Committees</a></li>
                                 <li><a target="" href="#">Constitution</a></li>
+                                <li><a target="" href="{{ route('fn.contact')}}">contact</a></li>
+                                
                                 
                             </ul>
                         </li>
