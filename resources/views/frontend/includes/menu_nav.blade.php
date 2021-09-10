@@ -2,7 +2,7 @@
     <div class="yl-header-top clearfix">
         <div class="container">
             <div class="yl-brand-logo float-left">
-                <a href="#"><img src="assets/img/logo/logo1.png" alt=""></a>
+                <a href="#"><img src="/assets/img/logo/logo1.png" alt=""></a>
             </div>
  
             @foreach(App\Models\Admins\Sysinfo::orderBy('sys_name','asc')->get() as $companyinfo)
@@ -11,7 +11,7 @@
                     <li>
                         <div class="header-top-cta-content">
                             <div class="yl-top-cta-icon float-left">
-                                <img src="assets/img/icon/mail.png" alt="">
+                                <img src="/assets/img/icon/mail.png" alt="">
                             </div>
                             <div class="yl-top-cta-text float-right yl-headline">
                                 <a href="#">{{ $companyinfo->sys_email1 }}</a>
@@ -22,7 +22,7 @@
                     <li>
                         <div class="header-top-cta-content">
                             <div class="yl-top-cta-icon float-left">
-                                <img src="assets/img/icon/call.png" alt="">
+                                <img src="/assets/img/icon/call.png" alt="">
                             </div>
                             <div class="yl-top-cta-text float-right yl-headline">
                                 <a href="#">Requesting a Call:</a>
@@ -33,7 +33,7 @@
                     <li>
                         <div class="header-top-cta-content">
                             <div class="yl-top-cta-icon float-left">
-                                <img src="assets/img/icon/clock.png" alt="">
+                                <img src="/assets/img/icon/clock.png" alt="">
                             </div>
                             <div class="yl-top-cta-text float-right yl-headline">
                                 
@@ -45,7 +45,7 @@
                     <li>
                         <div class="header-top-cta-content">
                             <div class="yl-top-cta-icon float-left">
-                                <img src="assets/img/icon/pin.png" alt="">
+                                <img src="/assets/img/icon/pin.png" alt="">
                             </div>
                             <div class="yl-top-cta-text float-right yl-headline">
                                 <a href="#">{{ $companyinfo->sys_address }}</a>
@@ -71,7 +71,7 @@
                                 <i class="fas fa-times"></i>
                             </div>
                             <div class="m-brand-logo text-center">
-                                <a href="#"><img src="assets/img/logo/logo4.png" alt=""></a>
+                                <a href="#"><img src="/assets/img/logo/logo4.png" alt=""></a>
                             </div>
                             <nav class="yl-mobile-main-navigation  clearfix ul-li">
                                 <ul id="m-main-nav" class="navbar-nav text-capitalize clearfix">
@@ -81,9 +81,7 @@
                                         <a href="#">Course</a>
                                         <ul class="dropdown-menu clearfix">
                                           
-                                            <li><a target="" href="#">𝐁𝐞𝐠𝐢𝐧𝐧𝐞𝐫 Course </a></li>
-                                            <li><a target="" href="#"> Middle Course</a></li>
-                                            <li><a target="" href="#"> 𝐀𝐝𝐯𝐚𝐧𝐜𝐞 Course</a></li>
+                                           
                                             <li><a target="" href="#"> Children Course</a></li>
                                             <li><a target="" href="#"> Normal Course </a></li>
                                         </ul>
@@ -169,7 +167,7 @@
                             <ul class="dropdown-menu clearfix">
                                
                                 @foreach(App\Models\Admins\Course::where('course_status','=','Y')->orderBy('course_index','asc')->get() as $_item)
-                                    <li><a target="" href="{{ $_item->course_link =='' ? '#' : $_item->course_link }}">{{ $_item->course_name}}</a></li>
+                                    <li><a target="" href="{{ $_item->course_link =='' ? '#' : '/course/'.$_item->course_link }}">{{ $_item->course_name}}</a></li>
                                 @endforeach
  
                             </ul>

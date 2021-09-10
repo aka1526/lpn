@@ -26,6 +26,7 @@ class CourseItem extends Model
         'courseref_name',
         'course_item_icon',
         'course_item_img',
+        'course_item_url',
        'created_at',
        'update_at',
     

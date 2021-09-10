@@ -105,6 +105,7 @@ class CourseItemController extends Controller
                 "course_item_price" => $request->course_item_price,
                 "course_item_duration" => $request->course_item_duration,
                 "course_item_certificate" => $request->course_item_certificate,
+                'course_item_url' =>  $course->course_link .'/'. str_replace(' ', '-', $request->course_item_name),
                 'created_at' => Carbon::now(),
                 'update_at' => Carbon::now()
             ]);
@@ -158,6 +159,8 @@ class CourseItemController extends Controller
           $uid=$request->course_item_uid;
           $courseItem = CourseItem::where('course_item_uid', '=', $uid)->first();
           $courseuid=  $courseItem->courseref_uid;
+          $course =Course::where('course_uid','=',$courseuid)->first();
+
           $Action=false;
           if($courseItem){
            
@@ -169,6 +172,7 @@ class CourseItemController extends Controller
                 "course_item_price" => $request->course_item_price,
                 "course_item_duration" => $request->course_item_duration,
                 "course_item_certificate" => $request->course_item_certificate,
+                'course_item_url' =>  $course->course_link .'/'. str_replace(' ', '-', $request->course_item_name),
                 "update_at" =>Carbon::now(),
 
             ]);

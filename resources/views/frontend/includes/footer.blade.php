@@ -1,4 +1,4 @@
-<footer id="yl-footer" class="yl-footer-section" data-background="assets/img/f-bg.jpg">
+<footer id="yl-footer" class="yl-footer-section" data-background="/assets/img/f-bg.jpg">
     <div class="container">
        <div class="yl-footer-content-wrap">
           <div class="row">
@@ -7,7 +7,7 @@
                 <div class="yl-footer-widget">
                    <div class="yl-footer-logo-widget yl-headline pera-content">
                       <div class="yl-footer-logo">
-                         <a href="#"><img src="assets/img/logo2.png" alt=""></a>
+                         <a href="#"><img src="/assets/img/logo2.png" alt=""></a>
                       </div>
                       <p> {{ $companyinfo->sys_slogan  }}</p>
                       <a class="footer-logo-btn text-center text-uppercase" href="{{ route('fn.aboutus')}}">About us</a>
@@ -67,12 +67,12 @@
                       <h3 class="widget-title">Instagram</h3>
                       <div class="insta-feed ul-li clearfix">
                          <ul>
-                            <li><a href="!#"><img src="assets/img/instagram/ins1.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
-                            <li><a href="!#"><img src="assets/img/instagram/ins2.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
-                            <li><a href="!#"><img src="assets/img/instagram/ins3.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
-                            <li><a href="!#"><img src="assets/img/instagram/ins4.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
-                            <li><a href="!#"><img src="assets/img/instagram/ins5.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
-                            <li><a href="!#"><img src="assets/img/instagram/ins6.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="!#"><img src="/assets/img/instagram/ins1.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="!#"><img src="/assets/img/instagram/ins2.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="!#"><img src="/assets/img/instagram/ins3.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="!#"><img src="/assets/img/instagram/ins4.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="!#"><img src="/assets/img/instagram/ins5.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="!#"><img src="/assets/img/instagram/ins6.jpg" alt=""><i class="fab fa-instagram"></i></a></li>
                          </ul>
                       </div>
                    </div>

@@ -93,7 +93,7 @@
                             
                             <div class="col-2 ">
                                 <div class="form-group ">
-                                    <label for="course_item_duration">Course Duration (day) </label>
+                                    <label for="course_item_duration">Course Duration (Hr.) </label>
                                     <input type="number" class="form-control" id="course_item_duration" name="course_item_duration"
                                       min="1" max="100" value="0" placeholder="Enter Course  Duration">
                                 </div>

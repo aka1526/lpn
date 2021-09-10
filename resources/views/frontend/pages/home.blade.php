@@ -19,11 +19,11 @@
    <div id="yl-main-slider-3" class="yl-main-slider-wrap owl-carousel">
       @foreach ($slidepage as $key => $item) 
       <div class="slider-main-item-3 position-relative">
-         <div class="slider-main-img img-zooming" data-background="{{ isset($item->slidepages_img) ?  'images/slidepage/'.$item->slidepages_img :''}}"></div>
+         <div class="slider-main-img img-zooming" data-background="{{ isset($item->slidepages_img) ?  '/images/slidepage/'.$item->slidepages_img :''}}"></div>
          <div class="slider-overlay"></div>
          <div class="container">
             <div class="slider-main-text yl-headline text-center position-relative pera-content">
-               <span class="shape-layer position-absolute"><img src="assets/img/s-shape.png" alt=""></span>
+               <span class="shape-layer position-absolute"><img src="/assets/img/s-shape.png" alt=""></span>
                <span>{{ isset($item->slidepages_headline) ?  $item->slidepages_headline :''}}</span>
                <h1> {{ isset($item->slidepages_header) ?  $item->slidepages_header :''}}  </h1>
                {!!  $item->slidepages_detail   !!} 

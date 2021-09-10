@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\CourseFnController;
 
 use App\Http\Controllers\Admins\AdminHomeController;
 use App\Http\Controllers\Admins\AdminUserController;
@@ -19,6 +20,9 @@ Route::get('/', [HomeController::class, 'index'])->name('fn.index');
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('fn.aboutus');
 Route::get('/contact', [HomeController::class, 'contact'])->name('fn.contact');
 
+Route::get('/course/{course_link}', [CourseFnController::class, 'index'])->name('fn.course_index');
+Route::get('/course/{course_link}/{detail}', [CourseFnController::class, 'detail'])->name('fn.course_detail');
+  
 ###### Backend ###################
 
 Route::get('/pageadmin/dashboard', [AdminHomeController::class, 'admin'])->name('admin_dashboard');
