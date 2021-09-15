@@ -56,7 +56,7 @@
                      <i class="{{ isset($item) ?  $item->course_icon : 'flaticon-design' }}"></i>
                   </div>
                   <div class="yl-top-category-slide-text yl-headline">
-                     <h3><a href="#">{{ $item->course_name }}</a></h3>
+                     <h3><a href="{{ '/course/'.$item->course_link }}">{{ $item->course_name }}</a></h3>
                      <span>{{ $item->course_total }} Courses</span>
                      <a class="top-cat-more-icon" href="#"><i class="fas fa-arrow-right"></i></a>
                   </div>
@@ -102,7 +102,8 @@
 
             <button class="filter-button" data-filter=".science">Normal class </button> --}}
          </div>
-         <div class="filtr-container-area grid clearfix" data-isotope="{ &quot;masonry&quot;: { &quot;columnWidth&quot;: 0 } }">
+         <div class="filtr-container-area grid clearfix" 
+         data-isotope="{ &quot;masonry&quot;: { &quot;columnWidth&quot;: 0 } }">
             <div class="grid-sizer"></div>
 
             @foreach ($courseAll as $course_item)
@@ -110,8 +111,8 @@
                <div class="yl-course-img-text">
                   <div class="yl-course-img position-relative">
                      <span class="c-price-tag">{{ $course_item->course_item_price >0 ? '$'.$course_item->course_item_price : 'Free' }}</span>
-                     <img src="assets/img/course/crs1.jpg" alt="">
-                     <span class="c-hover-icon"><a href="#"><i class="fas fa-plus"></i></a></span>
+                   <img src="{{ '/images/course/'.$course_item->course_item_uid.'/'. $course_item->course_item_home_img }}" alt=""> 
+                     <span class="c-hover-icon"><a href="{{ '/course/'. $course_item->course_item_url }}"><i class="fa fa-eye"></i></a></span>
                   </div>
                   <div class="yl-course-text">
                      <div class="yl-course-meta">
@@ -119,7 +120,7 @@
                         <a href="#"><i class="fas fa-user"></i> 20 Students</a>
                      </div>
                      <div class="yl-course-tilte-head yl-headline ul-li">
-                        <h3><a href="#">{{ $course_item->course_item_name }}</a></h3> 
+                        <h3><a href="{{ '/course/'. $course_item->course_item_url }}">{{ $course_item->course_item_name }}</a></h3> 
                         <ul>
                            <li><i class="fas fa-star"></i></li>
                            <li><i class="fas fa-star"></i></li>
@@ -519,81 +520,35 @@
       </div>
       <div class="yl-blog-content-4">
          <div class="row">
+            @foreach ($neweven as $itemNew)
             <div class="col-lg-4 col-md-6">
                <div class="yl-blog-img-text">
                   <div class="yl-blog-img text-center position-relative">
-                     <img src="assets/img/blg1.jpg" alt="">
+                     <img src="{{ $itemNew->news_img !='' ? '/images/news/'.$itemNew->news_url.'/thumbnails/'.$itemNew->news_img :'assets/img/blg1.jpg' }}" alt="">
                      <div class="yl-blog-date">
-                        <i class="fas fa-calendar-alt"></i> 15 th Feb, 2021
+                        <i class="fas fa-calendar-alt"></i>{{ \Carbon\Carbon::parse($itemNew->news_datetime)->format('jS M, Y') }}
                      </div>
                   </div>
                   <div class="yl-blog-text yl-headline pera-content">
                      <div class="yl-blog-meta text-uppercase">
                         <a href="#"><i class="far fa-user"></i> admin</a>
-                        <a href="#"><i class="far fa-folder-open"></i> branding</a>
+                        <a href="#"><i class="far fa-folder-open"></i> training</a>
                      </div>
                      <div class="yl-blog-title">
-                        <h3><a href="#">Five benefits of an IIE Higher
-                        Certificate in Law.</a> </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur to
-                           adipiscing elit, sed do eiusmod tempor tour
-                           rincididunt ut labore.
-                        </p>
+                        <h3>
+                           <a href="#">{{ $itemNew->news_toppic }}</a> 
+                     </h3>
+                     {!! $itemNew->news_desc !!}
                      </div>
                   </div>
                </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-               <div class="yl-blog-img-text">
-                  <div class="yl-blog-img text-center position-relative">
-                     <img src="assets/img/blg2.jpg" alt="">
-                     <div class="yl-blog-date">
-                        <i class="fas fa-calendar-alt"></i> 15 th Feb, 2021
-                     </div>
-                  </div>
-                  <div class="yl-blog-text yl-headline pera-content">
-                     <div class="yl-blog-meta text-uppercase">
-                        <a href="#"><i class="far fa-user"></i> admin</a>
-                        <a href="#"><i class="far fa-folder-open"></i> branding</a>
-                     </div>
-                     <div class="yl-blog-title">
-                        <h3><a href="#">What you might be know about
-                        getting an Honours.</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur to
-                           adipiscing elit, sed do eiusmod tempor tour
-                           rincididunt ut labore.
-                        </p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-               <div class="yl-blog-img-text">
-                  <div class="yl-blog-img text-center position-relative">
-                     <img src="assets/img/blg3.jpg" alt="">
-                     <div class="yl-blog-date">
-                        <i class="fas fa-calendar-alt"></i> 15 th Feb, 2021
-                     </div>
-                  </div>
-                  <div class="yl-blog-text yl-headline pera-content">
-                     <div class="yl-blog-meta text-uppercase">
-                        <a href="#"><i class="far fa-user"></i> admin</a>
-                        <a href="#"><i class="far fa-folder-open"></i> branding</a>
-                     </div>
-                     <div class="yl-blog-title">
-                        <h3><a href="#">Career paths to pursue with an
-                        IIE BA Degree.</a> </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur to
-                           adipiscing elit, sed do eiusmod tempor tour
-                           rincididunt ut labore.
-                        </p>
-                     </div>
-                  </div>
-               </div>
-            </div>
+            @endforeach
+            
+            
          </div>
          <div class="blog-btn-4 text-center">
-            <a href="#">View All News</a>
+            <a href="/news">View All News</a>
          </div>
       </div>
    </div>

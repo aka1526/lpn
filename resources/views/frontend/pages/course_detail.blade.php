@@ -5,7 +5,8 @@
 @section('content')
    <!-- Start of breadcrumb section
          ============================================= -->
-         <section id="yl-breadcrumb" class="yl-breadcrumb-section position-relative" data-background="/assets/img/banner/bn-bg1.jpg">
+         <section id="yl-breadcrumb" class="yl-breadcrumb-section position-relative" 
+         data-background="{{'/images/course/'.$courses_item->course_item_uid.'/'. $courses_item->course_item_header_img }}">
             <span class="breadcrumb-overlay position-absolute"></span>
             <div class="container">
                <div class="yl-breadcrumb-content text-center yl-headline"> 
@@ -31,7 +32,7 @@
                      <div class="col-lg-9">
                         <div class="course-details-tab-area">
                            <div class="course-details-main-img">
-                              <img src="/assets/img/banner/cd-bg.jpg" alt="">
+                              <img src="{{'/images/course/'.$courses_item->course_item_uid.'/'. $courses_item->course_item_detail_img }}" alt="">
                            </div>
                            <div class="course-details-tab-wrapper">
                               

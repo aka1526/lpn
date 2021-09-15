@@ -139,7 +139,7 @@
                                     
                                     <li class="dropdown">
                                         <a href="#">About us</a>
-                                        <ul class="dropdown-menu clearfix">
+                                         <ul class="dropdown-menu clearfix">
                                             <li><a target="" href="#">History</a></li>
                                             <li><a target="" href="#">Committees</a></li>
                                             <li><a target="" href="#">Constitution</a></li>
@@ -223,20 +223,18 @@
                                
                             </ul>
                         </li>
-                        <li><a href="about.html">News</a></li>
+                        <li><a href="/news">News</a></li>
                         
                        
                         
                         <li class="dropdown">
                             <a href="#">About us</a>
                             <ul class="dropdown-menu clearfix">
-                                <li><a target="" href="{{ route('fn.aboutus')}}">About</a></li>
-                                <li><a target="" href="#">History</a></li>
-                                <li><a target="" href="#">Committees</a></li>
-                                <li><a target="" href="#">Constitution</a></li>
-                                <li><a target="" href="{{ route('fn.contact')}}">contact</a></li>
-                                
-                                
+                                @foreach(App\Models\Admins\Aboutus::orderBy('aboutus_index','asc')->get() as $pageabout)
+                                <li><a target="" href="/aboutus/{{ $pageabout->aboutus_url}}">{{ $pageabout->aboutus_name}}</a></li>
+                                @endforeach
+                                <li><a target="" href="/contact">Contact</a></li>
+                                 
                             </ul>
                         </li>
                     </ul>

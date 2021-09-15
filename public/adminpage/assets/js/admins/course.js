@@ -23,14 +23,12 @@ $(document).on('click', '.btn-new', function() {
     $("#course_index").prop("disabled", true);
 });
 
-$(document).on('click', '.btn-save', function() {
+$(document).on('click', '.btn-save2', function() {
 
     //$('.btn-save').on('click', function() {
     //e.preventDefault();
     var form = $('#frm');
     var url = "/pageadmin/course/add";
-
-
     $.ajax({
         type: "POST",
         url: url,
@@ -47,7 +45,7 @@ $(document).on('click', '.btn-save', function() {
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
             }).then(() => {
-                location.reload();
+                //location.reload();
             });
 
         },
@@ -68,7 +66,7 @@ $(document).on('click', '.btn-edit', function() {
     var uid = $(this).data('uid');
     var url = "/pageadmin/course/get";
     // $("#modalcourse").attr('action', url);
-    $("#btn-save").removeClass('btn-save').addClass('btn-update');
+    // $("#btn-save").removeClass('btn-save').addClass('btn-update');
     var effect = $(this).attr('data-effect');
 
     $.ajax({
@@ -96,7 +94,7 @@ $(document).on('click', '.btn-edit', function() {
 
 
 //$('.btn-update').on('click', function() {
-$(document).on('click', '.btn-update', function() {
+$(document).on('click', '.btn-update2', function() {
     var uid = $(this).data('uid');
     var url = "/pageadmin/course/update";
     var data = $("#frm").serialize();
@@ -225,4 +223,29 @@ $('.btn-delete').on('click', function() {
         }
     })
 
+});
+
+
+
+$(document).on('change', ':file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [numFiles, label]);
+});
+
+// We can watch for our custom `fileselect` event like this
+$(document).ready(function() {
+    $(':file').on('fileselect', function(event, numFiles, label) {
+
+        var input = $(this).parents('.input-group').find(':text'),
+            log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+        if (input.length) {
+            input.val(log);
+        } else {
+            if (log) alert(log);
+        }
+
+    });
 });

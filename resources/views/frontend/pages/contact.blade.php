@@ -3,30 +3,20 @@
  หน้าหลัก 
  @endsection
 @section('content')
-  <!-- Start of breadcrumb section
-         ============================================= -->
-         <section id="yl-breadcrumb" class="yl-breadcrumb-section position-relative" data-background="assets/img/banner/bn-bg1.jpg">
-            <span class="breadcrumb-overlay position-absolute"></span>
-            <div class="container">
-               <div class="yl-breadcrumb-content text-center yl-headline"> 
-                  <h2>Contact Us</h2>
-                  <div class="yl-breadcrumb-item ul-li">
-                     <ul class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
-                   </ul>
-                </div>
-             </div>
-          </div>
-       </section>
-      <!-- End of breadcrumb section
-         ============================================= -->
+  
 
       <!-- Start of contact map section
          ============================================= -->   
          <div class="yl-googlemap">
             <div class="container">
-               <div id="yl_map" data-lat="43.653225" data-lon="-79.383186" data-zoom="12" data-info="Trinity Bellwoods Park" data-mlat="43.653225" data-mlon="-79.383186" data-marker="assets/img/map-m.png">
+               <div id="yl_map" 
+               data-lat="43.653225" 
+               data-lon="-79.383186" 
+               data-zoom="12" 
+               data-info="Trinity Bellwoods Park" 
+               data-mlat="43.653225" 
+               data-mlon="-79.383186"
+                data-marker="assets/img/map-m.png">
                </div>   
             </div>
          </div>
@@ -37,13 +27,7 @@
          ============================================= -->       
          <section id="contact-content" class="contact-content-section">
             <div class="container">
-               <div class="yl-section-title text-center yl-headline yl-title-style-two position-relative">
-                  <p class="title-watermark">Categories</p>
-                  <span>Top Categories </span>
-                  <h2>We have many courses in our
-                     top Categories
-                  </h2>
-               </div>
+              
                <div class="yl-contact-content-wrap">
                   <div class="row justify-content-center">
                      <div class="col-lg-4 col-md-6">
@@ -54,8 +38,8 @@
                            <div class="yl-contact-content-text yl-headline">
                               <h3>Address</h3>
                               <span>
-                                 212, Johnson Street
-                                 Melborne, Australia
+                                 <span> {{ $sysinfo->sys_address}}</span>
+                                 <span> {{ $sysinfo->sys_country}}</span>
                               </span>
                            </div>
                         </div>
@@ -67,8 +51,8 @@
                            </div>
                            <div class="yl-contact-content-text yl-headline">
                               <h3>Email Us</h3>
-                               <span>hello@yale.com</span>
-                              <span>sales@yale.com</span>
+                              <span> {{ $sysinfo->sys_email1}}</span>
+                               <span> {{ $sysinfo->sys_email2}}</span>
                            </div>
                         </div>
                      </div>
@@ -79,8 +63,8 @@
                            </div>
                            <div class="yl-contact-content-text yl-headline">
                               <h3>Phone No</h3>
-                              <span>+123 - 456 - 7890</span>
-                              <span>+123 - 456 - 7891</span>
+                              <span> {{ $sysinfo->sys_phone1}}</span>
+                              <span>{{ $sysinfo->sys_phone2}}</span>
                            </div>
                         </div>
                      </div>

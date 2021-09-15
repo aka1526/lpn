@@ -25,7 +25,7 @@
             </div>
             <!-- breadcrumb -->
             <!-- container opened -->
- <form id="frm" action="" method="POST" enctype="multipart/form-data">
+ <form id="frm" action="/pageadmin/course/items/update"  method="POST" enctype="multipart/form-data">
     @csrf
     <input type="hidden"  id="course_item_uid" name="course_item_uid"  value={{ $uid }}>
 
@@ -39,7 +39,16 @@
                                 <h4 class="card-title mg-b-0 text-white">
                                     <i class="fas fa-book-medical"></i> Courses Item Table
                                 </h4>
-                                 
+                                <div class="d-flex my-xl-auto right-content">
+                                    <div class="pr-1  mb-xl-0">
+
+                                        <a class=" btn btn-warning  btn-block " 
+                                        href="/pageadmin/course/items/{{ $courseuid }}">
+                                         <i class="fa fa-fast-backward"></i>
+                                            back</a>
+                                    </div>
+                                    
+                                </div>  
                             </div>
 
                         </div>
@@ -85,7 +94,7 @@
                         {{-- End Row --}}
                         {{-- Start Row --}}
                         <div class="row row-sm">
-                            <div class="col-2 ">
+                            <div class="col-md-2 col-sm-4 ">
                                 <div class="form-group ">
                                     <label for="course_item_price">Course Price </label>
                                     <input type="number" class="form-control" id="course_item_price" name="course_item_price"
@@ -93,15 +102,15 @@
                                 </div>
                             </div>
                             
-                            <div class="col-2 ">
+                            <div class="col-md-2 col-sm-4 ">
                                 <div class="form-group ">
                                     <label for="course_item_duration">Course Duration (Hr.) </label>
                                     <input type="number" class="form-control" id="course_item_duration" name="course_item_duration"
-                                      min="1" max="100" value="{{ $courseItem->course_item_duration }}" placeholder="Enter Course  Duration">
+                                      min="0" max="100" value="{{ $courseItem->course_item_duration }}" placeholder="Enter Course  Duration">
                                 </div>
                             </div>
                             
-                            <div class="col-2 ">
+                            <div class="col-md-2 col-sm-4 ">
                                 <div class="form-group ">
                                     <p class="mg-b-10">Certificate </p>
                                     <select class="form-control select2-no-search" id="course_item_certificate" name="course_item_certificate">
@@ -112,7 +121,7 @@
                                 </div>
                             </div>
                             
-                            <div class="col-2 ">
+                            <div class="col-md-2 col-sm-4 ">
                                 <div class="form-group ">
                                 <p class="mg-b-10">Status  </p>
                                 <select class="form-control select2-no-search" id="course_item_status" name="course_item_status">
@@ -126,10 +135,99 @@
 
                         {{-- End Row --}}
                        
+                        <div class="row row-sm">
+                            <div class="col-md-4 col-xl-4 col-xs-4 col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="main-content-label mg-b-5">
+                                            Imange Page Home
+                                        </div>
+                                        <p class="mg-b-20">Size 348x223 px</p>
+                                        <div class="row row-sm">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="input-group file-browser">
+                                                    <input type="text" class="form-control border-right-0 browse-file" placeholder="choose" readonly="">
+                                                    <label class="input-group-btn">
+                                                        <span class="btn btn-default">
+                                                            Browse <input type="file" id="img_home" name="img_home" style="display: none;"  >
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="course-details-tab-area">
+                                                <div class="course-details-main-img">
+                                                   <img src="{{ '/images/course/'.$courseItem->course_item_uid.'/'. $courseItem->course_item_home_img }}" alt="">
+                                                </div>
+                                          
+                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xl-4 col-xs-4 col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="main-content-label mg-b-5">
+                                           Imange Page Herder
+                                        </div>
+                                        <p class="mg-b-20">Size 1932x445 px</p>
+                                        <div class="row row-sm">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="input-group file-browser">
+                                                    <input type="text" class="form-control border-right-0 browse-file" placeholder="choose" readonly="">
+                                                    <label class="input-group-btn">
+                                                        <span class="btn btn-default">
+                                                            Browse <input type="file" id="img_herder" name="img_herder" style="display: none;"  >
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="course-details-tab-area">
+                                                <div class="course-details-main-img">
+                                                    <img src="{{ '/images/course/'.$courseItem->course_item_uid.'/'. $courseItem->course_item_header_img }}" alt="">
+                                                </div>
+                                          
+                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-xl-4 col-xs-4 col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="main-content-label mg-b-5">
+                                            Imange Page Detail
+                                        </div>
+                                        <p class="mg-b-20">Size 868x293 px</p>
+                                        <div class="row row-sm">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="input-group file-browser">
+                                                    <input type="text" class="form-control border-right-0 browse-file" placeholder="choose" readonly="">
+                                                    <label class="input-group-btn">
+                                                        <span class="btn btn-default">
+                                                            Browse <input type="file" id="img_detail" name="img_detail" style="display: none;"  >
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="course-details-tab-area">
+                                                <div class="course-details-main-img">
+                                                    <img src="{{ '/images/course/'.$courseItem->course_item_uid.'/'. $courseItem->course_item_detail_img }}" alt="">
+                                                </div>
+                                          
+                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+
+                        {{-- End Row --}}   
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="btn-save" class="btn ripple btn-primary btn-update">Save changes</button>
+                        <button type="submit" id="btn-save" class="btn ripple btn-primary btn-update">Save changes</button>
                         <button type="button" id="btn-close"  class="btn ripple btn-secondary bt-close" data-dismiss="modal">Close</button>
                     </div>
                         </div>

@@ -13,7 +13,8 @@ use App\Models\Admins\Accessuid;
 use App\Models\Admins\Course;
 use App\Models\Admins\CourseItem;
 use App\Models\Admins\Pageheader;
-
+use Image;
+use File;
 
 class CourseController extends Controller
 {
@@ -93,49 +94,116 @@ class CourseController extends Controller
         if( $this->GetUserUid()==''){
             return  redirect(url('/pageadmin/adminlogin'))  ; 
           }
-   
-          $fields = $request->validate(
-            [
 
-                'course_name' => 'required|string|unique:courses,course_name',
-                
-               
-            ],
-            [
-                'course_name.required' => 'Course Name Is Required ',
-                'course_name.unique' => 'Course Name Is Duplicate ',
-              
-                
+         
 
-            ]
-        );
+        
+       
         $success = false;
         $message = 'fail';
         $response = [];
         $course_total =0;
         $course_index = Course::max('course_index');
-         
-        $uid = $this->NewUid();
-        $action = Course::create([
-            'course_uid'=> $uid,
-            'course_index' =>  (int)$course_index+1,
-            'course_name' =>$request->course_name,
-            'course_th' => "",
-            'course_description'=> $request->course_description,
-            'course_link' =>  str_replace(' ', '-', $request->course_name),
-            'course_total' =>$course_total,
-            'course_status' =>$request->course_status,
-            'course_icon' =>$request->course_icon,
-            'created_at' => Carbon::now(),
-            'update_at' => Carbon::now(),
           
+        if( $request->course_uid  !='' ) {
 
-        ]);
-        if ($action) {
-            $success = $action;
-            $message = 'success';
+            $fields = $request->validate(
+                [
+                    'course_uid' => 'required|string',
+                    'course_name' => 'required|string',
+                ],
+                [
+                    'course_uid.required' => 'Password Is Required For Your Information Safety.',
+                    'course_name.required' => 'Course Name Is Required ',
+                    
+                  
+                ]
+            );
+           
+            $uid =  $request->course_uid;
+        
+            $course = Course::where('course_uid', '=', $uid)->first();
+           // $course_total= 0;
+            $success = false;
+            $message = 'fail';
             $response = [];
+            if ($course) {
+
+                $success = true;
+              
+                $message = 'success';
+                $success =  Course::where('course_uid', '=', $uid)->update([
+                   
+                    'course_index' =>$request->course_index,
+                    'course_name' =>$request->course_name,
+                    'course_th' => "",
+                    'course_description'=> $request->course_description,
+                    'course_link' => str_replace(' ', '-', $request->course_name),
+                    //'course_total' =>$course_total,
+                    'course_status' =>$request->course_status,
+                    'course_icon' =>$request->course_icon,
+                    
+                    'update_at' => Carbon::now(),
+    
+                ]);
+
+                $course_img = $this->uploadFile($request, $uid ) ;
+                if( $course_img !=''){
+                    Course::where('course_uid', '=', $uid)->update([
+                        'course_img' => $course_img
+                        ]);
+                }
+               
+               
+            }
+            
+
+        } else {
+
+            $fields = $request->validate(
+                [
+    
+                    'course_name' => 'required|string|unique:courses,course_name',
+                    
+                   
+                ],
+                [
+                    'course_name.required' => 'Course Name Is Required ',
+                    'course_name.unique' => 'Course Name Is Duplicate ',
+                      ]
+            );
+
+            $uid =   $this->NewUid();
+
+            $course_img = $this->uploadFile($request, $uid ) ;
+             
+            $action = Course::insert([
+                'course_uid'=> $uid,
+                'course_index' =>  (int)$course_index+1,
+                'course_name' =>$request->course_name,
+                'course_th' => "",
+                'course_img' => $course_img ,
+                'course_description'=> $request->course_description,
+                'course_link' =>  str_replace(' ', '-', $request->course_name),
+                'course_total' =>$course_total,
+                'course_status' =>$request->course_status,
+                'course_icon' =>$request->course_icon,
+                'created_at' => Carbon::now(),
+                'update_at' => Carbon::now(),
+              
+    
+            ]);
+            
+    
+            if ($action) {
+                $success = $action;
+                $message = 'success';
+                $response = [];
+            }
+             
         }
+        return redirect()->back();
+       
         //return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
     }
 
@@ -415,5 +483,32 @@ class CourseController extends Controller
         //return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
     }
 
+    public function uploadFile(Request $request,$uid='')
+    {
+        $image = $request->file('fileupload');
+        $uid = $uid !='' ? $uid :   $request->course_uid;
+        $imagename = '';
+        if ($image) {
+            $imagename = time() . '.' . $image->extension();
+
+            $filePath = public_path('/images/course/'.$uid);
+            $filePath_thumbnails = public_path('/images/course/'.$uid.'/thumbnails');
+            if (!File::exists($filePath_thumbnails)) {
+
+                File::makeDirectory($filePath_thumbnails, 0755, true, true);
+            }
+
+            $image_thumbnail = Image::make($image->getRealPath());
+            $image_thumbnail->resize(445, 200); //
+            $image_thumbnail->save($filePath_thumbnails . '/' . $imagename);
+            
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->resize(1932, 445); //
+            $image_resize->save($filePath . '/' . $imagename);
+            
+        }
+
+        return $imagename;
+    }
 
 }

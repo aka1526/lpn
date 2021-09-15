@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use File;
+use Image;
 
 class CKEditorController extends Controller
 {
@@ -15,9 +17,15 @@ class CKEditorController extends Controller
             $fileName = pathinfo($originName, PATHINFO_FILENAME);
             $extension = $request->file('upload')->getClientOriginalExtension();
             $fileName = $fileName.'_'.time().'.'.$extension;
-            $request->file('upload')->move(public_path('images'), $fileName);
+            $filePath = public_path('/images/ckeditor');
+            if (!File::exists($filePath)) {
+
+                File::makeDirectory($filePath, 0755, true, true);
+            }
+
+            $request->file('upload')->move( $filePath, $fileName);
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('images/'.$fileName); 
+            $url =  '/images/ckeditor/'.$fileName; 
             $msg = 'Image successfully uploaded'; 
             $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
                

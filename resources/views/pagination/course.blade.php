@@ -3,7 +3,7 @@
      
 
 
-      <ul class="">
+      <ul>
         
         @foreach ($elements as $element)
    

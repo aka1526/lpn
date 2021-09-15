@@ -12,12 +12,48 @@ use App\Http\Controllers\Admins\CKEditorController;
 use App\Http\Controllers\Admins\SlidepageController;
 use App\Http\Controllers\Admins\NewsController;
 use App\Http\Controllers\Admins\SysinfoController;
+use App\Http\Controllers\Admins\AboutusController;
+
 ###### frontend ###################
 Route::fallback(function () {
   return view('/frontend/pages/404');
 });
 Route::get('/', [HomeController::class, 'index'])->name('fn.index');
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('fn.aboutus');
+Route::get('/aboutus/{url}', [HomeController::class, 'aboutus_page'])->name('fn.aboutus_page');
+
+Route::get('/news', [HomeController::class, 'news'])->name('fn.news');
+ 
+
+
+// Route::get('/aboutus/about', [HomeController::class, 'aboutus_about'])->name('fn.aboutus_about');
+// Route::get('/aboutus/history', [HomeController::class, 'aboutus_history'])->name('fn.aboutus_history');
+// Route::get('/aboutus/committees', [HomeController::class, 'aboutus_committees'])->name('fn.aboutus_committees');
+// Route::get('/aboutus/constitution', [HomeController::class, 'aboutus_constitution'])->name('fn.aboutus_constitution');
+// Route::get('/aboutus/contact', [HomeController::class, 'aboutus_contact'])->name('fn.aboutus_contact');
+
+
+
+// Route::get('/aboutus/About', function () {
+//   return view('frontend/pages/aboutus_About');
+// });
+// Route::get('/aboutus/Page-History', function () {
+//   return view('frontend/pages/aboutus_Page-History');
+// });
+// Route::get('/aboutus/Committees', function () {
+//   return view('frontend/pages/aboutus_Committees');
+// });
+// Route::get('/aboutus/Constitution', function () {
+//   return view('frontend/pages/aboutus_Constitution');
+// });
+
+// Route::get('/aboutus/Contact', function () {
+//   return view('frontend/pages/aboutus_Contact');
+// });
+
+
+
+
 Route::get('/contact', [HomeController::class, 'contact'])->name('fn.contact');
 
 Route::get('/course/{course_link}', [CourseFnController::class, 'index'])->name('fn.course_index');
@@ -91,10 +127,26 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/slidepage/delete', [SlidepageController::class, 'delete'])->name('slidepage.delete');
 
 
- Route::get('/pageadmin/news/home', [NewsController::class, 'home'])->name('news.home');
- Route::post('/pageadmin/news/header', [NewsController::class, 'header'])->name('news.header'); 
-
  Route::get('/pageadmin/sysinfo', [SysinfoController::class, 'index'])->name('sysinfo.index');
  Route::post('/pageadmin/sysinfo/add', [SysinfoController::class, 'add'])->name('sysinfo.add'); 
 
+ Route::get('/pageadmin/aboutus', [AboutusController::class, 'index'])->name('aboutus.index');
+ Route::get('/pageadmin/aboutus/new', [AboutusController::class, 'new'])->name('aboutus.new');
+ Route::get('/pageadmin/aboutus/edit/{uid}', [AboutusController::class, 'edit'])->name('aboutus.edit');
+ Route::post('/pageadmin/aboutus/add', [AboutusController::class, 'add'])->name('aboutus.add');
+ Route::post('/pageadmin/aboutus/update', [AboutusController::class, 'update'])->name('aboutus.update');
+ Route::post('/pageadmin/aboutus/upload', [AboutusController::class, 'uploadimg'])->name('aboutus.uploadimg');
  
+
+ 
+ Route::get('/pageadmin/news/home', [NewsController::class, 'home'])->name('news.home');
+ Route::get('/pageadmin/news/index', [NewsController::class, 'index'])->name('news.index');
+ Route::get('/pageadmin/news/new', [NewsController::class, 'new'])->name('news.new');
+ Route::get('/pageadmin/news/edit/{uid}', [NewsController::class, 'edit'])->name('news.edit');
+ Route::post('/pageadmin/news/add', [NewsController::class, 'add'])->name('news.add');
+ Route::post('/pageadmin/news/update', [NewsController::class, 'update'])->name('news.update');
+ Route::post('/pageadmin/news/updatestatus', [NewsController::class, 'updatestatus'])->name('news.updatestatus');
+ 
+
+ Route::post('/pageadmin/news/delete', [NewsController::class, 'delete'])->name('news.delete');
+ Route::post('/pageadmin/news/header', [NewsController::class, 'header'])->name('news.header'); 

@@ -130,7 +130,7 @@
 
     <!-- Modal effects -->
     <div class="modal " id="modalcourse">
-        <form id="frm" action="" method="POST" enctype="multipart/form-data">
+        <form id="frm" action="/pageadmin/course/add" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" id="course_uid" name="course_uid">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -199,11 +199,39 @@
                         </div>
 
                         {{-- End Row --}}
-                       
-
+                        <div class="row row-sm">
+                            <div class="col-md-6 col-xl-6 col-xs-6 col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="main-content-label mg-b-5">
+                                            Imange Page Home
+                                        </div>
+                                        <p class="mg-b-20">Size 1932x445 px</p>
+                                        <div class="row row-sm">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="input-group file-browser">
+                                                    <input type="text" class="form-control border-right-0 browse-file" placeholder="choose" readonly="">
+                                                    <label class="input-group-btn">
+                                                        <span class="btn btn-default">
+                                                            Browse <input type="file" id="fileupload" name="fileupload" style="display: none;"  >
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="course-details-tab-area">
+                                                <div class="course-details-main-img">
+                                                   {{-- <img src="{{ $courseItem->course_item_home_img }}" alt=""> --}}
+                                                </div>
+                                          
+                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="btn-save" class="btn ripple btn-primary btn-save">Save changes</button>
+                        <button type="submit" id="btn-save" class="btn ripple btn-primary btn-save">Save changes</button>
                         <button type="button" id="btn-close"  class="btn ripple btn-secondary bt-close" data-dismiss="modal">Close</button>
                     </div>
                 </div>

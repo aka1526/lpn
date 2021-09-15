@@ -51,6 +51,8 @@ Lumpinee Academy Muaythai</a>.
     <!-- JQuery min js -->
     <script src="{{ asset('adminpage/assets/plugins/jquery/jquery.min.js')}}"></script>
 
+    <script src="{{ asset('adminpage/assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+
     <!-- Bootstrap Bundle js -->
     <script src="{{ asset('adminpage/assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 

@@ -5,7 +5,8 @@
 @section('content')
    <!-- Start of breadcrumb section
          ============================================= -->
-         <section id="yl-breadcrumb" class="yl-breadcrumb-section position-relative" data-background="/assets/img/banner/bn-bg1.jpg">
+         <section id="yl-breadcrumb" class="yl-breadcrumb-section position-relative" 
+         data-background="{{ isset($course->course_img ) ? '/images/course/'.$course->course_uid .'/'.$course->course_img : '/assets/img/banner/bn-bg1.jpg'}}">
             <span class="breadcrumb-overlay position-absolute"></span>
             <div class="container">
                <div class="yl-breadcrumb-content text-center yl-headline"> 
@@ -48,7 +49,7 @@
                         <div class="col-lg-4 col-md-6">
                            <div class="yl-popular-course-img-text">
                               <div class="yl-popular-course-img text-center">
-                                 <a href="{{ $item->course_item_url}}"> <img src="/assets/img/course/cpc1.jpg" alt=""></a>
+                                 <a href="{{ $item->course_item_url}}"> <img src="{{'/images/course/'.$item->course_item_uid.'/'. $item->course_item_home_img }}" alt=""></a>
                               </div>
                               <div class="yl-popular-course-text">
                                  <div class="popular-course-fee clearfix">

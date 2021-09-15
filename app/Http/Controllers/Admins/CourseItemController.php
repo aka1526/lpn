@@ -12,7 +12,8 @@ use App\Models\Admins\User;
 use App\Models\Admins\Accessuid;
 use App\Models\Admins\Course;
 use App\Models\Admins\CourseItem;
-
+use Image;
+use File;
 
 class CourseItemController extends Controller
 {
@@ -146,8 +147,9 @@ class CourseItemController extends Controller
           }
    
         $courseItem = CourseItem::where('course_item_uid', '=', $uid)->first();
+        $courseuid = $courseItem ->courseref_uid;
      
-        return view('admins.pages.course_item_edit', compact('courseItem','uid'));
+        return view('admins.pages.course_item_edit', compact('courseItem','uid','courseuid'));
     }
 
     public function update(Request $request)
@@ -156,6 +158,8 @@ class CourseItemController extends Controller
         if( $this->GetUserUid()==''){
             return  redirect(url('/pageadmin/adminlogin'))  ; 
           }
+
+          
           $uid=$request->course_item_uid;
           $courseItem = CourseItem::where('course_item_uid', '=', $uid)->first();
           $courseuid=  $courseItem->courseref_uid;
@@ -178,10 +182,18 @@ class CourseItemController extends Controller
             ]);
 
             if($Action){
-                $this->Update_total($courseuid);
+              $this->Update_total($courseuid);
+              $this->uploadFile($request);
             }
           }
-        
+
+    //       "img_home" => Symfony\Component\HttpFoundation\File\UploadedFile {#33 ▶}
+    //   "img_herder" => Symfony\Component\HttpFoundation\File\UploadedFile {#34 ▶}
+    //   "img_detail" => Symfony\Component\HttpFoundation\File\UploadedFile {#35 ▶}
+
+          $img_home=$request->img_home;
+          $img_home= $this->uploadFile($request,$img_home,1);
+
           $success = false;
           $message = 'fail';
           $response = [];
@@ -194,9 +206,9 @@ class CourseItemController extends Controller
               ];
           }
           
-  
-            // return redirect()->back() ;
-          return response()->json(['success' => $Action, 'message' =>  $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+          
+          return redirect('/pageadmin/course/items/edit/'.$uid);
+        //  return response()->json(['success' => $Action, 'message' =>  $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
      
         
@@ -295,6 +307,115 @@ class CourseItemController extends Controller
      
         
     }
+
+     public function uploadFile(Request $request)
+    {
+
+      
+        $course_item_uid= $request->course_item_uid;
+
+       if( $request->file('img_home') ){
+         $image1 = $request->file('img_home');
+         $image1name = '';
+         
+         if ($image1) {
+              
+             $image1name = 'home_'. $this->NewUid(). '.' . $image1->extension();
+             
+            $filePath = public_path('/images/course/'.$course_item_uid);
+             $filePath_thumbnails = public_path('/images/course/'.$course_item_uid.'/thumbnails');
+             if (!File::exists($filePath_thumbnails)) {
+ 
+                 File::makeDirectory($filePath_thumbnails, 0755, true, true);
+             }
+ 
+           
+                 $image1_resize = Image::make($image1->getRealPath());
+                 $image1_resize->resize(260,174); //
+                 $image1_resize->save($filePath_thumbnails . '/' . $image1name);
+             
+                 $image1_resize = Image::make($image1->getRealPath());
+                 $image1_resize->resize(260,174); //
+                 $image1_resize->save($filePath . '/' . $image1name);
+ 
+                 if($image1name!=''){
+                     CourseItem::where('course_item_uid', '=', $course_item_uid)->update([
+                         "course_item_home_img" =>   $image1name
+                     ]);
+                   }
+
+         }
+       }
+ 
+
+       if( $request->file('img_herder') ){
+        $image2 = $request->file('img_herder');
+        $image2name = '';
+        if ($image2) {
+             
+            $image2name = 'herder_'. $this->NewUid(). '.' . $image2->extension();
+            
+           $filePath = public_path('/images/course/'.$course_item_uid);
+            $filePath_thumbnails = public_path('/images/course/'.$course_item_uid.'/thumbnails');
+            if (!File::exists($filePath_thumbnails)) {
+
+                File::makeDirectory($filePath_thumbnails, 0755, true, true);
+            }
+
+          
+                $image2_resize = Image::make($image2->getRealPath());
+                $image2_resize->resize(1932,445); //
+                $image2_resize->save($filePath_thumbnails . '/' . $image2name);
+            
+                $image2_resize = Image::make($image2->getRealPath());
+                $image2_resize->resize(1932,445); //
+                $image2_resize->save($filePath . '/' . $image2name);
+
+                if($image2name!=''){
+                    CourseItem::where('course_item_uid', '=', $course_item_uid)->update([
+                        "course_item_header_img" =>   $image2name
+                    ]);
+                  }
+
+        }
+      }
+ 
+      if( $request->file('img_detail') ){
+        $image3 = $request->file('img_detail');
+        $image3name = '';
+        if ($image3) {
+             
+            $image3name = 'detail_'. $this->NewUid() . '.' . $image3->extension();
+            
+           $filePath = public_path('/images/course/'.$course_item_uid);
+            $filePath_thumbnails = public_path('/images/course/'.$course_item_uid.'/thumbnails');
+            if (!File::exists($filePath_thumbnails)) {
+
+                File::makeDirectory($filePath_thumbnails, 0755, true, true);
+            }
+
+          
+                $image3_resize = Image::make($image3->getRealPath());
+                $image3_resize->resize(868,293); //
+                $image3_resize->save($filePath_thumbnails . '/' . $image3name);
+
+                $image3_resize = Image::make($image3->getRealPath());
+                $image3_resize->resize(868,293); //
+                $image3_resize->save($filePath . '/' . $image3name);
+
+                if($image3name!=''){
+                    CourseItem::where('course_item_uid', '=', $course_item_uid)->update([
+                        "course_item_detail_img" =>   $image3name
+                    ]);
+                  }
+
+        }
+      }
+ 
+
+        return true;
+    }
+
 
 
 }

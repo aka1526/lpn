@@ -64,7 +64,7 @@
              <div class="col-lg-3 col-md-6">
                 <div class="yl-footer-widget">
                    <div class="yl-footer-instagram-widget">
-                      <h3 class="widget-title">Instagram</h3>
+                      <h3 class="widget-title">facebook</h3>
                       <div class="insta-feed ul-li clearfix">
                          <ul>
                             <li><a href="!#"><img src="/assets/img/instagram/ins1.jpg" alt=""><i class="fab fa-instagram"></i></a></li>

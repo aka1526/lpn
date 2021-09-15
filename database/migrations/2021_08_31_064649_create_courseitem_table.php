@@ -17,7 +17,7 @@ class CreateCourseitemTable extends Migration
             $table->string('course_item_uid',50)->primary();
             $table->integer('course_item_index')->default(0);
             $table->string('course_item_name',200)->nullable()->default('');
-            $table->string('Course_details',200)->nullable()->default('');
+            $table->string('Course_details',2000)->nullable()->default('');
             $table->string('Course_vdo_link',200)->nullable()->default('');
             $table->string('course_item_status',50)->nullable()->default('Y');
             $table->string('courseref_uid',50)->nullable()->default('');
