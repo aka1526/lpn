@@ -44,7 +44,7 @@ class CourseFnController extends Controller
      $course_item_url=$course_link.'/'.$item ;
      $course =Course::where('course_link','=',$course_link)->first();
      if(!$course){return view('/frontend/pages/404');}
-     $courses_item=CourseItem::where('course_item_url','=',$course_item_url)->first();
+          $courses_item=CourseItem::where('course_item_url','=',$course_item_url)->first();
      if(!$courses_item){return view('/frontend/pages/404');}
 
      return view('frontend.pages.course_detail',compact('course','courses_item'));

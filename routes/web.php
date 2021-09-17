@@ -59,6 +59,10 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('fn.contact');
 Route::get('/course/{course_link}', [CourseFnController::class, 'index'])->name('fn.course_index');
 Route::get('/course/{course_link}/{detail}', [CourseFnController::class, 'detail'])->name('fn.course_detail');
   
+
+
+
+
 ###### Backend ###################
 
 Route::get('/pageadmin/dashboard', [AdminHomeController::class, 'admin'])->name('admin_dashboard');

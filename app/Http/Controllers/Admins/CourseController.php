@@ -184,7 +184,7 @@ class CourseController extends Controller
                 'course_th' => "",
                 'course_img' => $course_img ,
                 'course_description'=> $request->course_description,
-                'course_link' =>  str_replace(' ', '-', $request->course_name),
+                'course_link' =>  strtolower(str_replace(' ', '-', $request->course_name)),
                 'course_total' =>$course_total,
                 'course_status' =>$request->course_status,
                 'course_icon' =>$request->course_icon,
@@ -268,7 +268,7 @@ class CourseController extends Controller
                 'course_name' =>$request->course_name,
                 'course_th' => "",
                 'course_description'=> $request->course_description,
-                'course_link' => str_replace(' ', '-', $request->course_name),
+               // 'course_link' => strtolower(str_replace(' ', '-', $request->course_name)),
                 //'course_total' =>$course_total,
                 'course_status' =>$request->course_status,
                 'course_icon' =>$request->course_icon,
@@ -487,12 +487,15 @@ class CourseController extends Controller
     {
         $image = $request->file('fileupload');
         $uid = $uid !='' ? $uid :   $request->course_uid;
+
+        $course = Course::where('course_uid', '=', $uid)->first();
+        $course_link = $course->course_link;
         $imagename = '';
         if ($image) {
             $imagename = time() . '.' . $image->extension();
 
-            $filePath = public_path('/images/course/'.$uid);
-            $filePath_thumbnails = public_path('/images/course/'.$uid.'/thumbnails');
+            $filePath = public_path('/images/course/'.$course_link);
+            $filePath_thumbnails = public_path('/images/course/'.$course_link.'/thumbnails');
             if (!File::exists($filePath_thumbnails)) {
 
                 File::makeDirectory($filePath_thumbnails, 0755, true, true);

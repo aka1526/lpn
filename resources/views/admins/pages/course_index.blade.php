@@ -55,7 +55,7 @@
                                             <th class="text-center">NO</th>
                                             <th>Course Name</th>
                                             <th>Description</th>
-                                            
+                                            <th>imang</th>
                                             <th class="text-center">icon</th>
                                             <th class="text-center">Total</th>
                                             <th class="text-center">Status</th>
@@ -69,9 +69,10 @@
                                                 </th>
                                                 <td>{{ $row->course_name }}</td>
                                                 <td>{{ $row->course_description }}</td>
+                                                <td class="text-center" ><img alt="Responsive image" width="120px" height="60px" src="{{ '/images/course/'.$row->course_link.'/'. $row->course_img }}"> </td>
                                                 
                                                 <td class="text-center"> <h3>
-                                                    <i class="{{  $row->course_icon }}"></i>
+                                                    <i class="{{ $row->course_icon }}"></i>
                                                 
                                                 </h3>
                                                   </td>

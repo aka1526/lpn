@@ -156,7 +156,7 @@
                                             </div>
                                             <div class="course-details-tab-area">
                                                 <div class="course-details-main-img">
-                                                   <img src="{{ '/images/course/'.$courseItem->course_item_uid.'/'. $courseItem->course_item_home_img }}" alt="">
+                                                   <img src="{{ '/images/course/'.$courseItem->course_item_url.'/'. $courseItem->course_item_home_img }}" alt="">
                                                 </div>
                                           
                                              </div>
@@ -184,7 +184,7 @@
                                             </div>
                                             <div class="course-details-tab-area">
                                                 <div class="course-details-main-img">
-                                                    <img src="{{ '/images/course/'.$courseItem->course_item_uid.'/'. $courseItem->course_item_header_img }}" alt="">
+                                                    <img src="{{ '/images/course/'.$courseItem->course_item_url.'/'. $courseItem->course_item_header_img }}" alt="">
                                                 </div>
                                           
                                              </div>
@@ -212,7 +212,7 @@
                                             </div>
                                             <div class="course-details-tab-area">
                                                 <div class="course-details-main-img">
-                                                    <img src="{{ '/images/course/'.$courseItem->course_item_uid.'/'. $courseItem->course_item_detail_img }}" alt="">
+                                                    <img src="{{ '/images/course/'.$courseItem->course_item_url.'/'. $courseItem->course_item_detail_img }}" alt="">
                                                 </div>
                                           
                                              </div>

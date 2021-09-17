@@ -111,7 +111,7 @@
                <div class="yl-course-img-text">
                   <div class="yl-course-img position-relative">
                      <span class="c-price-tag">{{ $course_item->course_item_price >0 ? '$'.$course_item->course_item_price : 'Free' }}</span>
-                   <img src="{{ '/images/course/'.$course_item->course_item_uid.'/'. $course_item->course_item_home_img }}" alt=""> 
+                   <img src="{{ '/images/course/'.$course_item->course_item_url.'/'. $course_item->course_item_home_img }}" alt=""> 
                      <span class="c-hover-icon"><a href="{{ '/course/'. $course_item->course_item_url }}"><i class="fa fa-eye"></i></a></span>
                   </div>
                   <div class="yl-course-text">

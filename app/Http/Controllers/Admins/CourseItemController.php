@@ -74,12 +74,13 @@ class CourseItemController extends Controller
          $course_details = ($request->course_details);
         $fields = $request->validate(
             [
-
-                'course_item_name' => 'required|string',
+                'course_item_name' => 'required|string|unique:courses_item,course_item_name',
+              //  'course_item_name' => 'required|string',
                 'courseref_uid' => 'required|string'
             ],
             [
                 'course_item_name.required'    => ' Course Name Is Required For Your Information ',
+                'course_item_name.unique' => 'Course Name Is Duplicate ',
                 'courseref_uid.required' => 'Ref Course  Is Required For Your Information Safety.',
                 
             ]
@@ -95,6 +96,7 @@ class CourseItemController extends Controller
             $uid = $this->NewUid();
             $course_item_index=  CourseItem::where('courseref_uid','=',$course_uid)->max('course_item_index');
             $course_item_index=$course_item_index+1 ;
+            $url= strtolower($course->course_link ).'/'. strtolower(str_replace(' ', '-', $request->course_item_name));
             $Action = CourseItem::insert([
                 'course_item_uid' => $uid,
                 'course_item_index' =>  $course_item_index,
@@ -106,7 +108,7 @@ class CourseItemController extends Controller
                 "course_item_price" => $request->course_item_price,
                 "course_item_duration" => $request->course_item_duration,
                 "course_item_certificate" => $request->course_item_certificate,
-                'course_item_url' =>  $course->course_link .'/'. str_replace(' ', '-', $request->course_item_name),
+                'course_item_url' => $url,
                 'created_at' => Carbon::now(),
                 'update_at' => Carbon::now()
             ]);
@@ -164,7 +166,7 @@ class CourseItemController extends Controller
           $courseItem = CourseItem::where('course_item_uid', '=', $uid)->first();
           $courseuid=  $courseItem->courseref_uid;
           $course =Course::where('course_uid','=',$courseuid)->first();
-
+          $url=strtolower($course->course_link ).'/'.strtolower(str_replace(' ', '-', $request->course_item_name));
           $Action=false;
           if($courseItem){
            
@@ -176,7 +178,7 @@ class CourseItemController extends Controller
                 "course_item_price" => $request->course_item_price,
                 "course_item_duration" => $request->course_item_duration,
                 "course_item_certificate" => $request->course_item_certificate,
-                'course_item_url' =>  $course->course_link .'/'. str_replace(' ', '-', $request->course_item_name),
+               // 'course_item_url' =>    $url ,
                 "update_at" =>Carbon::now(),
 
             ]);
@@ -313,6 +315,10 @@ class CourseItemController extends Controller
 
       
         $course_item_uid= $request->course_item_uid;
+        //$url=strtolower(str_replace(' ', '-', $request->course_item_name));
+       // $course_item_uid =$request->course_item_name;
+        $item = CourseItem::where('course_item_uid', '=', $course_item_uid)->first();
+        $url=$item->course_item_url !='' ? $item->course_item_url : strtolower(str_replace(' ', '-', $request->course_item_name));
 
        if( $request->file('img_home') ){
          $image1 = $request->file('img_home');
@@ -321,9 +327,10 @@ class CourseItemController extends Controller
          if ($image1) {
               
              $image1name = 'home_'. $this->NewUid(). '.' . $image1->extension();
-             
-            $filePath = public_path('/images/course/'.$course_item_uid);
-             $filePath_thumbnails = public_path('/images/course/'.$course_item_uid.'/thumbnails');
+            
+
+            $filePath = public_path('/images/course/'. $url);
+             $filePath_thumbnails = public_path('/images/course/'. $url.'/thumbnails');
              if (!File::exists($filePath_thumbnails)) {
  
                  File::makeDirectory($filePath_thumbnails, 0755, true, true);
@@ -334,9 +341,9 @@ class CourseItemController extends Controller
                  $image1_resize->resize(260,174); //
                  $image1_resize->save($filePath_thumbnails . '/' . $image1name);
              
-                 $image1_resize = Image::make($image1->getRealPath());
-                 $image1_resize->resize(260,174); //
-                 $image1_resize->save($filePath . '/' . $image1name);
+                 $image1_resize2 = Image::make($image1->getRealPath());
+                 $image1_resize2->resize(260,174); //
+                 $image1_resize2->save($filePath . '/' . $image1name);
  
                  if($image1name!=''){
                      CourseItem::where('course_item_uid', '=', $course_item_uid)->update([
@@ -355,8 +362,8 @@ class CourseItemController extends Controller
              
             $image2name = 'herder_'. $this->NewUid(). '.' . $image2->extension();
             
-           $filePath = public_path('/images/course/'.$course_item_uid);
-            $filePath_thumbnails = public_path('/images/course/'.$course_item_uid.'/thumbnails');
+           $filePath = public_path('/images/course/'.$url);
+            $filePath_thumbnails = public_path('/images/course/'.$url.'/thumbnails');
             if (!File::exists($filePath_thumbnails)) {
 
                 File::makeDirectory($filePath_thumbnails, 0755, true, true);
@@ -367,9 +374,9 @@ class CourseItemController extends Controller
                 $image2_resize->resize(1932,445); //
                 $image2_resize->save($filePath_thumbnails . '/' . $image2name);
             
-                $image2_resize = Image::make($image2->getRealPath());
-                $image2_resize->resize(1932,445); //
-                $image2_resize->save($filePath . '/' . $image2name);
+                $image2_resize2 = Image::make($image2->getRealPath());
+                $image2_resize2->resize(1932,445); //
+                $image2_resize2->save($filePath . '/' . $image2name);
 
                 if($image2name!=''){
                     CourseItem::where('course_item_uid', '=', $course_item_uid)->update([
@@ -387,8 +394,8 @@ class CourseItemController extends Controller
              
             $image3name = 'detail_'. $this->NewUid() . '.' . $image3->extension();
             
-           $filePath = public_path('/images/course/'.$course_item_uid);
-            $filePath_thumbnails = public_path('/images/course/'.$course_item_uid.'/thumbnails');
+           $filePath = public_path('/images/course/'.$url);
+            $filePath_thumbnails = public_path('/images/course/'.$url.'/thumbnails');
             if (!File::exists($filePath_thumbnails)) {
 
                 File::makeDirectory($filePath_thumbnails, 0755, true, true);
@@ -399,9 +406,9 @@ class CourseItemController extends Controller
                 $image3_resize->resize(868,293); //
                 $image3_resize->save($filePath_thumbnails . '/' . $image3name);
 
-                $image3_resize = Image::make($image3->getRealPath());
-                $image3_resize->resize(868,293); //
-                $image3_resize->save($filePath . '/' . $image3name);
+                $image3_resize2 = Image::make($image3->getRealPath());
+                $image3_resize2->resize(868,293); //
+                $image3_resize2->save($filePath . '/' . $image3name);
 
                 if($image3name!=''){
                     CourseItem::where('course_item_uid', '=', $course_item_uid)->update([
