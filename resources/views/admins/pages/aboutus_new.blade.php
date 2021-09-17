@@ -108,14 +108,14 @@
     <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('assets/plugins/ckeditor/adapters/jquery.js') }}"></script> 
     <script type="text/javascript">
-        CKEDITOR.replace('aboutus_desc', {
+       /* CKEDITOR.replace('aboutus_desc', {
             filebrowserUploadUrl: "{{route('aboutus.uploadimg', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
         });
         CKEDITOR.add
         CKEDITOR.config.contentsCss = '/assets/css/style.css' ; 
         CKEDITOR.config.allowedContent = true;
-  
+  */
     </script>
 
 @endsection
