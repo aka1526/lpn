@@ -71,7 +71,7 @@ class AboutusController extends Controller
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
- 
+       
         $success = false;
         $message = 'fail';
         $response = [];
@@ -81,16 +81,16 @@ class AboutusController extends Controller
                 [
 
                     'aboutus_name' => 'required|string|unique:aboutus,aboutus_name',
-                    'aboutus_desc' => 'required',
+                   // 'aboutus_desc' => 'required',
 
                 ],
                 [
                     'aboutus_name.required' => 'Page Name Is Required ',
                     'aboutus_name.unique' => 'Page Name Is Duplicate ',
-                    'aboutus_desc.required' => 'Page Name Is Required ',
+                  //  'aboutus_desc.required' => 'Page Name Is Required ',
                 ]
             );
-
+          
             $uid = $this->NewUid();
             $url= $request->aboutus_url !='' ? $request->aboutus_url  :  str_replace(' ', '-', $request->aboutus_name)  ;
             $img_name =  $this->uploadFile($request, $url);
