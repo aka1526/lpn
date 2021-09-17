@@ -318,7 +318,7 @@ class CourseItemController extends Controller
         //$url=strtolower(str_replace(' ', '-', $request->course_item_name));
        // $course_item_uid =$request->course_item_name;
         $item = CourseItem::where('course_item_uid', '=', $course_item_uid)->first();
-        $url=$item->course_item_url !='' ? $item->course_item_url : strtolower(str_replace(' ', '-', $request->course_item_name));
+        $url= isset($item->course_item_url) && $item->course_item_url !='' ? $item->course_item_url : strtolower(str_replace(' ', '-', $request->course_item_name));
 
        if( $request->file('img_home') ){
          $image1 = $request->file('img_home');
