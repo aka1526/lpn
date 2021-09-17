@@ -242,4 +242,30 @@ public function uploadimg(Request $request, $uid = '')
         return $body_content;
      } 
 
+     
+    public function delete(Request $request)
+    {
+        if( $this->GetUserUid()==''){
+            return  redirect(url('/pageadmin/adminlogin'))  ; 
+          }
+         
+        $uid =  $request->uid;
+        
+        $aboutus = Aboutus::where('aboutus_uid', '=', $uid)->first();
+        
+        $success = false;
+        $message = 'fail';
+        $response = [];
+        if ($aboutus) {
+            $success = true;
+          
+            $message = 'success';
+            $success =  Aboutus::where('aboutus_uid', '=', $uid)->delete();
+            
+        }
+        
+        return response()->json(['success' => $success, 'message' =>  $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+
+
 }

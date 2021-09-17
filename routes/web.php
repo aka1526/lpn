@@ -139,6 +139,7 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::get('/pageadmin/aboutus/edit/{uid}', [AboutusController::class, 'edit'])->name('aboutus.edit');
  Route::post('/pageadmin/aboutus/add', [AboutusController::class, 'add'])->name('aboutus.add');
  Route::post('/pageadmin/aboutus/update', [AboutusController::class, 'update'])->name('aboutus.update');
+ Route::post('/pageadmin/aboutus/delete', [AboutusController::class, 'delete'])->name('aboutus.delete');
  Route::post('/pageadmin/aboutus/upload', [AboutusController::class, 'uploadimg'])->name('aboutus.uploadimg');
  
 

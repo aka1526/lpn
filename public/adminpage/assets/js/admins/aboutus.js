@@ -44,3 +44,48 @@ $(document).ready(function() {
 
     });
 });
+
+
+$('.btn-delete').on('click', function() {
+
+    var uid = $(this).data('uid');
+    var url = "/pageadmin/aboutus/delete";
+    var mtext = 'Yes, Delete it!';
+
+    Swal.fire({
+        title: 'Are you sure?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: mtext
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "post",
+                url: url,
+                data: { uid: uid, "_token": $('meta[name=_token]').attr('content') },
+                success: function(data) {
+
+                    if (data.success) {
+
+                        Swal.fire({
+                            title: 'Delete  Success.',
+                            text: "",
+                            icon: 'success',
+                            showCancelButton: false,
+                            timer: 1200,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                        }).then(() => {
+                            location.reload();
+                        });
+                    }
+                }
+
+            });
+        }
+    })
+
+});
