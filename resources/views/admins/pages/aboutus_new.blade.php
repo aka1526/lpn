@@ -49,14 +49,14 @@
                                         <label for="aboutus_header">Header Text</label>
                                         <input type="text" class="form-control" id="aboutus_header" name="aboutus_header" placeholder="Enter Header Text">
                                     </div>
-                                    {{-- <div class="row row-sm mg-t-20">
+                                    <div class="row row-sm mg-t-20">
                                        
 										<div class="col-lg-12 col-md-12 col-sm-12">
                                             <label for="aboutus_desc">body</label>
 											<textarea class="form-control" id="aboutus_desc" name="aboutus_desc" placeholder="body" rows="25" required></textarea>
 										</div>
 										 
-									</div> --}}
+									</div>
                                     <div class="row row-sm mg-t-20">
                                         {{-- <div class="col-lg-5 col-6 mg-t-5 mg-lg-t-0">
                                             <label for="aboutus_name">Url</label>
@@ -108,14 +108,14 @@
     <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('assets/plugins/ckeditor/adapters/jquery.js') }}"></script> 
     <script type="text/javascript">
-       /* CKEDITOR.replace('aboutus_desc', {
+        CKEDITOR.replace('aboutus_desc', {
             filebrowserUploadUrl: "{{route('aboutus.uploadimg', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
         });
         CKEDITOR.add
         CKEDITOR.config.contentsCss = '/assets/css/style.css' ; 
         CKEDITOR.config.allowedContent = true;
-  */
+  
     </script>
 
 @endsection
