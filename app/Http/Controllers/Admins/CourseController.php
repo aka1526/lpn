@@ -489,7 +489,7 @@ class CourseController extends Controller
         $uid = $uid !='' ? $uid :   $request->course_uid;
 
         $course = Course::where('course_uid', '=', $uid)->first();
-        $course_link = $course->course_link;
+        $course_link = $course->course_link !='' ? $course->course_link : strtolower(str_replace(' ', '-', $request->course_name));
         $imagename = '';
         if ($image) {
             $imagename = time() . '.' . $image->extension();
