@@ -93,6 +93,7 @@ class AboutusController extends Controller
           
             $uid = $this->NewUid();
             $url= $request->aboutus_url !='' ? $request->aboutus_url  :  str_replace(' ', '-', $request->aboutus_name)  ;
+            $url =strtolower($url); 
             $img_name =  $this->uploadFile($request, $url);
             $aboutus_index= Aboutus::max('aboutus_index')+1;   
            
@@ -155,14 +156,14 @@ class AboutusController extends Controller
         
         $uid = $request->aboutus_uid !='' ? $request->aboutus_uid : '';
         $url= $request->aboutus_url !='' ? $request->aboutus_url  :  str_replace(' ', '-', $request->aboutus_name)  ;
-
+        $url =strtolower($url); 
         if( $uid !=''){
             Aboutus::where('aboutus_uid', '=', $uid)->update([
                 'aboutus_index'=> $request->aboutus_index,
                 'aboutus_name' => $request->aboutus_name,
                 'aboutus_header'=>  $request->aboutus_header,
                 'aboutus_desc'=>    $request->aboutus_desc ,
-                'aboutus_url' => strtolower($url) ,
+               // 'aboutus_url' => strtolower($url) ,
                 ]);
 
                 $img_name =  $this->uploadFile($request, $url);
