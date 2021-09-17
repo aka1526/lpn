@@ -228,7 +228,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" id="btn-save" class="btn ripple btn-primary btn-update">Save changes</button>
-                        <button type="button" id="btn-close"  class="btn ripple btn-secondary bt-close" data-dismiss="modal">Close</button>
+                        {{-- <button type="button" id="btn-close"  class="btn ripple btn-secondary bt-close" data-dismiss="modal">Close</button> --}}
+                        <a class="btn ripple btn-secondary bt-close" 
+                            href="/pageadmin/course/items/{{ $courseuid }}"> Close</a>
                     </div>
                         </div>
                     </div>

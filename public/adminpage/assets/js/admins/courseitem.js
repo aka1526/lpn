@@ -195,10 +195,10 @@ $('.btn-delete').on('click', function() {
 
 });
 
-$('.bt-close').on('click', function() {
-    window.history.back();
+// $('.bt-close').on('click', function() {
+//     window.history.back();
 
-});
+// });
 
 $(document).on('change', ':file', function() {
     var input = $(this),
