@@ -64,12 +64,12 @@ $(document).on('click', '.btn-save', function() {
 });
 
 
-$(document).on('click', '.btn-update', function() {
+$(document).on('click', '.btn-update2', function() {
     //$('.btn-update').on('click', function() {
     var url = "/pageadmin/course/items/update";
     $("#frm").attr('action', url);
     var data = $("#frm").serialize();
-
+    alert('sdfsd');
     $.ajax({
         type: "post",
         url: url,
