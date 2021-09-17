@@ -431,9 +431,9 @@
       {{-- <div class="yl-course-more-btn text-center">
          <a href="#">Load More <i class="fas fa-sync-alt"></i></a>
       </div> --}}
-      <div class="blog-btn-4 text-center">
+      {{-- <div class="blog-btn-4 text-center">
          <a href="#">View All Course</a>
-      </div>
+      </div> --}}
    </div>
 </div>
 </section>
