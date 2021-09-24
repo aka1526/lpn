@@ -13,7 +13,9 @@ use App\Http\Controllers\Admins\SlidepageController;
 use App\Http\Controllers\Admins\NewsController;
 use App\Http\Controllers\Admins\SysinfoController;
 use App\Http\Controllers\Admins\AboutusController;
-
+use App\Http\Controllers\Admins\MembersController;
+use App\Http\Controllers\Admins\khansController;
+use App\Http\Controllers\Admins\CountryController;
 ###### frontend ###################
 Route::fallback(function () {
   return view('/frontend/pages/404');
@@ -155,3 +157,37 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
 
  Route::post('/pageadmin/news/delete', [NewsController::class, 'delete'])->name('news.delete');
  Route::post('/pageadmin/news/header', [NewsController::class, 'header'])->name('news.header'); 
+
+
+ Route::get('/pageadmin/members/prosonal', [MembersController::class, 'index'])->name('members.index');
+ Route::get('/pageadmin/members/prosonal/edit/{uid}', [MembersController::class, 'edit'])->name('members.edit');
+ Route::get(' /pageadmin/members/organization', [MembersController::class, 'org'])->name('members.org');
+
+
+ Route::get('/pageadmin/members/prosonal/register', [MembersController::class, 'register'])->name('members.register');
+ Route::post('/pageadmin/members/prosonal/register/add', [MembersController::class, 'add'])->name('members.register.add');
+ Route::post('/pageadmin/members/prosonal/register/update', [MembersController::class, 'update'])->name('members.register.update');
+ Route::post('/pageadmin/members/profileimg', [MembersController::class, 'profileimg'])->name('members.profileimg');
+ Route::post('/pageadmin/members/idcardimg', [MembersController::class, 'idcardimg'])->name('members.idcardimg');
+
+
+ Route::get('/pageadmin/khans', [khansController::class, 'index'])->name('khans.index');
+ Route::get('/pageadmin/khans/new', [khansController::class, 'new'])->name('khans.new');
+ Route::get('/pageadmin/khans/edit/{uid}', [khansController::class, 'edit'])->name('khans.edit');
+ 
+ Route::post('/pageadmin/khans/add', [khansController::class, 'add'])->name('khans.add');
+ Route::post('/pageadmin/khans/update', [khansController::class, 'update'])->name('khans.update');
+ Route::post('/pageadmin/khans/updatestatus', [khansController::class, 'updatestatus'])->name('khans.updatestatus');
+ Route::post('/pageadmin/khans/delete', [khansController::class, 'delete'])->name('khans.delete');
+
+
+ 
+ Route::get('/pageadmin/country', [CountryController::class, 'index'])->name('country.index');
+ Route::get('/pageadmin/country/new', [CountryController::class, 'new'])->name('country.new');
+ Route::get('/pageadmin/country/edit/{uid}', [CountryController::class, 'edit'])->name('country.edit');
+
+
+ Route::post('/pageadmin/country/add', [CountryController::class, 'add'])->name('country.add');
+ Route::post('/pageadmin/country/update', [CountryController::class, 'update'])->name('country.update');
+ Route::post('/pageadmin/country/updatestatus', [CountryController::class, 'updatestatus'])->name('country.updatestatus');
+ Route::post('/pageadmin/country/delete', [CountryController::class, 'delete'])->name('country.delete');

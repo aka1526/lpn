@@ -98,7 +98,7 @@ class SysinfoController extends Controller
 
             $action =  Sysinfo::where('sys_uid','=',$sysinfo->sys_uid)->update([
                 'sys_name'=>$request->sys_name, 
-                'sys_name_th' => "", 
+                'sys_name_th' => $request->sys_name_th, 
                 'sys_address'=>$request->sys_address, 
                 'sys_country' => $request->sys_country, 
                 'sys_slogan' => $request->sys_slogan,
@@ -118,7 +118,8 @@ class SysinfoController extends Controller
                 'sys_googlemap_zoom'=>$request->sys_googlemap_zoom, 
                 'sys_googlemap_info'=>$request->sys_googlemap_info, 
                 'sys_googlemap_marker'=>$request->sys_googlemap_marker, 
-        
+                'sys_www'=>$request->sys_www, 
+                
                 'sys_status'=> "Y", 
               
                 'updated_at'=> Carbon::now(), 
@@ -131,7 +132,7 @@ class SysinfoController extends Controller
             $action = Sysinfo::insert([
                 'sys_uid' =>$sys_uid, 
                 'sys_name'=>$request->sys_name, 
-                'sys_name_th' => "", 
+                'sys_name_th' => $request->sys_name_th, 
                 'sys_address'=>$request->sys_address, 
                 'sys_country' => $request->sys_country, 
                 'sys_slogan' => $request->sys_slogan,
@@ -151,7 +152,7 @@ class SysinfoController extends Controller
                 'sys_googlemap_zoom'=>$request->sys_googlemap_zoom, 
                 'sys_googlemap_info'=>$request->sys_googlemap_info, 
                 'sys_googlemap_marker'=>$request->sys_googlemap_marker, 
-        
+                'sys_www'=>$request->sys_www, 
                 'sys_status'=> "Y", 
                 'created_at'=> Carbon::now(), 
                 'updated_at'=> Carbon::now(), 

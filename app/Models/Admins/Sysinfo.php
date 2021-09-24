@@ -35,6 +35,7 @@ class Sysinfo extends Model
         'sys_googlemap_zoom',
         'sys_googlemap_info',
         'sys_googlemap_marker',
+        'sys_www',
 
         'sys_status',
         'created_at',

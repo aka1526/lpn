@@ -80,7 +80,23 @@
                                         d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z" />
                                 </svg>Dashboard</a>
                         </li>
+                        <li aria-haspopup="true"><a href="#" class="sub-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                                <path d="M0 0h24v24H0V0z" fill="none" />
+                                <path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3" />
+                                <path
+                                    d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z" />
+                            </svg>
+                            Members <i class="fe fe-chevron-down horizontal-icon"></i></a>
+                            <ul class="sub-menu">
+                                <li aria-haspopup="true"><a href="/pageadmin/members/prosonal" class="slide-item">
+                                   Prosonal Member </a></li>
+                                <li aria-haspopup="true"><a href="/pageadmin/members/organization" class="slide-item">
+                                   Organization Member</a></li>
 
+
+                            </ul>
+                        </li>
 
                         <li aria-haspopup="true"><a href="#" class="sub-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -157,11 +173,19 @@
                                 </svg>
                                 Admin Sytem <i class="fe fe-chevron-down horizontal-icon"></i></a>
                             <ul class="sub-menu">
-                                <li aria-haspopup="true"><a href="{{ route('sysinfo.index') }}" class="slide-item">Company Info</a></li>
-                                <li aria-haspopup="true"><a href="{{ route('admin.user') }}" class="slide-item">Staff
-                                        List</a></li>
-                                <li aria-haspopup="true"><a href="{{ route('menu.index') }}" class="slide-item">Menu
-                                        List</a></li>
+                                <li aria-haspopup="true">
+                                    <a href="{{ route('sysinfo.index') }}" class="slide-item">Company Info</a></li>
+                                <li aria-haspopup="true">
+                                    <a href="{{ route('admin.user') }}" class="slide-item">User</a></li>
+                               <li aria-haspopup="true">
+                                   <a href="{{ route('khans.index') }}" class="slide-item">Khan Muay</a>
+                                </li>
+                                <li aria-haspopup="true"> 
+                                    <a href="{{ route('country.index') }}" class="slide-item">Country </a>
+                                 </li>
+                                <li aria-haspopup="true">
+                                    <a href="{{ route('menu.index') }}" class="slide-item">Menu List</a>
+                                </li>
 
 
                             </ul>
