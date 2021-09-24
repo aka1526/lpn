@@ -66,7 +66,7 @@
                             <div class="card-body">
                                 <div class="pl-0">
                                     <div class="main-profile-overview ">
-                                        <div class="img profile-user  ml-5">
+                                        <div class="img profile-user text-center  ">
                                             <img width="180px" alt=""
                                                 src="{{ $member->img_profile != '' ? '/images/members/' . $member->img_profile : '' }}"
                                                 onerror="this.src='/images/no-image.png'" />
