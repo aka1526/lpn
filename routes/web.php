@@ -14,7 +14,7 @@ use App\Http\Controllers\Admins\NewsController;
 use App\Http\Controllers\Admins\SysinfoController;
 use App\Http\Controllers\Admins\AboutusController;
 use App\Http\Controllers\Admins\MembersController;
-use App\Http\Controllers\Admins\khansController;
+use App\Http\Controllers\Admins\KhansController;
 use App\Http\Controllers\Admins\CountryController;
 ###### frontend ###################
 Route::fallback(function () {
