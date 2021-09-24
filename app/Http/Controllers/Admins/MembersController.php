@@ -158,9 +158,9 @@ class MembersController extends Controller
 
         $action = Members::insert([
             'member_uid' => $uid
-            , 'first_name' => $request->first_name
-            , 'last_name' => $request->last_name
-            , 'full_name' => $request->first_name . ' ' . $request->last_name
+            , 'first_name' => strtoupper($request->first_name)
+            , 'last_name' => strtoupper($request->last_name)
+            , 'full_name' => strtoupper($request->first_name . ' ' . $request->last_name) 
             , 'gender' => $request->gender
             , 'dateofbirth' => $request->dateofbirth
             , 'user_tel' => $request->user_tel
@@ -293,9 +293,9 @@ class MembersController extends Controller
 
         if ($uid != '') {
             Members::where('member_uid', '=', $uid)->update([
-                'first_name' => $request->first_name
-                , 'last_name' => $request->last_name
-                , 'full_name' => $request->first_name . ' ' . $request->last_name
+                'first_name' => strtoupper($request->first_name)
+                , 'last_name' => strtoupper($request->last_name)
+                , 'full_name' => strtoupper($request->first_name . ' ' . $request->last_name)
                 , 'gender' => $request->gender
                 , 'dateofbirth' => $request->dateofbirth
                 , 'user_tel' => $request->user_tel
