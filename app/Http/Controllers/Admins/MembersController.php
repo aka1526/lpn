@@ -159,7 +159,7 @@ class MembersController extends Controller
         }
 
         $certificate_no = $request->certificate_no;
-dd($date_register);
+//dd($request->member_www);
         $action = Members::insert([
             'member_uid' => $uid
             , 'first_name' => strtoupper($request->first_name)
