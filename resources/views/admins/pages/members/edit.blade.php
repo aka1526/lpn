@@ -66,11 +66,11 @@
                             <div class="card-body">
                                 <div class="pl-0">
                                     <div class="main-profile-overview ">
-                                        <div class="main-img-user profile-user ">
-                                            <img alt=""
+                                        <div class="img profile-user  ml-5">
+                                            <img width="180px" alt=""
                                                 src="{{ $member->img_profile != '' ? '/images/members/' . $member->img_profile : '' }}"
                                                 onerror="this.src='/images/no-image.png'" />
-                                            <a class="fas fa-camera profile-edit text-center" data-target="#modalProfile"
+                                            <a class="fas fa-camera profile-edit text-center mr-5" data-target="#modalProfile"
                                                 data-toggle="modal" href="JavaScript:void(0);"></a>
                                         </div>
 										<div class="d-flex justify-content-between mg-b-20">
