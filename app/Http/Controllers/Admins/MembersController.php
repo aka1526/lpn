@@ -159,7 +159,7 @@ class MembersController extends Controller
         }
 
         $certificate_no = $request->certificate_no;
-
+dd($date_register);
         $action = Members::insert([
             'member_uid' => $uid
             , 'first_name' => strtoupper($request->first_name)
@@ -183,10 +183,8 @@ class MembersController extends Controller
             , 'user_facebook' => $request->user_facebook
             , 'user_ig' => $request->user_ig
             , 'user_wechat' => $request->user_wechat
-
             , 'img_user' => $request->img_user
             , 'user_email' => $request->user_email
-            // , 'email_verified_at' =>""
             , 'user_type' => $user_type
             , 'password' => ""
             , 'remember_token' => $request->remember_token
@@ -201,7 +199,6 @@ class MembersController extends Controller
             , 'member_year' => $member_year
             , 'member_month' => $member_month
             , 'member_no' => $member_no
-            // , 'img_certificate' => $img_certificate
             , 'member_www' => $request->member_www
             , 'date_register' => $date_register
 
