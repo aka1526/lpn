@@ -147,11 +147,15 @@ class MembersController extends Controller
             $khan_uid = "";
         }
 
-        $kru_uid = $request->kru_uid;
-        $kru = Members::where('member_uid', '=', $kru_uid)->first();
+        $kru_uid = isset($request->kru_uid) ? $request->kru_uid : '';
+        
         $kru_name = "";
-        if ($kru) {
-            $kru_name = $kru->full_name;
+        if ($kru_uid !='') {
+            $kru = Members::where('member_uid', '=', $kru_uid)->first();
+            if( $kru){
+                $kru_name = $kru->full_name;
+            }
+            
         }
 
         $certificate_no = $request->certificate_no;
