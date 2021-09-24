@@ -69,7 +69,7 @@
                                                 <th class="text-center" scope="row"> {{ $row->member_no }}
                                                 </th>
                                                 <td class="text-center">
-                                                    <img src="{{$row->img_profile !='' ? '/images/members/'.$row->img_profile :''  }}" onerror="this.src='/images/no-image.png'" width="40px" height="80px"/>
+                                                    <img src="{{$row->img_profile !='' ? '/images/members/'.$row->img_profile :''  }}" onerror="this.src='/images/no-image.png'" width="60px" height="80px"/>
                                                    </td>
                                                 <td>{{ $row->full_name }}</td>
                                                 <td class="text-center">{{ $row->user_type }}</td>

@@ -449,7 +449,7 @@ class MembersController extends Controller
             }
 
             $image_resize = Image::make($image->getRealPath());
-            $image_resize->resize(250, 450); //
+            $image_resize->resize(300, 400); //
             $image_resize->save($filePath . '/' . $imagename);
 
             $imgSave = true;
