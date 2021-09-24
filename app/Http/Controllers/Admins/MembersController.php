@@ -203,7 +203,7 @@ class MembersController extends Controller
             , 'member_no' => $member_no
             // , 'img_certificate' => $img_certificate
             , 'member_www' => $request->member_www
-            , 'date_register' => $date_register,
+            , 'date_register' => $date_register
 
         ]);
 
