@@ -252,7 +252,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row ">
+                                {{-- <div class="row ">
                                     <div class="col-md-2">
                                         <label class="form-label">Image </label>
                                     </div>
@@ -271,7 +271,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
 
                                 <div class="mb-4 main-content-label">Contact INFORMATION</div>

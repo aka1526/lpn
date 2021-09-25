@@ -195,6 +195,10 @@ $('.btn-disable').on('click', function() {
 });
 
 
+$('.btn-close').on('click', function() {
+    location.reload();
+});
+
 $('.btn-delete').on('click', function() {
 
     var uid = $(this).data('uid');

@@ -4,16 +4,17 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('adminpage/assets/plugins/sweet-alert/sweetalert.css') }}" rel="stylesheet">
+    <link href="{{ asset('/adminpage/assets/plugins/sweet-alert/sweetalert.css') }}" rel="stylesheet">
     <!-- Internal Select2 css -->
-    <link href="{{ asset('adminpage/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/adminpage/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
     <!--Internal  Datetimepicker-slider css -->
-    <link href="{{ asset('adminpage/assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}"
+    <link href="{{ asset('/adminpage/assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css') }}"
         rel="stylesheet">
-    <link href="{{ asset('adminpage/assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css') }}"
+    <link href="{{ asset('/adminpage/assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css') }}"
         rel="stylesheet">
-    <link href="{{ asset('adminpage/assets/plugins/pickerjs/picker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/adminpage/assets/plugins/pickerjs/picker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/adminpage/assets/css/imgareaselect-default.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -67,18 +68,19 @@
                                 <div class="pl-0">
                                     <div class="main-profile-overview ">
                                         <div class="img profile-user text-center  ">
-                                            <img width="180px" alt=""
+                                            <img width="160px" height="200px" alt=""
                                                 src="{{ $member->img_profile != '' ? '/images/members/' . $member->img_profile : '' }}"
                                                 onerror="this.src='/images/no-image.png'" />
-                                            <a class="fas fa-camera profile-edit text-center mr-5" data-target="#modalProfile"
-                                                data-toggle="modal" href="JavaScript:void(0);"></a>
+                                            <a class="fas fa-camera profile-edit text-center mr-5"
+                                                data-target="#modalProfile" data-toggle="modal"
+                                                href="JavaScript:void(0);"></a>
                                         </div>
-										<div class="d-flex justify-content-between mg-b-20">
-											<div>
-												<h5 class="main-profile-name">Membership ID</h5>
-												<p class="main-profile-name-text"> {{ $member->member_no }}</p>
-											</div>
-										</div>
+                                        <div class="d-flex justify-content-between mg-b-15 mg-t-15">
+                                            <div>
+                                                <h5 class="main-profile-name"> MEMBERSHIP NO:  <span class="text-danger">{{ $member->member_no }}</span></h5>
+                                                {{-- <p class="main-profile-name-text"> {{ $member->member_no }}</p> --}}
+                                            </div>
+                                        </div>
 
                                         <hr class="mg-y-10">
                                         <label class="main-content-label tx-13 mg-b-20">Social</label>
@@ -142,14 +144,14 @@
                                             <div class="pl-0">
                                                 <div class="main-profile-overview ">
                                                     <div class="main-content-label tx-13 mg-b-20">
-                                                        Membership ID Card
+                                                        Member  Card
                                                     </div>
                                                     <div class="img-user profile-user">
-														<img alt=""
-														src="{{ $member->img_idcard != '' ? '/images/members/card/' . $member->img_idcard : '' }}"
-														onerror="this.src='/images/no-image.png'" />
-															<a class="fas fa-camera profile-edit text-center" data-target="#modalidcard"
-															data-toggle="modal" href="JavaScript:void(0);"></a>
+                                                        <img alt=""
+                                                            src="{{ $member->img_idcard != '' ? '/images/members/card/' . $member->img_idcard : '' }}"
+                                                            onerror="this.src='/images/no-image.png'" />
+                                                        {{-- <a class="fas fa-camera profile-edit text-center" data-target="#modalidcard"
+															data-toggle="modal" href="JavaScript:void(0);"></a> --}}
                                                     </div>
 
                                                 </div>
@@ -169,7 +171,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="mb-4 main-content-label">
-                                    <h4>PERSONAL INFORMATION  </h4>
+                                    <h4>PERSONAL INFORMATION </h4>
                                 </div>
 
                                 <div class="row">
@@ -468,8 +470,8 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="/pageadmin/members/prosonal" class="btn btn-warning waves-effect waves-light"><i
-                                        class="fa fa-step-backward"></i> Back</a>
+                                <a href="/pageadmin/members/prosonal" class="btn btn-danger waves-effect waves-light"><i
+                                        class="fas fa-times"></i> Close</a>
                                 <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
                             </div>
                         </div>
@@ -487,44 +489,65 @@
 
     <!-- Basic modal -->
     <div class="modal" id="modalProfile">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
 
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
                     <h6 class="modal-title">Upload Image</h6><button aria-label="Close" class="close"
                         data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <form id="frmprofile" name="frmprofile" class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('members.profileimg')}}">
+                <form id="frmprofile" name="frmprofile" class="form-horizontal" method="post" enctype="multipart/form-data"
+                    action="{{ route('members.profileimg') }}">
                     <div class="modal-body">
 
                         @csrf
                         <input type="hidden" id="img_uid" name="img_uid" value="{{ $member->member_uid }}">
                         <input type="hidden" id="img_type" name="img_type" value="profile">
-						<div class="row ">
-							<div class="col-md-2">
-								<label class="form-label">Image </label>
-							</div>
+                        <div class="row mt-3">
 
-							<div class="col-sm-10 col-md-10 col-lg-10">
+                            <div class="col-sm-10 col-md-10 col-lg-10">
 
-								<div class="input-group file-browser">
+                                <div class="input-group file-browser">
 
-									<input type="text" class="form-control border-right-0 browse-file"
-										placeholder="choose" readonly="">
-									<label class="input-group-btn">
-										<span class="btn btn-default">
-											Browse <input type="file" id="fileupload" name="fileupload"
-												style="display: none;" multiple="">
-										</span>
-									</label>
-								</div>
-							</div>
-						</div>
+                                    <input type="text" class="form-control border-right-0 browse-file" placeholder="choose"
+                                        readonly="">
+                                    <label class="input-group-btn">
+                                        <span class="btn btn-default">
+                                            Browse <input type="file" class="image" id="fileupload"
+                                                name="fileupload" style="display: none;" multiple="">
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn ripple btn-primary" type="submit">Save</button>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 test-center">
+
+                                <div class="form-group">
+                                    <input type="hidden" name="x1" value="" />
+                                    <input type="hidden" name="y1" value="" />
+                                    <input type="hidden" name="w" value="" />
+                                    <input type="hidden" name="h" value="" />
+                                </div>
+
+
+                                <p id="image_card"><img id="previewimage" style="display:none;position:relative;" /></p>
+                                @if (session('path'))
+                                    <img src="{{ session('path') }}" />
+                                @endif
+                            </div>
+                        </div>
+
+
 
                     </div>
                     <div class="modal-footer">
-                        <button class="btn ripple btn-primary" type="submit">Save changes</button>
-                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Close</button>
+                        {{-- <button class="btn ripple btn-primary" type="submit">Save changes</button>
+                        <button class="btn ripple btn-secondary btn-close" data-dismiss="modal" type="button">Close</button> --}}
                     </div>
                 </form>
             </div>
@@ -532,77 +555,84 @@
     </div>
     <!-- End Basic modal -->
 
-<!-- Basic modal -->
-<div class="modal" id="modalidcard">
-	<div class="modal-dialog" role="document">
-
-		<div class="modal-content modal-content-demo">
-			<div class="modal-header">
-				<h6 class="modal-title">Upload Image</h6><button aria-label="Close" class="close"
-					data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-			</div>
-			<form id="frmidcard" name="frmidcard" class="form-horizontal" method="post" enctype="multipart/form-data" 
-				action="{{ route('members.idcardimg')}}">
-				<div class="modal-body">
-
-					@csrf
-					<input type="hidden" id="card_uid" name="img_uid" value="{{ $member->member_uid }}">
-					<input type="hidden" id="idcard_type" name="idcard_type" value="idcard">
-					<div class="row ">
-						<div class="col-md-4">
-							<label class="form-label">Image </label>
-						</div>
-
-						<div class="col-sm-10 col-md-10 col-lg-10">
-
-							<div class="input-group file-browser">
-
-								<input type="text" class="form-control border-right-0 browse-file"
-									placeholder="choose" readonly="">
-								<label class="input-group-btn">
-									<span class="btn btn-default">
-										Browse <input type="file" id="fileupload" name="fileupload"
-											style="display: none;" multiple="">
-									</span>
-								</label>
-							</div>
-						</div>
-					</div>
-
-				</div>
-				<div class="modal-footer">
-					<button class="btn ripple btn-primary" type="submit">Save</button>
-					<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">Close</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-<!-- End Basic modal -->
 
 
 
 @endsection
 @section('adminjs')
     <!-- Internal Modal js-->
-    <script src="{{ asset('adminpage/assets/js/admins/members.js?v=') . time() }}"></script>
+    <script src="{{ asset('/adminpage/assets/js/admins/members.js?v=') . time() }}"></script>
     <!--Internal  Sweet-Alert js-->
-    <script src="{{ asset('adminpage/assets/plugins/sweet-alert/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('adminpage/assets/plugins/sweet-alert/jquery.sweet-alert.js') }}"></script>
+    <script src="{{ asset('/adminpage/assets/plugins/sweet-alert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('/adminpage/assets/plugins/sweet-alert/jquery.sweet-alert.js') }}"></script>
     <!-- Internal Select2.min js -->
-    <script src="{{ asset('adminpage/assets/plugins/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('/adminpage/assets/plugins/select2/js/select2.min.js') }}"></script>
 
     <!--Internal Ion.rangeSlider.min js -->
-    <script src="{{ asset('adminpage/assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
+    <script src="{{ asset('/adminpage/assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js') }}"></script>
 
     <!--Internal  jquery-simple-datetimepicker js -->
-    <script src="{{ asset('adminpage/assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js') }}">
+    <script src="{{ asset('/adminpage/assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js') }}">
     </script>
 
     <!-- Ionicons js -->
-    <script src="{{ asset('adminpage/assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js') }}">
+    <script src="{{ asset('/adminpage/assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js') }}">
     </script>
+    <script src="{{ asset('/adminpage/assets/js/admins/jquery.imgareaselect.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var p = $("#previewimage");
 
+
+            $("body").on("change", ".image", function() {
+                var imageReader = new FileReader();
+                imageReader.readAsDataURL(document.querySelector(".image").files[0]);
+
+                imageReader.onload = function(oFREvent) {
+                    p.attr('src', oFREvent.target.result).fadeIn();
+
+                };
+            });
+
+
+            $('#previewimage').imgAreaSelect(
+
+                {
+                    parent: '#image_card',
+                    onSelectEnd: function(img, selection) {
+                        $('input[name="x1"]').val(selection.x1);
+                        $('input[name="y1"]').val(selection.y1);
+                        $('input[name="w"]').val(selection.width);
+                        $('input[name="h"]').val(selection.height);
+                    }
+
+                });
+
+
+        });
+
+        $(document).on('click', '.ripple', function(e) {
+            var file = $('#fileupload').val();
+            if (file == '') {
+				e.preventDefault();
+                $('#modalProfile').modal('hide');
+                Swal.fire({
+                    title: 'No File Selected',
+                  text: "Choose a file please!",
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Close.'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                })
+            }
+
+        });
+    </script>
 
 
 @endsection

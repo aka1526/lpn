@@ -217,7 +217,8 @@ class MembersController extends Controller
 
         }
 
-        return redirect()->route('members.index');
+        return  redirect()->to('/pageadmin/members/prosonal/edit/'.$uid);
+        //return redirect()->route('members.index');
 
     }
 
@@ -430,12 +431,14 @@ class MembersController extends Controller
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
-        // dd($request);
+        
         $uid = $request->img_uid;
 
         $image = $request->file('fileupload');
         $imagename = '';
-
+        $height = Image::make($image)->height();
+        $width = Image::make($image)->width();
+      //  dd($height,$width,$request );
         $path = "/images/members";
         $imgSave = false;
         if ($image) {
@@ -449,7 +452,16 @@ class MembersController extends Controller
             }
 
             $image_resize = Image::make($image->getRealPath());
-            $image_resize->resize(300, 400); //
+
+            //$height= $height >765 ? 765 : $height;
+           // $width = $width>460? 460 :$width ;
+           if($height >765 || $width>460 ){
+            $image_resize->resize(765, 460); 
+           }
+            //
+           
+            $image_resize->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
+            //$img->save($croppath);
             $image_resize->save($filePath . '/' . $imagename);
 
             $imgSave = true;
@@ -460,10 +472,13 @@ class MembersController extends Controller
             Members::where('member_uid', '=', $uid)->update([
                 'img_profile' => $imagename,
             ]);
+            
+            $this->idcardimg( $request,$uid);
         }
         $url = "/pageadmin/members/prosonal/edit/" . $uid;
         return redirect($url);
     }
+  //  public function idcardimg(Request $request,$memberuid=null)
     public function idcardimg(Request $request,$memberuid=null)
     {
         if ($this->GetUserUid() == '') {
@@ -471,16 +486,19 @@ class MembersController extends Controller
         }
 
         $uid = isset($memberuid) ? $memberuid : $request->img_uid;
+        
         $member = Members::where('member_uid', '=', $uid)->first();
         $sysinfo = Sysinfo::where('sys_uid', '!=', '')->first();
-
-        $image = $request->file('fileupload');
+      
+        $image =public_path('/images/members/'. $member->img_profile ) ;//  $request->file('fileupload');
+        $extension = pathinfo( $image, PATHINFO_EXTENSION);
         $imagename = '';
 
         $path = "/images/members/card";
         $imgSave = false;
         if ($image) {
-            $imagename =  $member->member_no. '_' . time() . '.' . $image->extension();
+          // dd( $extension);
+            $imagename =  $member->member_no. '_' . time() . '.' . $extension ;//$image->extension();
 
             $filePath = public_path($path);
 
@@ -489,61 +507,44 @@ class MembersController extends Controller
                 File::makeDirectory($filePath, 0755, true, true);
             }
 
-            $img_emp = Image::make($image->getRealPath());
+           // $img_emp = Image::make($image->getRealPath());
+            $img_emp = Image::make($image);
             $img_emp->resize(250, 340);
 
             $img = Image::make(public_path('/images/main.png'));
 
             //top-left, top-right, bottom-left and bottom-right
             $img->insert($img_emp, 'top-left', 20, 20);
-
-            $img->text($sysinfo->sys_name_th, 286, 50, function ($font) {
+             
+            $img->text($sysinfo->sys_name_th, 286, 40, function ($font) {
 
                 $font->file(public_path('/assets/fonts/FC_Home.ttf'));
                 $font->size(76);
-                $font->color('#000099');
+                $font->color('#FFFFFF');//#034703
                 $font->align('left');
                 $font->valign('top');
                 $font->angle(0);
             });
 
-            $img->text($sysinfo->sys_name, 286, 120, function ($font) {
+            $img->text($sysinfo->sys_name, 286, 110, function ($font) {
                 $font->file(public_path('/assets/fonts/BoonTookMon-Regular.ttf'));
                 $font->size(40);
-                $font->color('#000099');
+                $font->color('#FFFFFF');
                 $font->align('left');
                 $font->valign('top');
                 $font->angle(0);
             });
 
-            $img->text('Name', 286, 180, function ($font) {
+            $img->text('Name :', 286, 220, function ($font) {
                 $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
                 $font->size(20);
-                $font->color('#000099');
+                $font->color('#034703');
                 $font->align('left');
                 $font->valign('top');
                 $font->angle(0);
             });
 
-            $img->text($member->full_name, 286, 210, function ($font) {
-                $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
-                $font->size(20);
-                $font->color('#000000');
-                $font->align('left');
-                $font->valign('top');
-                $font->angle(0);
-            });
-
-            $img->text('Khan', 286, 270, function ($font) {
-                $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
-                $font->size(20);
-                $font->color('#000099');
-                $font->align('left');
-                $font->valign('top');
-                $font->angle(0);
-            });
-
-            $img->text($member->khan_name, 286, 300, function ($font) {
+            $img->text($member->full_name, 286, 246, function ($font) {
                 $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
                 $font->size(20);
                 $font->color('#000000');
@@ -552,16 +553,16 @@ class MembersController extends Controller
                 $font->angle(0);
             });
 
-            $img->text('Country', 286, 370, function ($font) {
+            $img->text('Khan :', 286, 310, function ($font) {
                 $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
                 $font->size(20);
-                $font->color('#000099');
+                $font->color('#034703');
                 $font->align('left');
                 $font->valign('top');
                 $font->angle(0);
             });
 
-            $img->text($member->country_name, 290, 390, function ($font) {
+            $img->text($member->khan_name, 286, 336, function ($font) {
                 $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
                 $font->size(20);
                 $font->color('#000000');
@@ -570,16 +571,34 @@ class MembersController extends Controller
                 $font->angle(0);
             });
 
-            $img->text('Cer No.', 286, 430, function ($font) {
+            $img->text('Country :', 286, 390, function ($font) {
                 $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
                 $font->size(20);
-                $font->color('#000099');
+                $font->color('#034703');
                 $font->align('left');
                 $font->valign('top');
                 $font->angle(0);
             });
 
-            $img->text($member->certificate_no, 290, 450, function ($font) {
+            $img->text($member->country_name, 400, 390, function ($font) {
+                $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
+                $font->size(20);
+                $font->color('#000000');
+                $font->align('left');
+                $font->valign('top');
+                $font->angle(0);
+            });
+
+            $img->text('Cer No :', 286, 430, function ($font) {
+                $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
+                $font->size(20);
+                $font->color('#034703');
+                $font->align('left');
+                $font->valign('top');
+                $font->angle(0);
+            });
+
+            $img->text($member->certificate_no, 390, 430, function ($font) {
                 $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
                 $font->size(20);
                 $font->color('#000000');
@@ -601,7 +620,7 @@ class MembersController extends Controller
 
             $date_expiry = Carbon::parse($date_expiry)->format('d F Y'); // date("d F Y", $date_expiry);
 
-            $img->text($date_expiry, 140, 430, function ($font) {
+            $img->text($date_expiry, 140, 410, function ($font) {
                 $font->file(public_path('/assets/fonts/BoonTookMon-Regular.ttf'));
                 $font->size(24);
                 $font->color('#b30000');
@@ -610,35 +629,55 @@ class MembersController extends Controller
                 $font->angle(0);
             });
 
-            $img->text('Issue in Bangkok,Thailand', 15, 480, function ($font) {
+            $img->text('Issue in Bangkok,Thailand', 28, 440, function ($font) {
                 $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
-                $font->size(18);
+                $font->size(14);
                 $font->color('#000000');
                 $font->align('left');
                 $font->valign('top');
                 $font->angle(0);
             });
 
-            $img->text($sysinfo->sys_www, 340, 480, function ($font) {
+            $img->text($sysinfo->sys_www, 20, 560, function ($font) {
                 $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
-                $font->size(20);
-                $font->color('#000099');
+                $font->size(26);
+                $font->color('#FFFFFF');
                 $font->align('left');
                 $font->valign('top');
                 $font->angle(0);
             });
 
+            $img->text('Tel. '. $sysinfo->sys_phone1, 400, 564, function ($font) {
+                $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
+                $font->size(18);
+                $font->color('#FFFFFF');
+                $font->align('left');
+                $font->valign('top');
+                $font->angle(0);
+            });
+
+            $img->text('E-mail: '. $sysinfo->sys_email1, 650, 564, function ($font) {
+                $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
+                $font->size(18);
+                $font->color('#FFFFFF');
+                $font->align('left');
+                $font->valign('top');
+                $font->angle(0);
+            });
+
+
+
             $img_barcode = Image::make(DNS1D::getBarcodePNG($member->member_no, 'C39', 2, 60, array(0, 0, 0), true));
 
-            $img->insert($img_barcode, 'top-left', 250, 510);
+            $img->insert($img_barcode, 'top-left', 20, 480);
 
             $img_qrcode = Image::make(DNS2D::getBarcodePNG($sysinfo->sys_www, 'QRCODE', 5, 5));
 
-            $img->insert($img_qrcode, 'top-left', 750, 234);
+            $img->insert($img_qrcode, 'top-left', 770, 210);
 
             $img_logo = Image::make(public_path('/images/logo.png'));
-            $img_logo->resize(200, 200);
-            $img->insert($img_logo, 'top-left', 700, 370);
+            $img_logo->resize(180, 180);
+            $img->insert($img_logo, 'top-left', 740, 350);
 
             $img->save(public_path('/images/members/card/' . $imagename));
             
