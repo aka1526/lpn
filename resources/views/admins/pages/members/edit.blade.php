@@ -21,14 +21,14 @@
 @section('content')
 
     <!-- main-content opened -->
-    <div class="main-content horizontal-content  ">
+    <div class="main-content horizontal-content ">
 
         <div class="container">
             <!-- breadcrumb -->
             <div class="breadcrumb-header justify-content-between">
                 <div class="my-auto">
                     <div class="d-flex">
-                        {{-- <h4 class="content-title mb-0 my-auto">Tables</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Basic Tables</span> --}}
+                        {{-- <h4 class="my-auto mb-0 content-title">Tables</h4><span class="mt-1 mb-0 ml-2 text-muted tx-13">/ Basic Tables</span> --}}
                     </div>
                 </div>
 
@@ -67,17 +67,17 @@
                             <div class="card-body">
                                 <div class="pl-0">
                                     <div class="main-profile-overview ">
-                                        <div class="img profile-user text-center  ">
+                                        <div class="text-center img profile-user ">
                                             <img width="160px" height="200px" alt=""
                                                 src="{{ $member->img_profile != '' ? '/images/members/' . $member->img_profile : '' }}"
                                                 onerror="this.src='/images/no-image.png'" />
-                                            <a class="fas fa-camera profile-edit text-center mr-5"
+                                            <a class="mr-5 text-center fas fa-camera profile-edit"
                                                 data-target="#modalProfile" data-toggle="modal"
                                                 href="JavaScript:void(0);"></a>
                                         </div>
                                         <div class="d-flex justify-content-between mg-b-15 mg-t-15">
                                             <div>
-                                                <h5 class="main-profile-name"> MEMBERSHIP NO:  <span class="text-danger">{{ $member->member_no }}</span></h5>
+                                                <h5 class="main-profile-name"> MEMBER NO:  <span class="text-danger">{{ $member->member_no }}</span></h5>
                                                 {{-- <p class="main-profile-name-text"> {{ $member->member_no }}</p> --}}
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                                         <div class="main-profile-social-list">
                                             <div class="media">
                                                 <div class="media-icon bg-primary-transparent text-primary">
-                                                    <i class="icon ion-logo-github"></i>
+													<i class="fab fa-instagram"></i>
                                                 </div>
                                                 <div class="media-body">
                                                     <span>Instagram</span>
@@ -97,8 +97,8 @@
                                                 </div>
                                             </div>
                                             <div class="media">
-                                                <div class="media-icon bg-success-transparent text-success">
-                                                    <i class="icon ion-logo-twitter"></i>
+                                                <div class="media-icon bg-primary-transparent text-primary">
+                                                    <i class="icon ion-logo-facebook"></i>
                                                 </div>
                                                 <div class="media-body">
                                                     <span>Facebook</span>
@@ -108,8 +108,9 @@
                                                 </div>
                                             </div>
                                             <div class="media">
-                                                <div class="media-icon bg-info-transparent text-info">
-                                                    <i class="icon ion-logo-linkedin"></i>
+                                                <div class="media-icon bg-primary-transparent text-primary">
+                                                    <i class="icon ion-ios-chatbubbles"></i>
+												 
                                                 </div>
                                                 <div class="media-body">
                                                     <span>We Chat</span>
@@ -119,11 +120,11 @@
                                                 </div>
                                             </div>
                                             <div class="media">
-                                                <div class="media-icon bg-info-transparent text-info">
-                                                    <i class="icon ion-logo-linkedin"></i>
+                                                <div class="media-icon bg-primary-transparent text-primary">
+                                                    <i class="icon ion-md-globe"></i>
                                                 </div>
                                                 <div class="media-body">
-                                                    <span>Website</span>
+                                                    <span>Web site</span>
                                                     <input type="text" class="form-control form-control-sm" id="member_www"
                                                         name="member_www" placeholder="www"
                                                         value="{{ $member->member_www }}">
@@ -150,7 +151,7 @@
                                                         <img alt=""
                                                             src="{{ $member->img_idcard != '' ? '/images/members/card/' . $member->img_idcard : '' }}"
                                                             onerror="this.src='/images/no-image.png'" />
-                                                        {{-- <a class="fas fa-camera profile-edit text-center" data-target="#modalidcard"
+                                                        {{-- <a class="text-center fas fa-camera profile-edit" data-target="#modalidcard"
 															data-toggle="modal" href="JavaScript:void(0);"></a> --}}
                                                     </div>
 
@@ -314,17 +315,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label class="form-label">Address</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <textarea class="form-control" id="user_address" name="user_address" rows="4"
-                                                placeholder="San Francisco, CA">{{ trim($member->user_address) }}</textarea>
+                                
+
+								<div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group ">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Address</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <textarea class="form-control" id="user_address" name="user_address"
+                                                        rows="4" placeholder="San Francisco, CA">{{ trim($member->user_address) }}</textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+							 
 
                                 <div class="mb-4 main-content-label">Muay INFORMATION</div>
                                 <div class="row">
@@ -470,9 +478,10 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="/pageadmin/members/prosonal" class="btn btn-danger waves-effect waves-light"><i
-                                        class="fas fa-times"></i> Close</a>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
+                                <a href="/pageadmin/members/prosonal" class="btn btn-danger waves-effect waves-light"><i class="fas fa-times"></i> Close</a>
+                                <button type="button" data-img="{{ $member->img_idcard != '' ? '/images/members/card/' . $member->img_idcard : '' }}" 
+                                    id="print_card" name="print_card" class="btn btn-primary "><i class="fa fa-credit-card"></i> Print Card</button>
+                                <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button> 
                             </div>
                         </div>
                     </div>
@@ -503,7 +512,7 @@
                         @csrf
                         <input type="hidden" id="img_uid" name="img_uid" value="{{ $member->member_uid }}">
                         <input type="hidden" id="img_type" name="img_type" value="profile">
-                        <div class="row mt-3">
+                        <div class="mt-3 row">
 
                             <div class="col-sm-10 col-md-10 col-lg-10">
 
@@ -528,14 +537,15 @@
                             <div class="col-md-12 test-center">
 
                                 <div class="form-group">
-                                    <input type="hidden" name="x1" value="" />
-                                    <input type="hidden" name="y1" value="" />
-                                    <input type="hidden" name="w" value="" />
-                                    <input type="hidden" name="h" value="" />
+                                    <input type="hidden" name="x1" id="x1" value="" />
+                                    <input type="hidden" name="y1" id="y1" value="" />
+                                    <input type="hidden" name="w"  id="w"value="" />
+                                    <input type="hidden" name="h" id="h" value="" />
                                 </div>
 
 
-                                <p id="image_card"><img id="previewimage" style="display:none;position:relative;" /></p>
+                                <p id="image_card">
+                                    <img id="previewimage" style="display:none;position:relative;" /></p>
                                 @if (session('path'))
                                     <img src="{{ session('path') }}" />
                                 @endif
@@ -612,8 +622,9 @@
         });
 
         $(document).on('click', '.ripple', function(e) {
-            var file = $('#fileupload').val();
-            if (file == '') {
+            var y1 = $('#y1').val();
+			 
+            if (y1 == '' || y1 <=0 ) {
 				e.preventDefault();
                 $('#modalProfile').modal('hide');
                 Swal.fire({

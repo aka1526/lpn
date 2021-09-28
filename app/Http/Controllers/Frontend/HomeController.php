@@ -17,6 +17,9 @@ use App\Models\Admins\CourseItem;
 use App\Models\Admins\Aboutus;
 use App\Models\Admins\Sysinfo;
 use App\Models\Admins\News;
+use App\Models\Admins\Members;
+
+
 class HomeController extends Controller
 {
 
@@ -74,6 +77,27 @@ class HomeController extends Controller
      $news = News::where('news_status', '=', 'Y')
      ->orderBy('news_datetime')->paginate(9);
          return view('frontend.pages.news_index',compact('news'));
+        
+    }
+
+    public function members(Request $request)
+    {    
+       //  dd($request);
+     $search=isset( $request->search ) ?  $request->search : ''; 
+     $members = Members::where('isdelete', '=', 'N')
+     ->whereIn('user_type', ['STUDENTS', 'TEACHERS'])
+     ->where(function($query) use ($search) {
+          if ($search !='') {
+              return $query->where('member_no','like', '%'.$search.'%')
+              ->orWhere('first_name','like', '%'.$search.'%')
+              ->orWhere('last_name','like', '%'.$search.'%')
+              ->orWhere('full_name','like', '%'.$search.'%')
+                  ;
+
+          }
+      })
+     ->orderBy('max_no')->paginate(9);
+         return view('frontend.pages.members.index',compact('members'));
         
     }
 

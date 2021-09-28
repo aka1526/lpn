@@ -78,7 +78,7 @@
                                         <div class="main-profile-social-list">
                                             <div class="media">
                                                 <div class="media-icon bg-primary-transparent text-primary">
-                                                    <i class="icon ion-logo-github"></i>
+                                                    <i class="fab fa-instagram"></i>
                                                 </div>
                                                 <div class="media-body">
                                                     <span>Instagram</span>
@@ -87,8 +87,8 @@
                                                 </div>
                                             </div>
                                             <div class="media">
-                                                <div class="media-icon bg-success-transparent text-success">
-                                                    <i class="icon ion-logo-twitter"></i>
+                                                <div class="media-icon bg-primary-transparent text-primary">
+                                                    <i class="icon ion-logo-facebook"></i>
                                                 </div>
                                                 <div class="media-body">
                                                     <span>Facebook</span>
@@ -98,8 +98,8 @@
                                                 </div>
                                             </div>
                                             <div class="media">
-                                                <div class="media-icon bg-info-transparent text-info">
-                                                    <i class="icon ion-logo-linkedin"></i>
+                                                <div class="media-icon bg-primary-transparent text-primary">
+                                                    <i class="icon ion-ios-chatbubbles"></i>
                                                 </div>
                                                 <div class="media-body">
                                                     <span>We Chat</span>
@@ -108,8 +108,8 @@
                                                 </div>
                                             </div>
                                             <div class="media">
-                                                <div class="media-icon bg-info-transparent text-info">
-                                                    <i class="icon ion-logo-linkedin"></i>
+                                                <div class="media-icon bg-primary-transparent text-primary">
+                                                    <i class="icon ion-md-globe"></i>
                                                 </div>
                                                 <div class="media-body">
                                                     <span>Website</span>
@@ -303,18 +303,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label class="form-label">Address</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <textarea class="form-control" id="user_address" name="user_address" rows="4"
-                                                placeholder="San Francisco, CA"></textarea>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group ">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Address</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <textarea class="form-control" id="user_address" name="user_address"
+                                                        rows="4" placeholder="San Francisco, CA"></textarea>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="mb-4 main-content-label">Muay INFORMATION</div>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -402,8 +405,9 @@
                                                 </div>
                                                 <div class="col-md-9">
                                                     {{-- <h4>Certificate </h4> --}}
-                                                    <input type="text" class="form-control form-control-sm" 
-                                                    id="certificate_no" name="certificate_no" placeholder="Certificate no." value="">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        id="certificate_no" name="certificate_no"
+                                                        placeholder="Certificate no." value="">
                                                 </div>
                                             </div>
                                         </div>

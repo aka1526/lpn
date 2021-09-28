@@ -145,7 +145,7 @@ $(document).on('click', '.btn-update2', function() {
 $('.btn-disable').on('click', function() {
     var uid = $(this).data('uid');
     var status = $(this).data('status');
-    var url = "/pageadmin/course/updatestatus";
+    var url = "/pageadmin/members/prosonal/status";
 
     if (status == 'Y') {
         var mtext = 'Yes, Enable it!';
@@ -202,12 +202,12 @@ $('.btn-close').on('click', function() {
 $('.btn-delete').on('click', function() {
 
     var uid = $(this).data('uid');
-    var url = "/pageadmin/course/delete";
+    var url = "/pageadmin/members/prosonal/delete";
     var mtext = 'Yes, Delete it!';
 
     Swal.fire({
         title: 'Are you sure?',
-        // text: "You won't be able to revert this!",
+        text: "You won't be able to Delete this!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -245,6 +245,15 @@ $('.btn-delete').on('click', function() {
 
 
 
+
+
+$(document).on('click', '.btn-search', function() {
+    var search = $('#search').val();
+    var type = $('#type').val();
+
+    location.href = "/pageadmin/members/prosonal?search=" + search + '&type=' + type; //redirection
+
+});
 $(document).on('change', ':file', function() {
     var input = $(this),
         numFiles = input.get(0).files ? input.get(0).files.length : 1,
@@ -266,4 +275,19 @@ $(document).ready(function() {
         }
 
     });
+});
+
+$(document).on('click', '#print_card', function() {
+
+    //$("#print_card").on("click", function(e) {
+    var img = $(this).data('img');
+    if (img != '') {
+        var win = window.open('', '', 'left=300,top=200,width=700,height=400,toolbar=0,scrollbars=0,status  =0');
+        win.document.write('<img src="' + img + '" onload="window.print();window.close()" />');
+        win.focus();
+    } else {
+
+        alert('No Image');
+    }
+
 });

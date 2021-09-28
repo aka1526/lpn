@@ -25,7 +25,8 @@ Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('fn.aboutus');
 Route::get('/aboutus/{url}', [HomeController::class, 'aboutus_page'])->name('fn.aboutus_page');
 
 Route::get('/news', [HomeController::class, 'news'])->name('fn.news');
- 
+
+Route::get('/members', [HomeController::class, 'members'])->name('fn.members');
 
 
 // Route::get('/aboutus/about', [HomeController::class, 'aboutus_about'])->name('fn.aboutus_about');
@@ -169,6 +170,9 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/members/prosonal/register/update', [MembersController::class, 'update'])->name('members.register.update');
  Route::post('/pageadmin/members/profileimg', [MembersController::class, 'profileimg'])->name('members.profileimg');
  Route::post('/pageadmin/members/idcardimg', [MembersController::class, 'idcardimg'])->name('members.idcardimg');
+ Route::post('/pageadmin/members/prosonal/delete', [MembersController::class, 'prosonal_del'])->name('members.prosonal.del');
+ Route::post('/pageadmin/members/prosonal/status', [MembersController::class, 'prosonal_status'])->name('members.prosonal.status');
+
 
 
  Route::get('/pageadmin/khans', [khansController::class, 'index'])->name('khans.index');

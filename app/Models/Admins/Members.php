@@ -65,6 +65,7 @@ class Members extends Authenticatable
         ,'member_www'
         ,'date_register'
         ,'img_idcard'
+        ,'isdelete'
 
     ];
 

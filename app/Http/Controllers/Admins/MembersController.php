@@ -57,8 +57,28 @@ class MembersController extends Controller
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
+        $search= isset($request->search) ?  trim($request->search) : '';
+        $type= isset($request->type) ?  $request->type : '';
+       // dd($request);
+        $members = Members::where('member_group', '=', 'PERSON')
+        ->where(function($query) use ($search) {
+            if ($search !='') {
+                return $query->where('member_no','like', '%'.$search.'%')
+                ->orWhere('first_name','like', '%'.$search.'%')
+                ->orWhere('last_name','like', '%'.$search.'%')
+                ->orWhere('full_name','like', '%'.$search.'%')
+                    ;
 
-        $members = Members::where('member_group', '=', 'PERSON')->orderBy('max_no')->paginate($this->paging);
+            }
+        })
+
+        ->where(function($query) use ($type) {
+            if ($type !='') {
+                return $query->where('user_type','=', $type)  ;
+
+            }
+        })
+        ->where('isdelete','!=','Y')->orderBy('max_no')->paginate($this->paging);
 
         return view('admins.pages.members.index', compact('members'));
     }
@@ -85,8 +105,7 @@ class MembersController extends Controller
         return view('admins.pages.members.new', compact('country', 'khans', 'krus'));
     }
 
-    public function add(Request $request)
-    {
+    public function add(Request $request)    {
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
@@ -159,7 +178,7 @@ class MembersController extends Controller
         }
 
         $certificate_no = $request->certificate_no;
-//dd($request->member_www);
+ 
         $action = Members::insert([
             'member_uid' => $uid
             , 'first_name' => strtoupper($request->first_name)
@@ -221,6 +240,9 @@ class MembersController extends Controller
         //return redirect()->route('members.index');
 
     }
+
+
+
 
     public function edit(Request $request, $uid = '')
     {
@@ -394,7 +416,63 @@ class MembersController extends Controller
         return $imagename;
     }
 
-    public function delete(Request $request)
+    
+    public function prosonal_del(Request $request ){
+
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+
+        $uid = $request->uid;
+        $member = Members::where('member_uid', '=', $uid)->first();
+
+        $success = false;
+        $message = 'fail';
+        $response = [];
+        if ($member) {
+            $success = true;
+            $message = 'success';
+            $success =  Members::where('member_uid', '=', $uid)->update([
+                'isdelete'=>'Y'
+            ]);
+
+        }
+
+        return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+    
+
+    public function prosonal_status(Request $request ){
+
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+
+        $uid = $request->uid;
+        $status = $request->status;
+        $member = Members::where('member_uid', '=', $uid)->first();
+
+        $success = false;
+        $message = 'fail';
+        $response = [];
+        if ($member) {
+            $success = true;
+            $message = 'success';
+            $success =  Members::where('member_uid', '=', $uid)->update([
+                'member_status'=> $status
+            ]);
+
+        }
+
+        return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+    
+
+    
+
+    public function delete222(Request $request)
     {
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
