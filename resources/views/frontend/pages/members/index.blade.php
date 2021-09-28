@@ -5,7 +5,7 @@
 @section('content')
 <style>
     .event-area-section {
-    padding: 50px 0px;
+    padding: 20px 0px;
     background-color: #f2f2f4;
 }
 </style>
