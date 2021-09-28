@@ -27,6 +27,8 @@ Route::get('/aboutus/{url}', [HomeController::class, 'aboutus_page'])->name('fn.
 Route::get('/news', [HomeController::class, 'news'])->name('fn.news');
 
 Route::get('/members', [HomeController::class, 'members'])->name('fn.members');
+Route::get('/members/teachers', [HomeController::class, 'members_teachers'])->name('fn.members.teachers');
+Route::get('/members/students', [HomeController::class, 'members_students'])->name('fn.members.students');
 
 
 // Route::get('/aboutus/about', [HomeController::class, 'aboutus_about'])->name('fn.aboutus_about');

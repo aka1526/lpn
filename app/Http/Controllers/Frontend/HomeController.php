@@ -101,6 +101,48 @@ class HomeController extends Controller
         
     }
 
+    public function members_teachers(Request $request)
+    {    
+       //  dd($request);
+     $search=isset( $request->search ) ?  $request->search : ''; 
+     $members = Members::where('isdelete', '=', 'N')
+     ->whereIn('user_type', [ 'TEACHERS'])
+     ->where(function($query) use ($search) {
+          if ($search !='') {
+              return $query->where('member_no','like', '%'.$search.'%')
+              ->orWhere('first_name','like', '%'.$search.'%')
+              ->orWhere('last_name','like', '%'.$search.'%')
+              ->orWhere('full_name','like', '%'.$search.'%')
+                  ;
+
+          }
+      })
+     ->orderBy('max_no')->paginate(9);
+         return view('frontend.pages.members.index',compact('members'));
+        
+    }
+    public function members_students(Request $request)
+    {    
+       //  dd($request);
+     $search=isset( $request->search ) ?  $request->search : ''; 
+     $members = Members::where('isdelete', '=', 'N')
+     ->whereIn('user_type', ['STUDENTS'])
+     ->where(function($query) use ($search) {
+          if ($search !='') {
+              return $query->where('member_no','like', '%'.$search.'%')
+              ->orWhere('first_name','like', '%'.$search.'%')
+              ->orWhere('last_name','like', '%'.$search.'%')
+              ->orWhere('full_name','like', '%'.$search.'%')
+                  ;
+
+          }
+      })
+     ->orderBy('max_no')->paginate(9);
+         return view('frontend.pages.members.index',compact('members'));
+        
+    }
+ 
+
 //     public function aboutus_about() {
 //      $url='about';    
 //      $aboutus = Aboutus::where('aboutus_url','=',$url)->first();

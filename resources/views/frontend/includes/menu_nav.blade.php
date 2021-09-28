@@ -178,9 +178,9 @@
                                 <li class="dropdown">
                                     <a target="" href="#">Personal</a>
                                     <ul class="clearfix dropdown-menu">
-                                        <li><a target="" href="#">Members</a></li>
-                                        <li><a target="" href="#">Teachers</a></li>
-                                        <li><a target="" href="#">Students</a></li>
+                                        {{-- <li><a target="" href="#">Members</a></li> --}}
+                                        <li><a target="" href="/members/teachers">Teachers</a></li>
+                                        <li><a target="" href="/members/students">Students</a></li>
                                     </ul>
                                 </li>
 
