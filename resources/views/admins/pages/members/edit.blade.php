@@ -502,7 +502,8 @@
 
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
-                    <h6 class="modal-title">Upload Image</h6><button aria-label="Close" class="close"
+                    <h6 class="modal-title">Upload Image</h6>
+                    <button aria-label="Close" class="close"
                         data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <form id="frmprofile" name="frmprofile" class="form-horizontal" method="post" enctype="multipart/form-data"
@@ -510,6 +511,10 @@
                     <div class="modal-body">
 
                         @csrf
+                        <div id="alert" name="alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none">
+                            <strong>Opp!</strong> You should area in on some of image below.
+                             
+                          </div>
                         <input type="hidden" id="img_uid" name="img_uid" value="{{ $member->member_uid }}">
                         <input type="hidden" id="img_type" name="img_type" value="profile">
                         <div class="mt-3 row">
@@ -626,20 +631,26 @@
 			 
             if (y1 == '' || y1 <=0 ) {
 				e.preventDefault();
+               // $("#alert").removeAttr("style").hide();
+                $("#alert").show();
+              //  $('#modalProfile').modal('hide');
+                // Swal.fire({
+                //     title: 'No Area Selected',
+                //    text: "Choose a Area please!",
+                //     icon: 'error',
+                //     showCancelButton: false,
+                //     confirmButtonColor: '#3085d6',
+                //     cancelButtonColor: '#d33',
+                //     confirmButtonText: 'Close.'
+                // }).then((result) => {
+                //     if (result.isConfirmed) {
+                //         location.reload();
+                //     }
+                // })
+            } else {
+                $("#alert").removeAttr("style").hide();
                 $('#modalProfile').modal('hide');
-                Swal.fire({
-                    title: 'No File Selected',
-                  text: "Choose a file please!",
-                    icon: 'error',
-                    showCancelButton: false,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Close.'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload();
-                    }
-                })
+                location.reload();
             }
 
         });
