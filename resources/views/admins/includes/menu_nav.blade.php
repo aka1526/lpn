@@ -10,9 +10,9 @@
                     <img src="{{ asset('assets/img/logo/logo1.png') }}" class="desktop-logo-dark">
 
                 </a>
-                <div class="main-header-center  ml-4">
+                <div class="ml-4 main-header-center">
                     <div>
-                        <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1 ml-4">
+                        <h2 class="ml-4 main-content-title tx-24 mg-b-1 mg-b-lg-1">
                             Lumpinee Academy Muaythai
                         </h2>
                     </div>
@@ -20,19 +20,19 @@
             </div><!-- search -->
             <div class="main-header-right">
 
-                <div class="nav nav-item  navbar-nav-right ml-auto">
+                <div class="ml-auto nav nav-item navbar-nav-right">
 
 
                     <div class="dropdown main-profile-menu nav nav-item nav-link">
                         <a class="profile-user d-flex" href=""><img alt=""
                                 src="{{ asset('adminpage/assets/img/faces/6.jpg') }}"></a>
                         <div class="dropdown-menu">
-                            <div class="main-header-profile bg-primary p-3">
+                            <div class="p-3 main-header-profile bg-primary">
                                 <div class="d-flex wd-100p">
                                     <div class="main-img-user"><img alt=""
                                             src="{{ asset('adminpage/assets/img/faces/6.jpg') }}" class="">
                                     </div>
-                                    <div class="ml-3 my-auto">
+                                    <div class="my-auto ml-3">
                                         <h6>Petey Cruiser</h6><span>Premium Member</span>
                                     </div>
                                 </div>
@@ -56,10 +56,10 @@
 
     <!--Horizontal-main -->
     <div class="sticky">
-        <div class="horizontal-main hor-menu clearfix side-header">
-            <div class="horizontal-mainwrapper container clearfix">
+        <div class="clearfix horizontal-main hor-menu side-header">
+            <div class="container clearfix horizontal-mainwrapper">
                 <!--Nav-->
-                <nav class="horizontalMenu clearfix">
+                <nav class="clearfix horizontalMenu">
                     <ul class="horizontalMenu-list">
                         <li aria-haspopup="true">
                             <a href="/" class="">
@@ -93,8 +93,9 @@
                                    Prosonal Member </a></li>
                                 <li aria-haspopup="true"><a href="/pageadmin/members/organization" class="slide-item">
                                    Organization Member</a></li>
-
-
+                                   <li aria-haspopup="true"><a href="/pageadmin/certificates" class="slide-item">
+                                   Certificates</a></li>
+                                   
                             </ul>
                         </li>
 

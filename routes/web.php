@@ -16,6 +16,8 @@ use App\Http\Controllers\Admins\AboutusController;
 use App\Http\Controllers\Admins\MembersController;
 use App\Http\Controllers\Admins\KhansController;
 use App\Http\Controllers\Admins\CountryController;
+use App\Http\Controllers\Admins\CertificatesController;
+
 ###### frontend ###################
 Route::fallback(function () {
   return view('/frontend/pages/404');
@@ -197,3 +199,10 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/country/update', [CountryController::class, 'update'])->name('country.update');
  Route::post('/pageadmin/country/updatestatus', [CountryController::class, 'updatestatus'])->name('country.updatestatus');
  Route::post('/pageadmin/country/delete', [CountryController::class, 'delete'])->name('country.delete');
+
+
+ Route::get('/pageadmin/certificates', [CertificatesController::class, 'index'])->name('certificates.index');
+ Route::get('/pageadmin/certificates/new', [CertificatesController::class, 'new'])->name('certificates.new');
+ Route::get('/pageadmin/certificates/get', [CertificatesController::class, 'get'])->name('certificates.get');
+
+ Route::post('/pageadmin/certificates/add', [CertificatesController::class, 'add'])->name('certificates.add');

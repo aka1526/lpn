@@ -7,7 +7,7 @@
     .event-area-section {
     padding: 20px 0px;
     background-color: #f2f2f4;
-}
+} 
 </style>
     <!-- Start of breadcrumb section
              ============================================= -->
@@ -28,7 +28,7 @@
                <div class="col-auto mb-3">
                    
                      <form action="">
-                        <input type="text" id="search" name="search" value="" placeholder="Enter Name">
+                        <input type="text" id="search" name="search" value="{{ Request::get('search') }}" placeholder="Enter Name">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                      </form>
                    
@@ -53,7 +53,7 @@
                                 <h3><a href="#">{{ $item->full_name}}</a></h3>
                                 <div class="yl-event-meta">
                                     <a href=""><i class="fas fa-map-marker-alt"></i> {{ $item->country_name}}</a>
-                                    
+                                    <a href=""><i class="fas fa-bell"></i> Exp. {{ $item->date_expiry}}</a>
                                 </div>
                             </div>
                         </div>
