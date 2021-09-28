@@ -3,7 +3,12 @@
     หน้าหลัก
 @endsection
 @section('content')
-
+<style>
+    .event-area-section {
+    padding: 50px 0px;
+    background-color: #f2f2f4;
+}
+</style>
     <!-- Start of breadcrumb section
              ============================================= -->
     {{-- <section id="yl-breadcrumb" class="yl-breadcrumb-section position-relative" data-background="/assets/img/ct-bg.jpg">
