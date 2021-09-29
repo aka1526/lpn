@@ -391,6 +391,7 @@ class MembersController extends Controller
         return $imagename;
     }
 
+   
     public function uploadFile(Request $request)
     {
         $image = $request->file('fileupload');
@@ -557,7 +558,7 @@ class MembersController extends Controller
         return redirect($url);
     }
   //  public function idcardimg(Request $request,$memberuid=null)
-    public function idcardimg(Request $request,$memberuid=null)
+    public function idcardimg(Request $request,$memberuid=null,$renewCard=false)
     {
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
@@ -767,9 +768,17 @@ class MembersController extends Controller
 
         }
 
-      
-        $url = "/pageadmin/members/prosonal/edit/" . $uid;
-        return redirect($url);
+         if($renewCard){
+            
+            return true;
+         } else {
+            $url =   "/pageadmin/members/prosonal/edit/" . $uid;
+        
+            return redirect($url);
+         }
+       
 
+       
+       
     }
 }

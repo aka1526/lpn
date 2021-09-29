@@ -17,6 +17,7 @@ use App\Http\Controllers\Admins\MembersController;
 use App\Http\Controllers\Admins\KhansController;
 use App\Http\Controllers\Admins\CountryController;
 use App\Http\Controllers\Admins\CertificatesController;
+use App\Http\Controllers\Admins\MemberkhansController;
 
 ###### frontend ###################
 Route::fallback(function () {
@@ -206,3 +207,10 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::get('/pageadmin/certificates/get', [CertificatesController::class, 'get'])->name('certificates.get');
 
  Route::post('/pageadmin/certificates/add', [CertificatesController::class, 'add'])->name('certificates.add');
+
+
+ Route::get('/pageadmin/memberkhans', [MemberkhansController::class, 'index'])->name('memberkhans.index');
+ Route::get('/pageadmin/memberkhans/new', [MemberkhansController::class, 'new'])->name('memberkhans.new');
+ Route::get('/pageadmin/memberkhans/get', [MemberkhansController::class, 'get'])->name('memberkhans.get');
+
+ Route::post('/pageadmin/memberkhans/add', [MemberkhansController::class, 'add'])->name('memberkhans.add');

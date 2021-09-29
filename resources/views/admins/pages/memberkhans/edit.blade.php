@@ -442,7 +442,7 @@
                                         <div class="form-group ">
                                             <div class="row">
                                                 <div class="col-md-3">
-                                                    <label class="form-label">Certificate.</label>
+                                                    <label class="form-label">Certificate No.</label>
                                                 </div>
                                                 <div class="col-md-9">
                                                     @if ($member->certificate_no != '')
@@ -455,20 +455,6 @@
                                                             placeholder="Certificate no." value="">
                                                     @endif
 
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group ">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <label class="form-label">Date Exp.</label>
-                                                </div>
-                                                <div class="col-md-9 text-danger">
-                                                    <h4> {{  \Carbon\Carbon::parse($member->date_expiry)->format('d/m/Y')  }} </h4>
-                                                        
 
                                                 </div>
                                             </div>
@@ -590,7 +576,7 @@
 @endsection
 @section('adminjs')
     <!-- Internal Modal js-->
-    <script src="{{ asset('/adminpage/assets/js/admins/members.js?v=') . time() }}"></script>
+    <script src="{{ asset('adminpage/assets/js/admins/memberkhans.js?v='). time() }}"></script>
     <!--Internal  Sweet-Alert js-->
     <script src="{{ asset('/adminpage/assets/plugins/sweet-alert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('/adminpage/assets/plugins/sweet-alert/jquery.sweet-alert.js') }}"></script>

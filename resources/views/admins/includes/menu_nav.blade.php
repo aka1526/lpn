@@ -93,8 +93,10 @@
                                    Prosonal Member </a></li>
                                 <li aria-haspopup="true"><a href="/pageadmin/members/organization" class="slide-item">
                                    Organization Member</a></li>
-                                   <li aria-haspopup="true"><a href="/pageadmin/certificates" class="slide-item">
-                                   Certificates</a></li>
+                                   {{-- <li aria-haspopup="true"><a href="/pageadmin/certificates" class="slide-item">
+                                   Certificates</a></li> --}}
+                                   <li aria-haspopup="true"><a href="/pageadmin/memberkhans" class="slide-item">
+                                    Member Level Khan</a></li>
                                    
                             </ul>
                         </li>
