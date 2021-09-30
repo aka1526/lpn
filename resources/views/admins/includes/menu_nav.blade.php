@@ -89,15 +89,22 @@
                             </svg>
                             Members <i class="fe fe-chevron-down horizontal-icon"></i></a>
                             <ul class="sub-menu">
-                                <li aria-haspopup="true"><a href="/pageadmin/members/prosonal" class="slide-item">
-                                   Prosonal Member </a></li>
+                                 
+
+                                   <li aria-haspopup="true" class="sub-menu-sub"><a href="#"> Prosonal Member</a>
+                                    <ul class="sub-menu">
+                                        <li aria-haspopup="true"><a href="/pageadmin/members/prosonal" class="slide-item">Register New</a></li>
+                                        <li aria-haspopup="true"><a href="/pageadmin/memberkhans" class="slide-item">Up Khan Muay</a></li>
+                                        <li aria-haspopup="true"><a href="/pageadmin/members/prosonal/renew" class="slide-item">Renew Membership</a></li>
+                                    </ul>
+                                </li>
+
+
                                 <li aria-haspopup="true"><a href="/pageadmin/members/organization" class="slide-item">
                                    Organization Member</a></li>
-                                   {{-- <li aria-haspopup="true"><a href="/pageadmin/certificates" class="slide-item">
-                                   Certificates</a></li> --}}
-                                   <li aria-haspopup="true"><a href="/pageadmin/memberkhans" class="slide-item">
-                                    Member Up Khan</a></li>
-                                   
+                                    
+
+                                       
                             </ul>
                         </li>
 

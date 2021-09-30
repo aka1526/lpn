@@ -7,6 +7,7 @@ use App\Models\Admins\Aboutus;
 use App\Models\Admins\Accessuid;
 use App\Models\Admins\Country;
 use App\Models\Admins\Khans;
+use App\Models\Admins\Memberrenews;
 use App\Models\Admins\Members;
 use App\Models\Admins\Sysinfo;
 use App\Models\Admins\User;
@@ -23,6 +24,7 @@ class MembersController extends Controller
 {
     protected $paging = 10;
     protected $useruid = '';
+    protected $username = '';
 
     public function GetUserUid()
     {
@@ -41,7 +43,7 @@ class MembersController extends Controller
         }
 
         $useruid = isset($user->uid) ? $user->uid : '';
-
+        $this->username = isset($user->uid) ? $user->name : '';
         return $useruid;
     }
 
@@ -57,28 +59,28 @@ class MembersController extends Controller
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
-        $search= isset($request->search) ?  trim($request->search) : '';
-        $type= isset($request->type) ?  $request->type : '';
-       // dd($request);
+        $search = isset($request->search) ? trim($request->search) : '';
+        $type = isset($request->type) ? $request->type : '';
+        // dd($request);
         $members = Members::where('member_group', '=', 'PERSON')
-        ->where(function($query) use ($search) {
-            if ($search !='') {
-                return $query->where('member_no','like', '%'.$search.'%')
-                ->orWhere('first_name','like', '%'.$search.'%')
-                ->orWhere('last_name','like', '%'.$search.'%')
-                ->orWhere('full_name','like', '%'.$search.'%')
+            ->where(function ($query) use ($search) {
+                if ($search != '') {
+                    return $query->where('member_no', 'like', '%' . $search . '%')
+                        ->orWhere('first_name', 'like', '%' . $search . '%')
+                        ->orWhere('last_name', 'like', '%' . $search . '%')
+                        ->orWhere('full_name', 'like', '%' . $search . '%')
                     ;
 
-            }
-        })
+                }
+            })
 
-        ->where(function($query) use ($type) {
-            if ($type !='') {
-                return $query->where('user_type','=', $type)  ;
+            ->where(function ($query) use ($type) {
+                if ($type != '') {
+                    return $query->where('user_type', '=', $type);
 
-            }
-        })
-        ->where('isdelete','!=','Y')->orderBy('max_no')->paginate($this->paging);
+                }
+            })
+            ->where('isdelete', '!=', 'Y')->orderBy('max_no')->paginate($this->paging);
 
         return view('admins.pages.members.index', compact('members'));
     }
@@ -105,7 +107,8 @@ class MembersController extends Controller
         return view('admins.pages.members.new', compact('country', 'khans', 'krus'));
     }
 
-    public function add(Request $request)    {
+    public function add(Request $request)
+    {
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
@@ -167,23 +170,23 @@ class MembersController extends Controller
         }
 
         $kru_uid = isset($request->kru_uid) ? $request->kru_uid : '';
-        
+
         $kru_name = "";
-        if ($kru_uid !='') {
+        if ($kru_uid != '') {
             $kru = Members::where('member_uid', '=', $kru_uid)->first();
-            if( $kru){
+            if ($kru) {
                 $kru_name = $kru->full_name;
             }
-            
+
         }
 
         $certificate_no = $request->certificate_no;
- 
+
         $action = Members::insert([
             'member_uid' => $uid
             , 'first_name' => strtoupper($request->first_name)
             , 'last_name' => strtoupper($request->last_name)
-            , 'full_name' => strtoupper($request->first_name . ' ' . $request->last_name) 
+            , 'full_name' => strtoupper($request->first_name . ' ' . $request->last_name)
             , 'gender' => $request->gender
             , 'dateofbirth' => $request->dateofbirth
             , 'user_tel' => $request->user_tel
@@ -219,7 +222,7 @@ class MembersController extends Controller
             , 'member_month' => $member_month
             , 'member_no' => $member_no
             , 'member_www' => $request->member_www
-            , 'date_register' => $date_register
+            , 'date_register' => $date_register,
 
         ]);
 
@@ -231,18 +234,15 @@ class MembersController extends Controller
             ]);
 
             if ($act) {
-                $this->idcardimg($request,$uid);
+                $this->idcardimg($request, $uid);
             }
 
         }
 
-        return  redirect()->to('/pageadmin/members/prosonal/edit/'.$uid);
+        return redirect()->to('/pageadmin/members/prosonal/edit/' . $uid);
         //return redirect()->route('members.index');
 
     }
-
-
-
 
     public function edit(Request $request, $uid = '')
     {
@@ -391,7 +391,6 @@ class MembersController extends Controller
         return $imagename;
     }
 
-   
     public function uploadFile(Request $request)
     {
         $image = $request->file('fileupload');
@@ -417,13 +416,12 @@ class MembersController extends Controller
         return $imagename;
     }
 
-    
-    public function prosonal_del(Request $request ){
+    public function prosonal_del(Request $request)
+    {
 
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
-
 
         $uid = $request->uid;
         $member = Members::where('member_uid', '=', $uid)->first();
@@ -434,22 +432,21 @@ class MembersController extends Controller
         if ($member) {
             $success = true;
             $message = 'success';
-            $success =  Members::where('member_uid', '=', $uid)->update([
-                'isdelete'=>'Y'
+            $success = Members::where('member_uid', '=', $uid)->update([
+                'isdelete' => 'Y',
             ]);
 
         }
 
         return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
     }
-    
 
-    public function prosonal_status(Request $request ){
+    public function prosonal_status(Request $request)
+    {
 
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
-
 
         $uid = $request->uid;
         $status = $request->status;
@@ -461,17 +458,14 @@ class MembersController extends Controller
         if ($member) {
             $success = true;
             $message = 'success';
-            $success =  Members::where('member_uid', '=', $uid)->update([
-                'member_status'=> $status
+            $success = Members::where('member_uid', '=', $uid)->update([
+                'member_status' => $status,
             ]);
 
         }
 
         return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
     }
-    
-
-    
 
     public function delete222(Request $request)
     {
@@ -510,14 +504,14 @@ class MembersController extends Controller
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
-        
+
         $uid = $request->img_uid;
 
         $image = $request->file('fileupload');
         $imagename = '';
         $height = Image::make($image)->height();
         $width = Image::make($image)->width();
-      //  dd($height,$width,$request );
+        //  dd($height,$width,$request );
         $path = "/images/members";
         $imgSave = false;
         if ($image) {
@@ -533,12 +527,12 @@ class MembersController extends Controller
             $image_resize = Image::make($image->getRealPath());
 
             //$height= $height >765 ? 765 : $height;
-           // $width = $width>460? 460 :$width ;
-           if($height >765 || $width>460 ){
-            $image_resize->resize(765, 460); 
-           }
+            // $width = $width>460? 460 :$width ;
+            if ($height > 765 || $width > 460) {
+                $image_resize->resize(765, 460);
+            }
             //
-           
+
             $image_resize->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
             //$img->save($croppath);
             $image_resize->save($filePath . '/' . $imagename);
@@ -551,33 +545,33 @@ class MembersController extends Controller
             Members::where('member_uid', '=', $uid)->update([
                 'img_profile' => $imagename,
             ]);
-            
-            $this->idcardimg( $request,$uid);
+
+            $this->idcardimg($request, $uid);
         }
         $url = "/pageadmin/members/prosonal/edit/" . $uid;
         return redirect($url);
     }
-  //  public function idcardimg(Request $request,$memberuid=null)
-    public function idcardimg(Request $request,$memberuid=null,$renewCard=false)
+    //  public function idcardimg(Request $request,$memberuid=null)
+    public function idcardimg(Request $request, $memberuid = null, $renewCard = false)
     {
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
 
         $uid = isset($memberuid) ? $memberuid : $request->img_uid;
-        
+
         $member = Members::where('member_uid', '=', $uid)->first();
         $sysinfo = Sysinfo::where('sys_uid', '!=', '')->first();
-      
-        $image =public_path('/images/members/'. $member->img_profile ) ;//  $request->file('fileupload');
-        $extension = pathinfo( $image, PATHINFO_EXTENSION);
+
+        $image = public_path('/images/members/' . $member->img_profile); //  $request->file('fileupload');
+        $extension = pathinfo($image, PATHINFO_EXTENSION);
         $imagename = '';
 
         $path = "/images/members/card";
         $imgSave = false;
         if ($image) {
-          // dd( $extension);
-            $imagename =  $member->member_no. '_' . time() . '.' . $extension ;//$image->extension();
+            // dd( $extension);
+            $imagename = $member->member_no . '_' . time() . '.' . $extension; //$image->extension();
 
             $filePath = public_path($path);
 
@@ -586,7 +580,7 @@ class MembersController extends Controller
                 File::makeDirectory($filePath, 0755, true, true);
             }
 
-           // $img_emp = Image::make($image->getRealPath());
+            // $img_emp = Image::make($image->getRealPath());
             $img_emp = Image::make($image);
             $img_emp->resize(250, 340);
 
@@ -594,12 +588,12 @@ class MembersController extends Controller
 
             //top-left, top-right, bottom-left and bottom-right
             $img->insert($img_emp, 'top-left', 20, 20);
-             
+
             $img->text($sysinfo->sys_name_th, 286, 40, function ($font) {
 
                 $font->file(public_path('/assets/fonts/FC_Home.ttf'));
                 $font->size(76);
-                $font->color('#FFFFFF');//#034703
+                $font->color('#FFFFFF'); //#034703
                 $font->align('left');
                 $font->valign('top');
                 $font->angle(0);
@@ -726,7 +720,7 @@ class MembersController extends Controller
                 $font->angle(0);
             });
 
-            $img->text('Tel. '. $sysinfo->sys_phone1, 400, 564, function ($font) {
+            $img->text('Tel. ' . $sysinfo->sys_phone1, 400, 564, function ($font) {
                 $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
                 $font->size(18);
                 $font->color('#FFFFFF');
@@ -735,7 +729,7 @@ class MembersController extends Controller
                 $font->angle(0);
             });
 
-            $img->text('E-mail: '. $sysinfo->sys_email1, 650, 564, function ($font) {
+            $img->text('E-mail: ' . $sysinfo->sys_email1, 650, 564, function ($font) {
                 $font->file(public_path('/assets/fonts/BOOKMADI.ttf'));
                 $font->size(18);
                 $font->color('#FFFFFF');
@@ -743,8 +737,6 @@ class MembersController extends Controller
                 $font->valign('top');
                 $font->angle(0);
             });
-
-
 
             $img_barcode = Image::make(DNS1D::getBarcodePNG($member->member_no, 'C39', 2, 60, array(0, 0, 0), true));
 
@@ -759,8 +751,8 @@ class MembersController extends Controller
             $img->insert($img_logo, 'top-left', 740, 350);
 
             $img->save(public_path('/images/members/card/' . $imagename));
-            
-            if ($imagename !='') {
+
+            if ($imagename != '') {
                 Members::where('member_uid', '=', $uid)->update([
                     'img_idcard' => $imagename,
                 ]);
@@ -768,17 +760,168 @@ class MembersController extends Controller
 
         }
 
-         if($renewCard){
-            
-            return true;
-         } else {
-            $url =   "/pageadmin/members/prosonal/edit/" . $uid;
-        
-            return redirect($url);
-         }
-       
+        if ($renewCard) {
 
-       
-       
+            return true;
+        } else {
+            $url = "/pageadmin/members/prosonal/edit/" . $uid;
+
+            return redirect($url);
+        }
+
     }
+
+    public function prosonal_renew(Request $request)
+    {
+
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+        $search = isset($request->search) ? $request->search : '';
+
+        $memberrenews = Memberrenews::select(
+            "memberrenews.*", 
+            "members.img_profile",
+            
+        ) ->leftJoin("members", "members.member_uid", "=", "memberrenews.renew_member_uid")
+        ->where(function ($query) use ($search) {
+            if ($search != '') {
+                return $query->where('renew_member_no', 'like', '%' . $search . '%')
+
+                    ->orWhere('renew_member_fullname', 'like', '%' . $search . '%');
+
+            }
+           
+        })->orderBy('renew_year', 'desc')->orderBy('renew_maxno', 'desc')->paginate($this->paging);
+
+        return view('admins.pages.rmemberrenew.index', compact('memberrenews'));
+    }
+
+    public function prosonal_renew_edit(Request $request)
+    {
+
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+        $search = isset($request->search) ? $request->$search : '';
+        $members = Members::where('user_type', '!=', 'MEMBERS')->where('isdelete', '!=', 'Y')->orderBy('full_name')->get();
+        $khans = Khans::where('khan_status', '=', 'Y')->orderBy('khan_index')->get();
+        return view('admins.pages.rmemberrenew.renew', compact('members', 'khans'));
+    }
+
+    public function prosonal_renew_get(Request $request)
+    {
+
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+        $uid = $request->uid;
+        $member = Members::where('member_uid', '=', $uid)->first();
+        $success = false;
+        $message = 'fail';
+
+        $response = [];
+        if ($member) {
+            $success = true;
+            $message = 'success';
+            $response = [
+                'member_uid' => $member->member_uid,
+                'khan_uid' => $member->khan_uid,
+                'khan_no' => $member->khan_no,
+                'date_expiry' => $member->date_expiry,
+
+                'img_idcard' => '/images/members/card/' . $member->img_idcard,
+            ];
+        }
+        return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function prosonal_renew_update(Request $request)
+    {
+
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+        $fields = $request->validate(
+            [
+
+                'member_uid' => 'required',
+                'member_group' => 'required',
+
+                'renew_date' => 'required|date|after_or_equal:date_expiry',
+
+            ],
+            [
+                'member_uid.required' => 'member id Is Required ',
+                'member_group.required' => 'Group Is Required ',
+                'renew_date.required' => 'Renew Date Is Required ',
+                'renew_date.after' => ' Date after Is Required ',
+            ]
+        );
+
+        $uid = $request->member_uid != '' ? $request->member_uid : '';
+        $_date = $request->renew_date;
+        $renew_date = Carbon::parse($_date)->format('Y-m-d');
+        $member_year = Carbon::parse($_date)->format('Y');
+        $member_month = Carbon::parse($_date)->format('m');
+        $date_expiry = Carbon::parse($_date)->addYears(1);
+
+        $member = Members::where('member_uid', '=', $uid)->first();
+
+        if ($uid != '') {
+
+            $act = Members::where('member_uid', '=', $uid)->update([
+                'date_renew' => $renew_date
+                , 'date_expiry' => $date_expiry,
+
+            ]);
+
+            $renew_uid = $this->NewUid();
+
+            $renew_maxno = Memberrenews::where('renew_year', '=', $member_year)->max('renew_maxno') + 1;
+
+            if ($act) {
+                Memberrenews::insert([
+                    'renew_uid' => $renew_uid
+                    , 'renew_maxno' => $renew_maxno
+                    , 'renew_member_uid' => $member->member_uid
+                    , 'renew_member_no' => $member->member_no
+                    , 'renew_member_fullname' => $member->full_name
+                    , 'renew_price' => 0
+                    , 'khan_uid' => $member->khan_uid
+                    , 'khan_no' => $member->khan_no
+                    , 'khan_name' => $member->khan_name
+                    , 'renew_year' => $member_year
+                    , 'renew_month' => $member_month
+                    , 'renew_date_issue' => $renew_date
+                    , 'renew_date_exp'=> $date_expiry
+                    , 'renew_status' => "Y"
+                    , 'created_by' => $this->username
+                    , 'updated_by' => $this->username
+                    , 'created_at' => Carbon::now()
+                    , 'updated_at' => Carbon::now(),
+
+                ]);
+
+                $url = "/pageadmin/members/membersrenew";
+                $card_renew = $this->idcardimg($request, $uid, $url);
+
+                if ($card_renew) {
+
+                    $member = Members::where('member_uid', '=', $uid)->first();
+                    Memberrenews::where('renew_uid', '=', $renew_uid)->update([
+                        
+                        'card_img' => $member->img_idcard,
+                    ]);
+                }
+
+            }
+        }
+
+        return redirect()->route('members.prosonal.renew');
+    }
+
 }

@@ -61,7 +61,12 @@ class MemberkhansController extends Controller
         $search= isset($request->search) ?  trim($request->search) : '';
         //$type= isset($request->type) ?  $request->type : '';
        // dd($request);
-        $memberkhans = Memberkhans::where(function($query) use ($search) {
+        $memberkhans = Memberkhans::select(
+            "memberkhans.*", 
+            "members.img_profile",
+            
+        ) ->leftJoin("members", "members.member_uid", "=", "memberkhans.cer_member_uid")
+        ->where(function($query) use ($search) {
             if ($search !='') {
                 return $query->where('cer_no','like', '%'.$search.'%')
                 ->orWhere('cer_member_no','like', '%'.$search.'%')

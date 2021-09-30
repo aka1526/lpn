@@ -178,6 +178,11 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/members/prosonal/delete', [MembersController::class, 'prosonal_del'])->name('members.prosonal.del');
  Route::post('/pageadmin/members/prosonal/status', [MembersController::class, 'prosonal_status'])->name('members.prosonal.status');
 
+ Route::get('/pageadmin/members/prosonal/renew', [MembersController::class, 'prosonal_renew'])->name('members.prosonal.renew');
+ Route::get('/pageadmin/members/prosonal/renew/edit', [MembersController::class, 'prosonal_renew_edit'])->name('members.prosonal.renew.edit');
+ Route::get('/pageadmin/members/memberrenew/get', [MembersController::class, 'prosonal_renew_get'])->name('members.prosonal.renew.get');
+
+ Route::post('/pageadmin/members/prosonal/renew/update', [MembersController::class, 'prosonal_renew_update'])->name('members.prosonal.renew.update');
 
 
  Route::get('/pageadmin/khans', [khansController::class, 'index'])->name('khans.index');
