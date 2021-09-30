@@ -91,7 +91,7 @@
                             <ul class="sub-menu">
                                  
 
-                                   <li aria-haspopup="true" class="sub-menu-sub"><a href="#"> Prosonal Member</a>
+                                   <li aria-haspopup="true" class="sub-menu-sub"><a href="/pageadmin/members/prosonal"> Prosonal Member</a>
                                     <ul class="sub-menu">
                                         <li aria-haspopup="true"><a href="/pageadmin/members/prosonal/register" class="slide-item">Register New</a></li>
                                         <li aria-haspopup="true"><a href="/pageadmin/memberkhans" class="slide-item">Up Khan Muay</a></li>
