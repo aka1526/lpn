@@ -96,7 +96,7 @@
                                    {{-- <li aria-haspopup="true"><a href="/pageadmin/certificates" class="slide-item">
                                    Certificates</a></li> --}}
                                    <li aria-haspopup="true"><a href="/pageadmin/memberkhans" class="slide-item">
-                                    Member Level Khan</a></li>
+                                    Member Up Khan</a></li>
                                    
                             </ul>
                         </li>
