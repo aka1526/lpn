@@ -20,14 +20,14 @@
 @section('content')
 
     <!-- main-content opened -->
-    <div class="main-content horizontal-content  ">
+    <div class="main-content horizontal-content ">
 
         <div class="container">
             <!-- breadcrumb -->
             <div class="breadcrumb-header justify-content-between">
                 <div class="my-auto">
                     <div class="d-flex">
-                        {{-- <h4 class="content-title mb-0 my-auto">Tables</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Basic Tables</span> --}}
+                        {{-- <h4 class="my-auto mb-0 content-title">Tables</h4><span class="mt-1 mb-0 ml-2 text-muted tx-13">/ Basic Tables</span> --}}
                     </div>
                 </div>
 
@@ -66,9 +66,9 @@
                             <div class="card-body">
                                 <div class="pl-0">
                                     <div class="main-profile-overview ">
-                                        <div class="main-img-user profile-user text-center">
+                                        <div class="text-center main-img-user profile-user">
                                             <img alt="" src="/images/no-image.png" />
-                                            {{-- <a class="fas fa-camera profile-edit text-center"
+                                            {{-- <a class="text-center fas fa-camera profile-edit"
                                                 href="JavaScript:void(0);"></a> --}}
                                         </div>
 
@@ -193,7 +193,7 @@
                                                 </div>
                                                 <div class="col-md-9">
                                                     <select class="form-control select2" id="gender" name="gender" required>
-
+                                                        <option value=""></option>
                                                         <option value="MALE">Male</option>
                                                         <option value="FEMALE">Female</option>
                                                     </select>
@@ -208,11 +208,10 @@
                                                     <label class="form-label">Country</label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <select class="form-control select2" id="country_uid" name="country_uid"
-                                                        required>
+                                                    <select class="form-control select2" id="country_uid" name="country_uid" required>
+                                                        <option value=""></option>
                                                         @foreach ($country as $item)
-                                                            <option value="{{ $item->country_uid }}">
-                                                                {{ $item->country_name }}</option>
+                                                            <option value="{{ $item->country_uid }}">{{ $item->country_name }}</option>
                                                         @endforeach
 
                                                     </select>
@@ -231,7 +230,7 @@
                                                 </div>
                                                 <div class="col-md-9">
                                                     <input type="date" class="form-control" id="date_register"
-                                                        name="date_register" placeholder="Register Date" value="" required>
+                                                        name="date_register" placeholder="Register Date"  required>
                                                 </div>
                                             </div>
                                         </div>
@@ -252,26 +251,6 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="row ">
-                                    <div class="col-md-2">
-                                        <label class="form-label">Image </label>
-                                    </div>
-
-                                    <div class="col-sm-6 col-md-6 col-lg-4">
-
-                                        <div class="input-group file-browser">
-
-                                            <input type="text" class="form-control border-right-0 browse-file"
-                                                placeholder="choose" readonly="">
-                                            <label class="input-group-btn">
-                                                <span class="btn btn-default">
-                                                    Browse <input type="file" id="fileupload" name="fileupload"
-                                                        style="display: none;" multiple="">
-                                                </span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div> --}}
 
 
                                 <div class="mb-4 main-content-label">Contact INFORMATION</div>
@@ -328,7 +307,8 @@
                                                     <label class="form-label">Type</label>
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <select class="form-control select2" id="user_type" name="user_type">
+                                                    <select class="form-control select2" id="user_type" name="user_type" required>
+                                                        <option value=""> </option>
                                                         <option value="MEMBERS">Members</option>
                                                         <option value="TEACHERS">Teachers</option>
                                                         <option value="STUDENTS">Students</option>
@@ -347,9 +327,9 @@
                                                 </div>
                                                 <div class="col-md-9">
                                                     <select class="form-control select2" id="khan_uid" name="khan_uid">
+                                                        <option value=""></option>
                                                         @foreach ($khans as $item)
-                                                            <option value="{{ $item->khan_uid }}">
-                                                                {{ $item->khan_name }}</option>
+                                                            <option value="{{ $item->khan_uid }}">{{ $item->khan_name }}</option>
                                                         @endforeach
 
                                                     </select>
