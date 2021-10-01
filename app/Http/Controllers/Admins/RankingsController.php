@@ -315,7 +315,7 @@ class RankingsController extends Controller
             
         $created_by = $this->username ;  
         $uid = $this->NewUid();
-        $list_index = Rankingslist::max('list_index')+1 ;
+        $list_index = Rankingslist::where('list_ref','=',$rank_uid)->max('list_index')+1 ;
 
         $action =Rankingslist::insert([
             'list_uid'=> $uid
