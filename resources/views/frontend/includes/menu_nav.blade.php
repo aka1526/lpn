@@ -206,8 +206,16 @@
                         <li class="dropdown">
                             <a href="#">Rankings</a>
                             <ul class="clearfix dropdown-menu">
-                                <li><a target="" href="#">Rankings</a></li>
-                             
+                                
+                                <li class="dropdown">
+                                    <a target="" href="/rankings">Rankings</a>
+                                    <ul class="clearfix dropdown-menu">
+                                        <li><a target="" href="/rankings/male">Male</a></li>
+                                        <li><a target="" href="/rankings/female">Female</a></li>
+                                  
+                                         
+                                    </ul>
+                                </li>
 
                                 <li class="dropdown">
                                     <a target="" href="#">Champion</a>

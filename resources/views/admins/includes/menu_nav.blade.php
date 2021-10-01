@@ -100,10 +100,10 @@
                                 </li>
 
 
-                                <li aria-haspopup="true"><a href="/pageadmin/members/organization" class="slide-item">
-                                   Organization Member</a></li>
-                                    
-
+                                <li aria-haspopup="true"><a href="/pageadmin/members/organization" class="slide-item">Organization Member</a></li>
+                                <li aria-haspopup="true"><a href="/pageadmin/rankings" class="slide-item">WORLD RANKINGS</a></li>
+                                     
+                                   
                                        
                             </ul>
                         </li>

@@ -18,7 +18,7 @@ use App\Models\Admins\Aboutus;
 use App\Models\Admins\Sysinfo;
 use App\Models\Admins\News;
 use App\Models\Admins\Members;
-
+use App\Models\Admins\Rankings;
 
 class HomeController extends Controller
 {
@@ -142,37 +142,39 @@ class HomeController extends Controller
         
     }
  
+    public function rankings_index(Request $request)
+    {    
+      
+     $search='MALE'; 
+     $rankings = Rankings::where('rank_gander', '=', $search)
+     ->orderBy('rank_index')->get();
+         return view('frontend.pages.rankings.index',compact('rankings'));
+        
+    }
 
-//     public function aboutus_about() {
-//      $url='about';    
-//      $aboutus = Aboutus::where('aboutus_url','=',$url)->first();
-//      return view('frontend/pages/aboutus_About',compact('aboutus'));
-  
-//     }
-//     public function aboutus_history() {
-//      $url='history';    
-//      $aboutus = Aboutus::where('aboutus_url','=',$url)->first();
-//      return view('frontend/pages/aboutus_Page-History');
-  
-//     }
-//     public function aboutus_committees() {
-//      $url='committees';    
-//      $aboutus = Aboutus::where('aboutus_url','=',$url)->first();
-//      return view('frontend/pages/aboutus_Committees');
-  
-//     }
-//     public function aboutus_constitution() {
-//      $url='constitution';    
-//      $aboutus = Aboutus::where('aboutus_url','=',$url)->first();
-//      return view('frontend/pages/aboutus_Constitution');
-  
-//     }
-//     public function aboutus_contact() {
-//      $url='contact';    
-//      $aboutus = Aboutus::where('aboutus_url','=',$url)->first();
-//      return view('frontend/pages/aboutus_Contact');
-  
-//     }
-     
+    public function rankings_m(Request $request)
+    {    
+      
+     $search='MALE'; 
+     $rankings = Rankings::where('rank_gander', '=', $search)
+     ->orderBy('rank_index')->get();
+         return view('frontend.pages.rankings.index',compact('rankings'));
+        
+    }
+
+    public function rankings_f(Request $request)
+    {    
+      
+     $search='FEMALE'; 
+     $rankings = Rankings::where('rank_gander', '=', $search)
+     ->orderBy('rank_index')->get();
+         return view('frontend.pages.rankings.index',compact('rankings'));
+        
+    }
+
+    // Route::get('/rankings', [HomeController::class, 'rankings_index'])->name('fn.rankings_index');
+    // Route::get('/rankings/male', [HomeController::class, 'rankings_m'])->name('fn.rankings_m');
+    // Route::get('/rankings/female', [HomeController::class, 'rankings_f'])->name('fn.rankings_f');
+
 
 }

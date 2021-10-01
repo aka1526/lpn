@@ -18,6 +18,8 @@ use App\Http\Controllers\Admins\KhansController;
 use App\Http\Controllers\Admins\CountryController;
 use App\Http\Controllers\Admins\CertificatesController;
 use App\Http\Controllers\Admins\MemberkhansController;
+use App\Http\Controllers\Admins\RankingsController;
+
 
 ###### frontend ###################
 Route::fallback(function () {
@@ -32,6 +34,10 @@ Route::get('/news', [HomeController::class, 'news'])->name('fn.news');
 Route::get('/members', [HomeController::class, 'members'])->name('fn.members');
 Route::get('/members/teachers', [HomeController::class, 'members_teachers'])->name('fn.members.teachers');
 Route::get('/members/students', [HomeController::class, 'members_students'])->name('fn.members.students');
+
+Route::get('/rankings', [HomeController::class, 'rankings_index'])->name('fn.rankings_index');
+Route::get('/rankings/male', [HomeController::class, 'rankings_m'])->name('fn.rankings_m');
+Route::get('/rankings/female', [HomeController::class, 'rankings_f'])->name('fn.rankings_f');
 
 
 // Route::get('/aboutus/about', [HomeController::class, 'aboutus_about'])->name('fn.aboutus_about');
@@ -185,14 +191,14 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/members/prosonal/renew/update', [MembersController::class, 'prosonal_renew_update'])->name('members.prosonal.renew.update');
 
 
- Route::get('/pageadmin/khans', [khansController::class, 'index'])->name('khans.index');
- Route::get('/pageadmin/khans/new', [khansController::class, 'new'])->name('khans.new');
- Route::get('/pageadmin/khans/edit/{uid}', [khansController::class, 'edit'])->name('khans.edit');
+ Route::get('/pageadmin/khans', [KhansController::class, 'index'])->name('khans.index');
+ Route::get('/pageadmin/khans/new', [KhansController::class, 'new'])->name('khans.new');
+ Route::get('/pageadmin/khans/edit/{uid}', [KhansController::class, 'edit'])->name('khans.edit');
  
- Route::post('/pageadmin/khans/add', [khansController::class, 'add'])->name('khans.add');
- Route::post('/pageadmin/khans/update', [khansController::class, 'update'])->name('khans.update');
- Route::post('/pageadmin/khans/updatestatus', [khansController::class, 'updatestatus'])->name('khans.updatestatus');
- Route::post('/pageadmin/khans/delete', [khansController::class, 'delete'])->name('khans.delete');
+ Route::post('/pageadmin/khans/add', [KhansController::class, 'add'])->name('khans.add');
+ Route::post('/pageadmin/khans/update', [KhansController::class, 'update'])->name('khans.update');
+ Route::post('/pageadmin/khans/updatestatus', [KhansController::class, 'updatestatus'])->name('khans.updatestatus');
+ Route::post('/pageadmin/khans/delete', [KhansController::class, 'delete'])->name('khans.delete');
 
 
  
@@ -219,3 +225,17 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::get('/pageadmin/memberkhans/get', [MemberkhansController::class, 'get'])->name('memberkhans.get');
 
  Route::post('/pageadmin/memberkhans/add', [MemberkhansController::class, 'add'])->name('memberkhans.add');
+
+
+ Route::get('/pageadmin/rankings', [RankingsController::class, 'index'])->name('rankings.index');
+ Route::get('/pageadmin/rankings/new', [RankingsController::class, 'new'])->name('rankings.new');
+ Route::get('/pageadmin/rankings/edit/{uid}', [RankingsController::class, 'edit'])->name('rankings.edit');
+  Route::get('/pageadmin/rankings/list/{uid}', [RankingsController::class, 'list'])->name('rankings.list');
+ 
+
+ Route::post('/pageadmin/rankings/add', [RankingsController::class, 'add'])->name('rankings.add');
+ Route::post('/pageadmin/rankings/update', [RankingsController::class, 'update'])->name('rankings.update');
+ Route::post('/pageadmin/rankings/updatestatus', [RankingsController::class, 'updatestatus'])->name('rankings.updatestatus');
+ Route::post('/pageadmin/rankings/delete', [RankingsController::class, 'delete'])->name('rankings.delete');
+ Route::post('/pageadmin/rankings/addlist', [RankingsController::class, 'add_list'])->name('rankings.add.list');
+ 
