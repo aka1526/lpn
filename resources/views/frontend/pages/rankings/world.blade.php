@@ -59,7 +59,8 @@
                             <div class="card-body ">
                             <img alt="Image" class="img-fluid card-img-top" 
                             
-                            src="{{ $item->contenders_img !='' ?  '/images/rankings/'.$item->contenders_img : ''}} ">
+                            src="{{ $item->contenders_img !='' ?  '/images/rankings/'.$item->contenders_img : ''}} " 
+                            onerror="this.src='/images/rankings/nopic.jpg'" >
                           
                                
                             </div>
