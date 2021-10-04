@@ -45,6 +45,7 @@
            
             <div class="instructor-details-content position-relative">
                 <h2 class="text-center text-danger">{{ isset($rankingslist[0]) ? $rankingslist[0]->contenders_gander : '' }} CHAMPIONS</h2>
+                
 
                 <div class="row row-sm mt-4">
                     @if (isset($rankingslist))
