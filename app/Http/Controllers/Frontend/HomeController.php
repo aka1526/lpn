@@ -177,8 +177,9 @@ class HomeController extends Controller
     {    
       
      $search='MALE'; 
-     $rankingslist = Rankingslist::where('contenders_gander', '=', $search)
-
+     $rankingslist = Rankingslist::seleet('rankings.*','rankings_weight','rankings_weight_desc')
+     ->where('contenders_gander', '=', $search)
+     ->leftJoin("rankings", "rankings.rank_uid", "=", "rankingslist.list_ref")
      ->where('contenders_type','WORLD')
      ->orderBy('list_index')->get();
          return view('frontend.pages.rankings.world',compact('rankingslist'));
@@ -189,7 +190,8 @@ class HomeController extends Controller
     {    
       
      $search='FEMALE'; 
-     $rankingslist = Rankingslist::where('contenders_gander', '=', $search)
+     $rankingslist = Rankingslist::seleet('rankings.*','rankings_weight','rankings_weight_desc')
+     ->where('contenders_gander', '=', $search)
      ->leftJoin("rankings", "rankings.rank_uid", "=", "rankingslist.list_ref")
      ->where('contenders_type','WORLD')
      ->orderBy('list_index')->get();
