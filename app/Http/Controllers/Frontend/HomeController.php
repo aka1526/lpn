@@ -19,7 +19,7 @@ use App\Models\Admins\Sysinfo;
 use App\Models\Admins\News;
 use App\Models\Admins\Members;
 use App\Models\Admins\Rankings;
-
+use App\Models\Admins\Rankingslist;
 class HomeController extends Controller
 {
 
@@ -172,9 +172,50 @@ class HomeController extends Controller
         
     }
 
-    // Route::get('/rankings', [HomeController::class, 'rankings_index'])->name('fn.rankings_index');
-    // Route::get('/rankings/male', [HomeController::class, 'rankings_m'])->name('fn.rankings_m');
-    // Route::get('/rankings/female', [HomeController::class, 'rankings_f'])->name('fn.rankings_f');
 
+    public function world_m(Request $request)
+    {    
+      
+     $search='MALE'; 
+     $rankingslist = Rankingslist::where('contenders_gander', '=', $search)
 
+     ->where('contenders_type','WORLD')
+     ->orderBy('list_index')->get();
+         return view('frontend.pages.rankings.world',compact('rankingslist'));
+        
+    }
+ 
+    public function world_f(Request $request)
+    {    
+      
+     $search='FEMALE'; 
+     $rankingslist = Rankingslist::where('contenders_gander', '=', $search)
+     ->leftJoin("rankings", "rankings.rank_uid", "=", "rankingslist.list_ref")
+     ->where('contenders_type','WORLD')
+     ->orderBy('list_index')->get();
+         return view('frontend.pages.rankings.world',compact('rankingslist'));
+        
+    }
+ 
+    public function inter_m(Request $request)
+    {    
+      
+     $search='MALE'; 
+     $rankingslist = Rankingslist::where('contenders_gander', '=', $search)
+     ->where('contenders_type','INTERNATIONAL')
+     ->orderBy('list_index')->get();
+         return view('frontend.pages.rankings.inter',compact('rankingslist'));
+        
+    }
+    public function inter_f(Request $request)
+    {    
+      
+     $search='FEMALE'; 
+     $rankingslist = Rankingslist::where('contenders_gander', '=', $search)
+     ->where('contenders_type','INTERNATIONAL')
+     ->orderBy('list_index')->get();
+         return view('frontend.pages.rankings.inter',compact('rankingslist'));
+        
+    }
 }
+ 

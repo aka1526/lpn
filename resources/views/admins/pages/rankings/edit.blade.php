@@ -76,10 +76,10 @@
                                     </div>
                                 @endif
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <img
                                             src="{{ $rankings->rank_img !='' ? '/images/rankings/'. $rankings->rank_img :  '/images/rankings/nopic.jpg' }}"></img>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-8">
                                         <div class="row">
                                             
@@ -124,7 +124,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="row">
+                                        {{-- <div class="row">
                                             <div class="col-md-8 col-sm-8 col-lg-8">
                                                 <label for="fileupload">Browse File image. </label>
                                                 <div class="input-group file-browser">
@@ -191,7 +191,7 @@
                                                         value="{{ $rankings->international_last_defense }}" placeholder="July 24, 2021">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="">
                                             <a href="/pageadmin/rankings" class="btn btn-danger waves-effect waves-light"><i class="fas fa-times"></i> Close</a>
                                             <button type=" submit"

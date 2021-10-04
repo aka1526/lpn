@@ -28,6 +28,7 @@ class CreateRankingsTable extends Migration
         $table->string('international_vacant',200)->nullable()->default('');
         $table->string('international_won_title',200)->nullable()->default('');
         $table->string('international_last_defense',200)->nullable()->default('');
+        
         $table->string('created_by',200)->nullable();
         $table->string('updated_by',200)->nullable();
         $table->timestamp('created_at')->nullable();

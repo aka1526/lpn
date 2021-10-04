@@ -48,7 +48,7 @@
                             <div class="text-white card-header tx-medium bd-0 bg-primary">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="text-white card-title mg-b-0">
-                                        <i class="fas fa-book-medical"></i> WORLD RANKINGS Information
+                                        <i class="fas fa-book-medical"></i>  Contenders List
                                     </h4>
                                     <div class="d-flex my-xl-auto right-content">
                                         <div class="pr-1 mb-xl-0">
@@ -119,42 +119,103 @@
                                             </div>
 
                                         </div>
-                                        
-
-                                        <div class="mt-3 main-content-label">Contenders </div>
+                                      
+                                        <form class=" " method="post" enctype="multipart/form-data" action="{{ route('rankings.add.list') }}">
+                                            @csrf
+                                            <input type="hidden"  id="rank_uid" name="rank_uid"  value="{{ $rankings->rank_uid}}">
+                                            <input type="hidden"  id="contenders_gander" name="contenders_gander"  value="{{ $rankings->rank_gander}}">
+                                            
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <form class="form-inline" method="post" enctype="multipart/form-data" action="{{ route('rankings.add.list') }}">
-                                                    @csrf
-                                                    <input type="hidden"  id="rank_uid" name="rank_uid"  value="{{ $rankings->rank_uid}}">
-                                                     
-                                                    <div class="mb-2 form-group col-md-8">
-                                                      <label for="contenders" class="sr-only"> contenders</label>
-                                                       
-                                                        <input type="text" class="form-control col-md-12" id="contenders" name="contenders" placeholder="contenders">
-                                                     
+
+                                            <div class="col-md-2">
+                                                <div class="form-group ">
+                                                    <label class="form-label">Champions :</label>
+                                                    <div class="row">
+                                                   
+                                                        <div class="col">
+                                                            <select class="form-control " id="contenders_type" name="contenders_type" required>
+                                                                <option value="NONE" {{ $rankings->contenders_type =='NONE' ? 'selected' :'' }} >--NONE-- </option>
+                                                                <option value="WORLD" {{ $rankings->contenders_type =='WORLD' ? 'selected' :'' }} >WORLD </option>
+                                                                <option value="INTERNATIONAL" {{ $rankings->contenders_type =='INTERNATIONAL' ? 'selected' :'' }}>INTERNATIONAL</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
-
-                                                     
-                                                    <button type="submit" class="mb-2 btn btn-primary">Add Contenders</button>
-                                                    
-                                                  </form>
+                                                </div>
                                             </div>
-                                             
-                                           
+
+                                            <div class="col-md-4">
+                                                <div class="form-group ">
+                                                    <label class="form-label">Vacant :</label>
+                                                    <input type="text" class="form-control" id="contenders" name="contenders" value="" placeholder="Vacant"  >
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                <div class="form-group ">
+                                                    <label class="form-label">Won Title :</label>
+                                                    <input type="text" class="form-control" id="won_title" name="won_title" value="" placeholder="June 5, 2021"  >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group ">
+                                                    <label class="form-label">Last Defense :</label>
+                                                    <input type="text" class="form-control" id="last_defense" name="last_defense" value="" placeholder="June 5, 2021"  >
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="mt-3 main-content-label"> List :</div>
-                                                <ol>
-                                                 @foreach ($rankingslist as $item)
-                                                    <li><h4>{{ $item->contenders }}</h4></li>
-                                                     
-                                                 @endforeach
-                                                 <ol>
+                                            <div class="col-md-8 col-sm-8 col-lg-8">
+                                                <label for="fileupload">Browse Image. </label>
+                                                <div class="input-group file-browser">
+                                                  
+                                                    <input type="text" class="form-control border-right-0 browse-file" placeholder="choose" readonly="">
+                                                    <label class="input-group-btn">
+                                                        <span class="btn btn-default">
+                                                            Browse <input type="file" id="fileupload" name="fileupload" style="display: none;">
+                                                        </span>
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
-                                       
+                                        <button type="submit" class="mb-2 btn btn-primary">Add Contenders</button>
+                                    </form>
+                                        
+                                        <div class="row row-sm mt-4">
+                                            @foreach ($rankingslist as $item)
+                                            
+                                            <div class="col-md-3 col-lg-3">
+                                                <div class="card">
+
+                                                    @if ($item->contenders_type=='NONE')
+                                                    <div class="card-header tx-medium bd-0 tx-white bg-secondary text-center">
+                                                        NONE
+                                                    </div>
+                                                    @elseif ($item->contenders_type=='WORLD')
+                                                    <div class="card-header tx-medium bd-0 tx-white bg-primary text-center">
+                                                        WORLD CHAMPIONS
+                                                    </div>
+                                                    @else
+                                                    <div class="card-header tx-medium bd-0 tx-white bg-danger text-center ">
+                                                        INTERNATIONAL CHAMPIONS
+                                                    </div>
+                                                    @endif
+                                                   
+                                                    <img alt="Image" class="img-fluid card-img-top" 
+                                                    
+                                                    src="{{ $item->contenders_img !='' ?  '/images/rankings/'.$item->contenders_img : ''}} ">
+                                                    <div class="card-body ">
+                                                        <h4 class="card-title mb-3 text-center">{{ $item->contenders }}</h4>
+                                                        <p class="card-text"> Won Title : <strong>{{ $item->won_title }}</strong> </p>
+                                                        <p class="card-text"> Last Defense : <strong>{{ $item->last_defense }}</strong> </p>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col-4 -->
+                                         @endforeach
+
+                                            
+                                           
+                                            
+                                        </div>
                                     
                                 </div>
                             

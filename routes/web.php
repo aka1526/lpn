@@ -39,6 +39,13 @@ Route::get('/rankings', [HomeController::class, 'rankings_index'])->name('fn.ran
 Route::get('/rankings/male', [HomeController::class, 'rankings_m'])->name('fn.rankings_m');
 Route::get('/rankings/female', [HomeController::class, 'rankings_f'])->name('fn.rankings_f');
 
+Route::get('/champions/world/male', [HomeController::class, 'world_m'])->name('fn.champions_m');
+Route::get('/champions/world/female', [HomeController::class, 'world_f'])->name('fn.champions_f');
+
+Route::get('/champions/international/male', [HomeController::class, 'inter_m'])->name('fn.inter_m');
+Route::get('/champions/international/female', [HomeController::class, 'inter_f'])->name('fn.inter_f');
+
+
 
 // Route::get('/aboutus/about', [HomeController::class, 'aboutus_about'])->name('fn.aboutus_about');
 // Route::get('/aboutus/history', [HomeController::class, 'aboutus_history'])->name('fn.aboutus_history');

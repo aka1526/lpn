@@ -4,61 +4,61 @@
             <div class="float-left yl-brand-logo">
                 <a href="#"><img src="/assets/img/logo/logo1.png" alt=""></a>
             </div>
- 
-            @foreach(App\Models\Admins\Sysinfo::orderBy('sys_name','asc')->get() as $companyinfo)
-            <div class="clearfix float-right yl-header-top-cta ul-li">
-                <ul>
-                    <li>
-                        <div class="header-top-cta-content">
-                            <div class="float-left yl-top-cta-icon">
-                                <img src="/assets/img/icon/mail.png" alt="">
+
+            @foreach (App\Models\Admins\Sysinfo::orderBy('sys_name', 'asc')->get() as $companyinfo)
+                <div class="clearfix float-right yl-header-top-cta ul-li">
+                    <ul>
+                        <li>
+                            <div class="header-top-cta-content">
+                                <div class="float-left yl-top-cta-icon">
+                                    <img src="/assets/img/icon/mail.png" alt="">
+                                </div>
+                                <div class="float-right yl-top-cta-text yl-headline">
+                                    <a href="#">{{ $companyinfo->sys_email1 }}</a>
+                                    <h3>Mail us</h3>
+                                </div>
                             </div>
-                            <div class="float-right yl-top-cta-text yl-headline">
-                                <a href="#">{{ $companyinfo->sys_email1 }}</a>
-                                <h3>Mail us</h3>
+                        </li>
+                        <li>
+                            <div class="header-top-cta-content">
+                                <div class="float-left yl-top-cta-icon">
+                                    <img src="/assets/img/icon/call.png" alt="">
+                                </div>
+                                <div class="float-right yl-top-cta-text yl-headline">
+                                    <a href="#">Requesting a Call:</a>
+                                    <h3>{{ $companyinfo->sys_phone1 }}</h3>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="header-top-cta-content">
-                            <div class="float-left yl-top-cta-icon">
-                                <img src="/assets/img/icon/call.png" alt="">
+                        </li>
+                        <li>
+                            <div class="header-top-cta-content">
+                                <div class="float-left yl-top-cta-icon">
+                                    <img src="/assets/img/icon/clock.png" alt="">
+                                </div>
+                                <div class="float-right yl-top-cta-text yl-headline">
+
+                                    <a href="#">{{ $companyinfo->sys_openday }}:</a>
+                                    <h3>{{ $companyinfo->sys_openhour }}</h3>
+                                </div>
                             </div>
-                            <div class="float-right yl-top-cta-text yl-headline">
-                                <a href="#">Requesting a Call:</a>
-                                <h3>{{ $companyinfo->sys_phone1 }}</h3>
+                        </li>
+                        <li>
+                            <div class="header-top-cta-content">
+                                <div class="float-left yl-top-cta-icon">
+                                    <img src="/assets/img/icon/pin.png" alt="">
+                                </div>
+                                <div class="float-right yl-top-cta-text yl-headline">
+                                    <a href="#">{{ $companyinfo->sys_address }}</a>
+                                    <h3>{{ $companyinfo->sys_country }}</h3>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="header-top-cta-content">
-                            <div class="float-left yl-top-cta-icon">
-                                <img src="/assets/img/icon/clock.png" alt="">
-                            </div>
-                            <div class="float-right yl-top-cta-text yl-headline">
-                                
-                                <a href="#">{{ $companyinfo->sys_openday }}:</a>
-                                <h3>{{ $companyinfo->sys_openhour }}</h3>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="header-top-cta-content">
-                            <div class="float-left yl-top-cta-icon">
-                                <img src="/assets/img/icon/pin.png" alt="">
-                            </div>
-                            <div class="float-right yl-top-cta-text yl-headline">
-                                <a href="#">{{ $companyinfo->sys_address }}</a>
-                                <h3>{{ $companyinfo->sys_country }}</h3>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
- 
+                        </li>
+                    </ul>
+                </div>
+
 
             @endforeach
-           
+
             <div class="yl-mobile-menu-wrap">
                 <div class="yl-mobile_menu position-relative">
                     <div class="yl-mobile_menu_button yl-open_mobile_menu">
@@ -76,12 +76,12 @@
                             <nav class="clearfix yl-mobile-main-navigation ul-li">
                                 <ul id="m-main-nav" class="clearfix navbar-nav text-capitalize">
                                     <li><a href="/">Home</a></li>
-                                    <li><a href="{{ route('fn.aboutus')}}">About</a></li>
+                                    <li><a href="{{ route('fn.aboutus') }}">About</a></li>
                                     <li class="dropdown">
                                         <a href="#">Course</a>
                                         <ul class="clearfix dropdown-menu">
-                                          
-                                           
+
+
                                             <li><a target="" href="#"> Children Course</a></li>
                                             <li><a target="" href="#"> Normal Course </a></li>
                                         </ul>
@@ -98,7 +98,7 @@
                                                     <li><a target="" href="#">Students</a></li>
                                                 </ul>
                                             </li>
-            
+
                                             <li class="dropdown">
                                                 <a target="" href="#">Organization</a>
                                                 <ul class="clearfix dropdown-menu">
@@ -106,45 +106,45 @@
                                                     <li><a target="" href="#">Countries</a></li>
                                                     <li><a target="" href="#">Area</a></li>
                                                     <li><a target="" href="#">Club</a></li>
-                                                     
+
                                                 </ul>
                                             </li>
-            
-                                             
+
+
                                         </ul>
                                     </li>
-                                    
+
                                     <li class="dropdown">
                                         <a href="#">Rankings</a>
                                         <ul class="clearfix dropdown-menu">
                                             <li><a target="" href="#">Rankings</a></li>
-                                         
-            
+
+
                                             <li class="dropdown">
                                                 <a target="" href="#">Champion</a>
                                                 <ul class="clearfix dropdown-menu">
                                                     <li><a target="" href="#">Male</a></li>
                                                     <li><a target="" href="#">Female</a></li>
-                                              
-                                                     
+
+
                                                 </ul>
                                             </li>
                                             <li><a target="" href="#">Hall of Fame</a></li>
-                                            
-                                           
+
+
                                         </ul>
                                     </li>
                                     <li><a href="about.html">News</a></li>
-                        
-                                    
+
+
                                     <li class="dropdown">
                                         <a href="#">About us</a>
-                                         <ul class="clearfix dropdown-menu">
+                                        <ul class="clearfix dropdown-menu">
                                             <li><a target="" href="#">History</a></li>
                                             <li><a target="" href="#">Committees</a></li>
                                             <li><a target="" href="#">Constitution</a></li>
                                             <li><a target="" href="#">History</a></li>
-                                            
+
                                         </ul>
                                     </li>
                                 </ul>
@@ -165,11 +165,14 @@
                         <li class="dropdown">
                             <a href="#">Courses</a>
                             <ul class="clearfix dropdown-menu">
-                               
-                                @foreach(App\Models\Admins\Course::where('course_status','=','Y')->orderBy('course_index','asc')->get() as $_item)
-                                    <li><a target="" href="{{ $_item->course_link =='' ? '#' : '/course/'.$_item->course_link }}">{{ $_item->course_name}}</a></li>
+
+                                @foreach (App\Models\Admins\Course::where('course_status', '=', 'Y')->orderBy('course_index', 'asc')->get()
+    as $_item)
+                                    <li><a target=""
+                                            href="{{ $_item->course_link == '' ? '#' : '/course/' . $_item->course_link }}">{{ $_item->course_name }}</a>
+                                    </li>
                                 @endforeach
- 
+
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -191,58 +194,53 @@
                                         <li><a target="" href="#">Countries</a></li>
                                         <li><a target="" href="#">Area</a></li>
                                         <li><a target="" href="#">Club</a></li>
-                                         
+
                                     </ul>
                                 </li>
 
-                                 
+
                             </ul>
                         </li>
 
-
-                     
-                       
-                      
                         <li class="dropdown">
                             <a href="#">Rankings</a>
                             <ul class="clearfix dropdown-menu">
-                                
                                 <li class="dropdown">
                                     <a target="" href="/rankings">Rankings</a>
                                     <ul class="clearfix dropdown-menu">
                                         <li><a target="" href="/rankings/male">Male</a></li>
                                         <li><a target="" href="/rankings/female">Female</a></li>
-                                  
-                                         
                                     </ul>
                                 </li>
-
                                 <li class="dropdown">
-                                    <a target="" href="#">Champion</a>
+                                    <a target="" href="#"> WORLD CHAMPIONS</a>
                                     <ul class="clearfix dropdown-menu">
-                                        <li><a target="" href="#">Male</a></li>
-                                        <li><a target="" href="#">Female</a></li>
-                                  
-                                         
+                                        <li><a target="" href="/champions/world/male">Male CHAMPIONS</a></li>
+                                        <li><a target="" href="/champions/world/female">Female CHAMPIONS</a></li>
+                                    </ul>
+                                </li>
+                                 <li class="dropdown">
+                                    <a target="" href="#">INTERNATIONAL CHAMPIONS</a>
+                                    <ul class="clearfix dropdown-menu">
+                                        <li><a target="" href="/champions/international/male">Male CHAMPIONS</a></li>
+                                        <li><a target="" href="/champions/international/female">Female CHAMPIONS</a></li>
                                     </ul>
                                 </li>
                                 <li><a target="" href="#">Hall of Fame</a></li>
-                                
-                               
                             </ul>
                         </li>
                         <li><a href="/news">News</a></li>
-                        
-                       
-                        
+
                         <li class="dropdown">
                             <a href="#">About us</a>
                             <ul class="clearfix dropdown-menu">
-                                @foreach(App\Models\Admins\Aboutus::orderBy('aboutus_index','asc')->get() as $pageabout)
-                                <li><a target="" href="/aboutus/{{ $pageabout->aboutus_url}}">{{ $pageabout->aboutus_name}}</a></li>
+                                @foreach (App\Models\Admins\Aboutus::orderBy('aboutus_index', 'asc')->get() as $pageabout)
+                                    <li><a target=""
+                                            href="/aboutus/{{ $pageabout->aboutus_url }}">{{ $pageabout->aboutus_name }}</a>
+                                    </li>
                                 @endforeach
                                 <li><a target="" href="/contact">Contact</a></li>
-                                 
+
                             </ul>
                         </li>
                     </ul>
