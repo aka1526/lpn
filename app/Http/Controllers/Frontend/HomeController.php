@@ -177,7 +177,7 @@ class HomeController extends Controller
     {    
       
      $search='MALE'; 
-     $rankingslist = Rankingslist::select('rankings.*','rankings_weight','rankings_weight_desc')
+     $rankingslist = Rankingslist::select('rankingslist.*','rankings_weight','rankings_weight_desc')
      ->where('contenders_gander', '=', $search)
      ->leftJoin("rankings", "rankings.rank_uid", "=", "rankingslist.list_ref")
      ->where('contenders_type','WORLD')
@@ -189,7 +189,7 @@ class HomeController extends Controller
     {    
       
      $search='FEMALE'; 
-     $rankingslist = Rankingslist::select('rankings.*','rankings_weight','rankings_weight_desc')
+     $rankingslist = Rankingslist::select('rankingslist.*','rankings_weight','rankings_weight_desc')
      ->where('contenders_gander', '=', $search)
      ->leftJoin("rankings", "rankings.rank_uid", "=", "rankingslist.list_ref")
      ->where('contenders_type','WORLD')
