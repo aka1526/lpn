@@ -48,6 +48,7 @@
 
                 <div class="row row-sm mt-4">
                     @if (isset($rankingslist))
+                    
                     @foreach ($rankingslist as $item)
                     
                     <div class="col-md-3 col-lg-3">
