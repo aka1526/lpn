@@ -8165,3 +8165,227 @@ select:visited {
 
 
 /*---------------------------------------------------- */
+
+
+/*-------------------Menu User Profile--------------------------------- */
+
+.dropdown-menu.dropdown-menu-right.profile.show {
+    display: block;
+    right: 0;
+    left: auto;
+}
+
+.dropdown-menu.dropdown-menu-right.profile {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 15rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #f8f9fa;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+}
+
+#crm-navbar-user {
+    padding: 19px 0 20px .5rem;
+}
+
+.navbar-nav {
+    min-width: 250px;
+}
+
+.account-logo.logo-text {
+    font-weight: 700;
+    font-size: 16px;
+    color: #000;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.navbar-expand .navbar-nav .dropdown-menu {
+    border: none;
+    box-shadow: 0 0 60px #1d4c7f1a;
+    border-radius: 5px;
+    width: 290px;
+    padding: 8px 0;
+    top: calc(100% - 10px);
+}
+
+.navbar-avatar {
+    border-radius: 100%;
+}
+
+.nav-item .avatar {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 50px;
+    -webkit-background-size: cover !important;
+    -moz-background-size: cover !important;
+    -o-background-size: cover !important;
+    background-size: cover !important;
+}
+
+.nav-item.menu-item>a {
+    line-height: 17px;
+    display: inline-block;
+    padding: 11px !important;
+    margin: 15px 3px;
+    font-size: 14px;
+    color: #7d8094;
+    border-radius: 5px;
+    -webkit-transition: all .2s linear;
+    -moz-transition: all .2s linear;
+    -ms-transition: all .2s linear;
+    -o-transition: all .2s linear;
+    transition: all .2s linear;
+}
+
+.nav-item.menu-item>a:hover,
+.nav-item.menu-item.active>a {
+    background-color: rgba(0, 120, 255, .05);
+    color: #0078ff !important;
+}
+
+.nav-item.menu-item>a.login-link {
+    background-color: #0078ff;
+    color: #fff !important;
+}
+
+.nav-item.menu-item>a.login-link:hover {
+    box-shadow: 0px 4px 16px 0px rgba(0, 120, 255, 0.3);
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+.navbar-avatar-inside .avatar {
+    width: 36px;
+    height: 36px;
+}
+
+.navbar-header .navbar-username-mail {
+    font-size: 12px;
+    padding: 0 0 0 10px;
+    font-weight: 600;
+    display: inline-block;
+    width: calc(100% - 50px);
+}
+
+#navbar-username,
+#navbar-mail {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#navbar-mail {
+    color: #abb0c1;
+    font-weight: 400;
+    line-height: 15px
+}
+
+.navbar-header {
+    display: block;
+    width: 100%;
+    padding: 8px 20px 8px 20px;
+    height: 54px;
+}
+
+#navbar-footer {
+    padding: 11px 23px 0px 23px;
+    width: 100%;
+    display: block;
+    text-align: right;
+    height: 40px;
+}
+
+#navbar-footer a {
+    font-size: 12px;
+    color: #0078ff;
+}
+
+#navbar-footer #navbar-learning:hover,
+#navbar-footer #navbar-privacy:hover {
+    text-decoration: underline;
+}
+
+#navbar-footer #navbar-learning,
+#navbar-footer #navbar-privacy {
+    display: inline-block;
+}
+
+#navbar-footer #navbar-learning {
+    float: left;
+}
+
+#navbar-footer #navbar-privacy {
+    float: right;
+}
+
+.dropdown-item {
+    font-size: 14px;
+    padding: 10px 23px;
+}
+
+.navbar-header .navbar-avatar-inside {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.navbar-avatar-inside img {
+    border-radius: 100px;
+}
+
+#crm-navbar-user.dropdown-toggle::after {
+    vertical-align: middle;
+}
+
+#crm-navbar-notifications i {
+    margin-top: 15px;
+}
+
+.front .navbar {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    position: relative;
+    z-index: 100;
+}
+
+.navbar-header {
+    display: block;
+    width: 100%;
+    padding: 8px 20px 8px 20px;
+    height: 54px;
+}
+
+.navbar-avatar-login .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin: 0px 15px;
+}
+
+.yl-popular-course-text .yl-top-title-text h3 {
+    color: #000000;
+    font-size: 19px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+}

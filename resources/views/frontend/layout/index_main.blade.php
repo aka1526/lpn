@@ -10,7 +10,7 @@
     <!-- preloader - start -->
     <div id="yl-preloader"></div>
     <div class="up">
-        <a href="#" class="scrollup text-center"><i class="fas fa-chevron-up"></i></a>
+        <a href="#" class="text-center scrollup"><i class="fas fa-chevron-up"></i></a>
     </div>
 
     <!-- Start of header section
@@ -30,6 +30,7 @@
 
 
     <!-- JS library -->
+
     <script src="/assets/js/jquery.js"></script>
     <script src="/assets/js/popper.min.js"></script>
     <script src="/assets/js/appear.js"></script>

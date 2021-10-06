@@ -19,7 +19,7 @@ use App\Http\Controllers\Admins\CountryController;
 use App\Http\Controllers\Admins\CertificatesController;
 use App\Http\Controllers\Admins\MemberkhansController;
 use App\Http\Controllers\Admins\RankingsController;
-
+use App\Http\Controllers\Admins\HalloffameController;
 
 ###### frontend ###################
 Route::fallback(function () {
@@ -44,6 +44,10 @@ Route::get('/champions/world/female', [HomeController::class, 'world_f'])->name(
 
 Route::get('/champions/international/male', [HomeController::class, 'inter_m'])->name('fn.inter_m');
 Route::get('/champions/international/female', [HomeController::class, 'inter_f'])->name('fn.inter_f');
+
+Route::get('/champions/hall-of-fame', [HomeController::class, 'hall_of_fame'])->name('fn.hall_of_fame');
+Route::get('/champions/hall-of-fame/{uid}', [HomeController::class, 'hall_of_fameView'])->name('fn.hall_of_fameView');
+
 
 
 
@@ -245,4 +249,17 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/rankings/updatestatus', [RankingsController::class, 'updatestatus'])->name('rankings.updatestatus');
  Route::post('/pageadmin/rankings/delete', [RankingsController::class, 'delete'])->name('rankings.delete');
  Route::post('/pageadmin/rankings/addlist', [RankingsController::class, 'add_list'])->name('rankings.add.list');
+ 
+
+ Route::get('/pageadmin/halloffame', [HalloffameController::class, 'index'])->name('halloffame.index');
+ Route::get('/pageadmin/halloffame/new', [HalloffameController::class, 'new'])->name('halloffame.new');
+ Route::get('/pageadmin/halloffame/edit/{uid}', [HalloffameController::class, 'edit'])->name('halloffame.edit');
+  Route::get('/pageadmin/halloffame/list/{uid}', [HalloffameController::class, 'list'])->name('halloffame.list');
+ 
+
+ Route::post('/pageadmin/halloffame/add', [HalloffameController::class, 'add'])->name('halloffame.add');
+ Route::post('/pageadmin/halloffame/update', [HalloffameController::class, 'update'])->name('halloffame.update');
+ Route::post('/pageadmin/halloffame/updatestatus', [HalloffameController::class, 'updatestatus'])->name('halloffame.updatestatus');
+ Route::post('/pageadmin/halloffame/delete', [HalloffameController::class, 'delete'])->name('halloffame.delete');
+ Route::post('/pageadmin/halloffame/addlist', [HalloffameController::class, 'add_list'])->name('halloffame.add.list');
  

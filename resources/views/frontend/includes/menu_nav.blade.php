@@ -219,14 +219,15 @@
                                         <li><a target="" href="/champions/world/female">Female CHAMPIONS</a></li>
                                     </ul>
                                 </li>
-                                 <li class="dropdown">
+                                <li class="dropdown">
                                     <a target="" href="#">INTERNATIONAL CHAMPIONS</a>
                                     <ul class="clearfix dropdown-menu">
                                         <li><a target="" href="/champions/international/male">Male CHAMPIONS</a></li>
-                                        <li><a target="" href="/champions/international/female">Female CHAMPIONS</a></li>
+                                        <li><a target="" href="/champions/international/female">Female CHAMPIONS</a>
+                                        </li>
                                     </ul>
                                 </li>
-                                <li><a target="" href="#">Hall of Fame</a></li>
+                                <li><a target="" href="/champions/hall-of-fame">Hall of Fame</a></li>
                             </ul>
                         </li>
                         <li><a href="/news">News</a></li>
@@ -254,11 +255,76 @@
                 </ul>
             </div>
             <div class="float-right yl-header-cart-login">
-                <div class="yl-top-cart-login">
+                <div class="yl-top-cart-login" id="cart">
                     <button><i class="fas fa-shopping-cart"></i></button>
+                    {{-- <div class="dropdown-menu dropdown-menu-right cart"   aria-labelledby="crm-navbar-user">
+                        <div class="navbar-header">
+                            <a class="navbar-avatar-inside" href="https://themexriver.helpviser.com/customer-profile"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="https://lpn.satangapp.in/assets/img/course/cm1.jpg">
+                            </a>
+                            <span class="avatar"><span
+                                    style="background:url('https://lpn.satangapp.in/assets/img/course/cm1.jpg') no-repeat center center;"></span></span>
+
+                            <span class="navbar-username-mail">
+                                <a href="https://themexriver.helpviser.com/customer-profile"
+                                    id="navbar-username">akachai pijan</a>
+                                <a href="https://themexriver.helpviser.com/customer-profile"
+                                    id="navbar-mail">akachai1526@hotmail.com</a>
+                            </span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="https://themexriver.helpviser.com/customer-profile">Update
+                            Profile</a>
+                        <a class="dropdown-item" href="https://themexriver.helpviser.com/login/logout">Logout</a>
+                        <div class="dropdown-divider"></div>
+                        <span id="navbar-footer">
+                            <a class="color-accent" target="_blank" rel="nofollow noopener noreferrer"
+                                href="https://www.helpviser.com/terms-conditions" id="navbar-learning">Terms &amp;
+                                Conditions</a>
+                            <a class="color-accent" target="_blank" rel="nofollow noopener noreferrer"
+                                href="https://www.helpviser.com/privacy-policy" id="navbar-privacy">Privacy Policy</a>
+                        </span>
+                    </div> --}}
                 </div>
-                <div class="yl-top-cart-login">
+                <div class="yl-top-cart-login" id="profile">
                     <button data-toggle="modal" data-target="#exampleModal"><i class="fas fa-user"></i></button>
+                    {{-- <a class="navbar-avatar-login" href="https://themexriver.helpviser.com/customer-profile"  >
+                        <img class="avatar" src="https://lpn.satangapp.in/assets/img/course/cm1.jpg">
+                    </a> --}}
+                    <div class="dropdown-menu dropdown-menu-right profile"   aria-labelledby="crm-navbar-user">
+                        <div class="navbar-header">
+                            <a class="navbar-avatar-inside" href="https://themexriver.helpviser.com/customer-profile"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="https://lpn.satangapp.in/assets/img/course/cm1.jpg">
+                            </a>
+                            <span class="avatar"><span
+                                    style="background:url('https://lpn.satangapp.in/assets/img/course/cm1.jpg') no-repeat center center;"></span></span>
+
+                            <span class="navbar-username-mail">
+                                <a href="https://themexriver.helpviser.com/customer-profile"
+                                    id="navbar-username">akachai pijan</a>
+                                <a href="https://themexriver.helpviser.com/customer-profile"
+                                    id="navbar-mail">akachai1526@hotmail.com</a>
+                            </span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href="https://themexriver.helpviser.com/customer-profile">Update
+                            Profile</a>
+                            <div class="dropdown-divider"></div>
+                        <a class="dropdown-item " href="https://themexriver.helpviser.com/login/logout">Logout</a>
+                        <div class="dropdown-divider"></div>
+                        <span id="navbar-footer">
+                            <a class="color-accent" target="_blank" rel="nofollow noopener noreferrer"
+                                href="https://www.helpviser.com/terms-conditions" id="navbar-learning">Terms &amp;
+                                Conditions</a>
+                            <a class="color-accent" target="_blank" rel="nofollow noopener noreferrer"
+                                href="https://www.helpviser.com/privacy-policy" id="navbar-privacy">Privacy Policy</a>
+                        </span>
+                   
+                    </div>
+
+                   
                 </div>
             </div>
         </div>

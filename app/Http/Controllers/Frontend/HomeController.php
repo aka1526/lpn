@@ -20,6 +20,8 @@ use App\Models\Admins\News;
 use App\Models\Admins\Members;
 use App\Models\Admins\Rankings;
 use App\Models\Admins\Rankingslist;
+use App\Models\Admins\Halloffames;
+
 class HomeController extends Controller
 {
 
@@ -210,6 +212,7 @@ class HomeController extends Controller
          return view('frontend.pages.rankings.inter',compact('rankingslist'));
         
     }
+
     public function inter_f(Request $request)
     {    
       
@@ -222,5 +225,27 @@ class HomeController extends Controller
          return view('frontend.pages.rankings.inter',compact('rankingslist'));
         
     }
+
+
+    public function hall_of_fame(Request $request)
+    {    
+   
+    // $search='FEMALE'; 
+     $halloffames = Halloffames::where('content_status','Y')
+     ->orderBy('hof_index','desc')->get();
+         return view('frontend.pages.halloffames.index',compact('halloffames'));
+        
+    }
+
+    public function hall_of_fameView(Request $request,$hof_slug='')
+    {    
+   //dd($hof_slug);
+    // $search='FEMALE'; 
+     $halloffame = Halloffames::where('content_status','Y')->where('hof_slug',$hof_slug)
+     ->orderBy('hof_index','desc')->first();
+         return view('frontend.pages.halloffames.view',compact('halloffame'));
+        
+    }
+
 }
  

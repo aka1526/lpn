@@ -102,9 +102,9 @@
 
                                 <li aria-haspopup="true"><a href="/pageadmin/members/organization" class="slide-item">Organization Member</a></li>
                                 <li aria-haspopup="true"><a href="/pageadmin/rankings" class="slide-item">WORLD RANKINGS</a></li>
-                                     
+                                <li aria-haspopup="true"><a href="/pageadmin/halloffame" class="slide-item">HALL OF FAME</a></li>   
                                    
-                                       
+                                
                             </ul>
                         </li>
 
