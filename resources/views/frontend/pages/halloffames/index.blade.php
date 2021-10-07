@@ -43,7 +43,7 @@
                                        </div>
                                     </div>
                                     <div class=" yl-top-title-text yl-headline">
-                                       <h3> <a href="/champions/hall-of-fame/{{$item->hof_slug}}">User Experience Research</a>
+                                       <h3> <a href="/champions/hall-of-fame/{{$item->hof_slug}}">{{$item->hof_title}}</a>
                                         </h3>
                                         
                                     </div>

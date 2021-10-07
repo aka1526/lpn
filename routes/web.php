@@ -48,7 +48,10 @@ Route::get('/champions/international/female', [HomeController::class, 'inter_f']
 Route::get('/champions/hall-of-fame', [HomeController::class, 'hall_of_fame'])->name('fn.hall_of_fame');
 Route::get('/champions/hall-of-fame/{uid}', [HomeController::class, 'hall_of_fameView'])->name('fn.hall_of_fameView');
 
-
+Route::get('/continent', [HomeController::class, 'continent'])->name('fn.continent');
+Route::get('/countries', [HomeController::class, 'countries'])->name('fn.countries');
+Route::get('/area-member', [HomeController::class, 'area_member'])->name('fn.area_member');
+Route::get('/club-member', [HomeController::class, 'club_member'])->name('fn.club_member');
 
 
 // Route::get('/aboutus/about', [HomeController::class, 'aboutus_about'])->name('fn.aboutus_about');

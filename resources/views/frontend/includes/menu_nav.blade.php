@@ -190,10 +190,10 @@
                                 <li class="dropdown">
                                     <a target="" href="#">Organization</a>
                                     <ul class="clearfix dropdown-menu">
-                                        <li><a target="" href="#">Continent</a></li>
-                                        <li><a target="" href="#">Countries</a></li>
-                                        <li><a target="" href="#">Area</a></li>
-                                        <li><a target="" href="#">Club</a></li>
+                                        <li><a target="" href="/continent">Continent</a></li>
+                                        <li><a target="" href="/countries">Countries</a></li>
+                                        <li><a target="" href="/area-member">Area</a></li>
+                                        <li><a target="" href="/club-member">Club</a></li>
 
                                     </ul>
                                 </li>
@@ -256,7 +256,10 @@
             </div>
             <div class="float-right yl-header-cart-login">
                 <div class="yl-top-cart-login" id="cart">
-                    <button><i class="fas fa-shopping-cart"></i></button>
+                    <button><i class="fas fa-shopping-cart"></i>
+                        {{-- <span class="cart-num" id="topActionCartNumber" data-spm-anchor-id="a2o4m.cart.dcart.i0.26576108ZdXKkQ" style="display: block;">
+                            28</span>
+                        </button> --}}
                     {{-- <div class="dropdown-menu dropdown-menu-right cart"   aria-labelledby="crm-navbar-user">
                         <div class="navbar-header">
                             <a class="navbar-avatar-inside" href="https://themexriver.helpviser.com/customer-profile"

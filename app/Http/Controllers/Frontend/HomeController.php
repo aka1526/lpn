@@ -246,6 +246,48 @@ class HomeController extends Controller
          return view('frontend.pages.halloffames.view',compact('halloffame'));
         
     }
+    
+    public function continent(Request $request)
+    {    
+   
+    // $search='FEMALE'; 
+     $halloffames = Halloffames::where('content_status','Y')
+     ->orderBy('hof_index','desc')->get();
+         return view('frontend.pages.continent.index',compact('halloffames'));
+        
+    }
+
+
+    public function countries(Request $request)
+    {    
+   
+    // $search='FEMALE'; 
+     $halloffames = Halloffames::where('content_status','Y')
+     ->orderBy('hof_index','desc')->get();
+         return view('frontend.pages.countries.index',compact('halloffames'));
+        
+    }
+
+    public function area_member(Request $request)
+    {    
+   
+    // $search='FEMALE'; 
+     $halloffames = Halloffames::where('content_status','Y')
+     ->orderBy('hof_index','desc')->get();
+         return view('frontend.pages.halloffames.index',compact('halloffames'));
+        
+    }
+    public function club_member(Request $request)
+    {    
+   
+    // $search='FEMALE'; 
+     $halloffames = Halloffames::where('content_status','Y')
+     ->orderBy('hof_index','desc')->get();
+         return view('frontend.pages.halloffames.index',compact('halloffames'));
+        
+    }
+ 
+
 
 }
  

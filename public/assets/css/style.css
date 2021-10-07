@@ -8389,3 +8389,31 @@ select:visited {
     text-align: center;
     margin-bottom: 10px;
 }
+
+span#topActionCartNumber {
+    position: absolute;
+    background: #f36e36;
+    color: #fff;
+    top: -4px;
+    font-weight: 400;
+    right: 1px;
+    text-align: center;
+    border: 3px solid #f36e36;
+    font-size: 13px;
+    min-width: 14px;
+    line-height: 14px;
+    border-radius: 50%;
+    display: none;
+}
+
+@media (min-width: 576px) {
+.dropdown-menu.dropdown-menu-right.profile.show:after {
+    content: '';
+    position: absolute;
+    top: -10.5px;
+    right: 13px;
+    border-bottom: 9px solid #c7c9cd;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+}
+}
