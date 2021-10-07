@@ -192,7 +192,7 @@
                                     <ul class="clearfix dropdown-menu">
                                         <li><a target="" href="/continent">Continent</a></li>
                                         <li><a target="" href="/countries">Countries</a></li>
-                                        <li><a target="" href="/area-member">Area</a></li>
+                                        {{-- <li><a target="" href="/area-member">Area</a></li> --}}
                                         <li><a target="" href="/club-member">Club</a></li>
 
                                     </ul>
