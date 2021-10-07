@@ -20,16 +20,16 @@
     </style>
 
     <!-- Start of breadcrumb section
-                 ============================================= -->
+                                 ============================================= -->
     {{-- <section id="yl-breadcrumb" class="yl-breadcrumb-section position-relative" data-background="/assets/img/ct-bg.jpg">
         <span class="breadcrumb-overlay position-absolute"></span>
 
     </section> --}}
     <!-- End of breadcrumb section
-                 ============================================= -->
+                                 ============================================= -->
 
     <!-- Start of event content section
-                 ============================================= -->
+                                 ============================================= -->
     <section id="event-area" class="event-area-section">
 
         <div class="container">
@@ -37,30 +37,46 @@
             <div class="yl-course-content-3">
                 <div class="row">
 
-                    <div class="col-md-12">
-                        <div class="yl-popular-course-img-text">
-                            <div class="yl-section-title text-center yl-headline yl-title-style-two position-relative">
-                                <h2>MAP OF WORLD </h2> 
-                            </div>
+                    <div class="col-md-12  ">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-4 main-content-label text-center">
+                                   
+                                    <h3  style="color: #000;font-weight: 700;">MAP OF WORLD </h3>
+                                </div>
 
-                            <div id="map_world" class="text-center"
-                                style="width:  90%; height: 400px; margin: 0px auto; position: relative; overflow: hidden; ">
+                                <div id="map_world" class="text-center"
+                                    style="width:  100%; height: 400px; margin: 0px auto; position: relative; overflow: hidden; ">
+                                </div>
+
                             </div>
 
                         </div>
-
                     </div>
-
+                </div>
+                <div class="row">
                     @foreach ($continent as $item)
-                        <div class="col-md-6">
-                            <div class="yl-popular-course-img-text">
-                                <div class="yl-section-title text-center yl-headline yl-title-style-two position-relative">
-                                    <h2>MAP OF {{ strtoupper($item) }} </h2> 
+                        <div class="col-md-6 mt-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mb-4 main-content-label text-center">
+                                        <h3 style="color: #000;font-weight: 700;">MAP OF {{ strtoupper($item)  }} </h3>
+                                    </div>
+
+
+
+
+
+                                    <div id="{{ $item }}"
+                                        style="width:  100%; height: 350px; margin: 0px auto; position: relative; overflow: hidden;">
+                                    </div>
+
+
+
                                 </div>
 
-                                <div id="{{ $item }}" style="width:  95%; height: 400px; margin: 0px auto; position: relative; overflow: hidden;"></div>
-
                             </div>
+
 
                         </div>
                     @endforeach
@@ -74,7 +90,7 @@
         </div>
     </section>
     <!-- End of of event content section
-                 ============================================= -->
+                                 ============================================= -->
 
 @endsection
 @section('js')
@@ -94,8 +110,8 @@
     <script src="/assets/plugins/jqvmap/maps/continents/jquery.vmap.south-america.js"></script>
     <script src="/assets/plugins/jqvmap/maps/data/jquery.vmap.world_data.js"></script>
     <script>
-        var member_continent = {!!  json_encode($member_continent) !!};
-        
+        var member_continent = {!! json_encode($member_continent) !!};
+
         jQuery('#map_world').vectorMap({
             map: 'world_en',
             backgroundColor: '#a5bfdd',
@@ -112,14 +128,14 @@
             selectedRegions: null,
             showTooltip: true,
             //values: sample_data,
-            colors:  member_continent,
+            colors: member_continent,
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
-                    console.log(message);
+                console.log(message);
             }
         });
-         
+
         jQuery('#africa').vectorMap({
             map: 'africa_en',
             backgroundColor: '#a5bfdd',
@@ -135,11 +151,11 @@
             selectedColor: '#c9dfaf',
             selectedRegions: null,
             showTooltip: true,
-            colors:  member_continent,
+            colors: member_continent,
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
-                    console.log(message);
+                console.log(message);
             }
         });
         jQuery('#europe').vectorMap({
@@ -157,11 +173,11 @@
             selectedColor: '#c9dfaf',
             selectedRegions: null,
             showTooltip: true,
-            colors:  member_continent,
+            colors: member_continent,
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
-                    console.log(message);
+                console.log(message);
             }
         });
         jQuery('#australia').vectorMap({
@@ -179,11 +195,11 @@
             selectedColor: '#c9dfaf',
             selectedRegions: null,
             showTooltip: true,
-            colors:  member_continent,
+            colors: member_continent,
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
-                    console.log(message);
+                console.log(message);
             }
         });
         jQuery('#asia').vectorMap({
@@ -201,11 +217,11 @@
             selectedColor: '#c9dfaf',
             selectedRegions: null,
             showTooltip: true,
-            colors:  member_continent,
+            colors: member_continent,
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
-                    console.log(message);
+                console.log(message);
             }
         });
 
@@ -224,11 +240,11 @@
             selectedColor: '#c9dfaf',
             selectedRegions: null,
             showTooltip: true,
-            colors:  member_continent,
+            colors: member_continent,
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
-                    console.log(message);
+                console.log(message);
             }
         });
         jQuery('#north-america').vectorMap({
@@ -246,12 +262,12 @@
             selectedColor: '#c9dfaf',
             selectedRegions: null,
             showTooltip: true,
-            colors:  member_continent,
+            colors: member_continent,
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
-               
-               console.log(message);
+
+                console.log(message);
             }
         });
         jQuery('#south-america').vectorMap({
@@ -269,11 +285,11 @@
             selectedColor: '#c9dfaf',
             selectedRegions: null,
             showTooltip: true,
-            colors:  member_continent,
+            colors: member_continent,
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
-                    console.log(message);
+                console.log(message);
             }
         });
     </script>

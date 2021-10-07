@@ -603,6 +603,7 @@ select:visited {
     background-color: #d9d9d9;
 }
 
+
 .yl-header-cart-login .yl-top-cart-login:last-child:after {
     display: none;
 }
@@ -8405,6 +8406,9 @@ span#topActionCartNumber {
     border-radius: 50%;
     display: none;
 }
+
+
+
 
 @media (min-width: 576px) {
 .dropdown-menu.dropdown-menu-right.profile.show:after {
