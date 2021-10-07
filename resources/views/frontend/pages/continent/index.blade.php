@@ -4,7 +4,7 @@
 @endsection
 
 @section('css')
-    <link href="/assets/plugins/jqvmap/maps/css/toolkit-minimal.css" rel="stylesheet">
+    {{-- <link href="/assets/plugins/jqvmap/maps/css/toolkit-minimal.css" rel="stylesheet"> --}}
     <link href="/assets/plugins/jqvmap/maps/css/application-minimal.css" rel="stylesheet">
     <link href="/assets/plugins/jqvmap/maps/css/jqvmap.css" media="screen" rel="stylesheet" type="text/css">
     <link href="/assets/plugins/jqvmap/maps/css/prism-theme.css" rel="stylesheet" />
@@ -12,24 +12,23 @@
 @endsection
 @section('content')
     <style>
-        .event-area-section {
-            padding: 20px 0px;
-            background-color: #f2f2f4;
-        }
+     a  {
+        text-decoration: none;
+      }
 
     </style>
 
     <!-- Start of breadcrumb section
-                                 ============================================= -->
+                                     ============================================= -->
     {{-- <section id="yl-breadcrumb" class="yl-breadcrumb-section position-relative" data-background="/assets/img/ct-bg.jpg">
         <span class="breadcrumb-overlay position-absolute"></span>
 
     </section> --}}
     <!-- End of breadcrumb section
-                                 ============================================= -->
+                                     ============================================= -->
 
     <!-- Start of event content section
-                                 ============================================= -->
+                                     ============================================= -->
     <section id="event-area" class="event-area-section">
 
         <div class="container">
@@ -41,8 +40,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="mb-4 main-content-label text-center">
-                                   
-                                    <h3  style="color: #000;font-weight: 700;">MAP OF WORLD </h3>
+
+                                    <h3 style="color: #000;font-weight: 700;">MAP OF WORLD </h3>
                                 </div>
 
                                 <div id="map_world" class="text-center"
@@ -60,7 +59,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="mb-4 main-content-label text-center">
-                                        <h3 style="color: #000;font-weight: 700;">MAP OF {{ strtoupper($item)  }} </h3>
+                                        <h3 style="color: #000;font-weight: 700;">MAP OF {{ strtoupper($item) }} </h3>
                                     </div>
 
 
@@ -90,7 +89,97 @@
         </div>
     </section>
     <!-- End of of event content section
-                                 ============================================= -->
+       
+       
+            ============================================= -->
+    <div class="modal yl-login-modal fade" name="mapModaldemo" id="mapModaldemo" tabindex="-1" role="dialog" aria-hidden="true"
+        style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header btn-primary"> 
+                    <h6 class="modal-title">MEMBERS OF COUNTRIES </h6>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="card">
+                        <table class="table table-striped table-bordered mb-0 text-sm-nowrap text-lg-nowrap text-xl-nowrap" style="padding: 10px">
+                            <thead>
+                                <tr>
+                                    <th class="wd-lg-25p">KHAN</th>
+                                    <th class="wd-lg-25p tx-right">MEMBERS</th>
+                                    <th class="wd-lg-25p tx-right">KHAN</th>
+                                    <th class="wd-lg-25p tx-right">STUDENTS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>KHAN 1</td>
+                                    <td class="tx-right tx-medium tx-inverse">34</td>
+                                    <td>KHAN 11</td>
+                                    <td class="tx-right tx-medium tx-danger">-$45.10</td>
+                                </tr>
+                                <tr>
+                                    <td>KHAN 2</td>
+                                    <td class="tx-right tx-medium tx-inverse">26</td>
+                                    <td>KHAN 12</td>
+                                    <td class="tx-right tx-medium tx-danger">-$15.02</td>
+                                </tr>
+                                <tr>
+                                    <td>KHAN 3</td>
+                                    <td class="tx-right tx-medium tx-inverse">34</td>
+                                    <td>KHAN 13</td>
+                                    <td class="tx-right tx-medium tx-danger">-$13.45</td>
+                                </tr>
+                                <tr>
+                                    <td>KHAN 4</td>
+                                    <td class="tx-right tx-medium tx-inverse">45</td>
+                                    <td>KHAN 14</td>
+                                    <td class="tx-right tx-medium tx-danger">-$24.22</td>
+                                </tr>
+                                <tr>
+                                    <td>KHAN 5</td>
+                                    <td class="tx-right tx-medium tx-inverse">31</td>
+                                    <td>KHAN 15</td>
+                                    <td class="tx-right tx-medium tx-danger">-$25.01</td>
+                                </tr>
+                                <tr>
+                                    <td>KHAN 6</td>
+                                    <td class="tx-right tx-medium tx-inverse">34</td>
+                                    <td>KHAN 16</td>
+                                    <td class="tx-right tx-medium tx-danger">-$45.10</td>
+                                </tr>
+                                <tr>
+                                    <td>KHAN 7</td>
+                                    <td class="tx-right tx-medium tx-inverse">26</td>
+                                    <td>KHAN 17</td>
+                                    <td class="tx-right tx-medium tx-danger">-$15.02</td>
+                                </tr>
+                                <tr>
+                                    <td>KHAN 8</td>
+                                    <td class="tx-right tx-medium tx-inverse">34</td>
+                                    <td>KHAN 18</td>
+                                    <td class="tx-right tx-medium tx-danger">-$13.45</td>
+                                </tr>
+                                <tr>
+                                    <td>KHAN 9</td>
+                                    <td class="tx-right tx-medium tx-inverse">45</td>
+                                    <td>KHAN 19</td>
+                                    <td class="tx-right tx-medium tx-danger">-$24.22</td>
+                                </tr>
+                                <tr>
+                                    <td>KHAN 10</td>
+                                    <td class="tx-right tx-medium tx-inverse">31</td>
+                                    <td>KHAN 20</td>
+                                    <td class="tx-right tx-medium tx-danger">-$25.01</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                 
+            </div>
+        </div>
+    </div>
+
 
 @endsection
 @section('js')
@@ -132,6 +221,8 @@
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
+                $("#mapModal").modal('show');
+
                 console.log(message);
             }
         });

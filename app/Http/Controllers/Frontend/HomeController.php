@@ -264,6 +264,24 @@ class HomeController extends Controller
 
     }
 
+    public function getMemberContinent(Request $request)
+    {
+      
+        $country_code=$request->country_code !='' ? $request->country_code :'';
+ 
+       $_member=  Members::where('member_status','Y')->where('country_code',$country_code)
+       ->orderBy('full_name')->get();
+        $coler=0;
+       foreach($member as $item){
+        $member_continent[$item->country_code] = $this->ColorSet1($coler);
+        $coler++;
+       }
+ 
+        return  $html;
+
+    }
+
+
     public function countries(Request $request)
     {
 
