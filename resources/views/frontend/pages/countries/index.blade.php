@@ -30,8 +30,8 @@
                             </div>
                             <div class="yl-blog-text yl-headline pera-content">
 
-                                <div class="yl-blog-title">
-                                    <h3><a class="btn btn-primary btn-block" href="#">{{ $item->org_country_name }}</a></h3>
+                                <div class="yl-blog-title  text-center ">
+                                    <h3><a class="footer-logo-btn text-center text-uppercase" href="#">{{ $item->org_country_name }}</a></h3>
 
                                 </div>
                             </div>
