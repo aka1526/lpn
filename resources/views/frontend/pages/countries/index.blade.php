@@ -4,88 +4,55 @@
 @endsection
 
 @section('css')
-<link href="/assets/plugins/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="/assets/plugins/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <style>
+        .yl-popular-course-section {
+            padding: 5px 0px 50px;
+            background-color: #f7f7f7;
+        }
+
+    </style>
 @endsection
 @section('content')
-    
-    <!-- Start of breadcrumb section
-                 ============================================= -->
-    {{-- <section id="yl-breadcrumb" class="yl-breadcrumb-section position-relative" data-background="/assets/img/ct-bg.jpg">
-        <span class="breadcrumb-overlay position-absolute"></span>
-
-    </section> --}}
-    <!-- End of breadcrumb section
-                 ============================================= -->
-
-    <!-- Start of event content section
-                 ============================================= -->
-    <section id="event-countries" class="event-countries-section">
-        <div class="main-content horizontal-content ">
-            <div class="container">
-                <div class="row ">
-
-                    <div class="col-md-12 col-lg-12 col-xl-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mb-4 main-content-label">
-                                    <h4 style="color: #0A0A0A;">Organization Of Countries </h4>
-                                </div>
-
-                             <div class="row">
-                                 <div class="col-12">
-                                    <table class="table table-striped table-bordered mb-0 text-sm-nowrap text-lg-nowrap text-xl-nowrap">
-										<thead>
-											<tr>
-                                                
-                                                <th class="wd-lg-25p">Countries</th>
-                                                <th class="wd-lg-25p">Logo</th>
-												<th class="wd-lg-25p">Club Name</th>
-                                                <th class="wd-lg-25p">Website</th> 
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-                                                <td><i class="flag-icon flag-icon-th flag-icon-squared"></i> Thailand</td>
-												<td>-</td>
-                                                <td>Muay Club</td>
-												<td>https://lpn.satangapp.in/</td> 
-											</tr>
-                                            <tr>
-                                                <td><i class="flag-icon flag-icon-us flag-icon-squared"></i> Us </td>
-												<td>-</td>
-                                                <td>Us Muay Club</td>
-												<td>https://lpn.satangapp.in/</td> 
-											</tr>
-                                            <tr>
-                                                <td><i class="flag-icon flag-icon-cn flag-icon-squared"></i> China</td>
-												<td>-</td>
-                                                <td>China Muay Club</td>
-												<td>https://lpn.satangapp.in/</td> 
-											</tr>
-										</tbody>
-									</table>
-                                 </div>
-                             </div>
 
 
-    
+
+    <section id="yl-popular-course" class="yl-popular-course-section">
+        <div class="container">
+            <div class="yl-popular-course-content">
+                <div class="row">
+                    @foreach ($Organizations as $item)
+                    <div class="owl-item " style="width: 370px; margin-right: 30px;">
+                        <div class="yl-blog-img-text">
+                            <div class=" text-center">
+                                <img width="230px" class="flag" src="{{ '/assets/plugins/flag-icon-css/flags/4x3/'.$item->org_country_code.'.svg'}}"
+                                    alt="Angola Flag">
                             </div>
-                            
+                            <div class="yl-blog-text yl-headline pera-content">
+
+                                <div class="yl-blog-title">
+                                    <h3><a class="btn btn-primary btn-block" href="#">{{ $item->org_country_name }}</a></h3>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    @endforeach
+                    
                 </div>
+
             </div>
         </div>
     </section>
-    <!-- End of of event content section
+    <!-- End of Popular course section
                  ============================================= -->
-
 @endsection
 @section('js')
 
     <!-- Internal Map -->
-    <script src="/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    {{-- <script src="/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script> --}}
 
     {{-- <!--Internal  index js -->
 		<script src="../../assets/js/index.js"></script>

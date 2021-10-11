@@ -42,7 +42,13 @@
     <script src="/assets/js/imagesloaded.pkgd.min.js"></script>
     <script src="/assets/js/masonry.pkgd.min.js"></script>
     <script src="/assets/js/odometer.js"></script>
+    
+ 
+    <script src="assets/js/parallax-scroll.js"></script>
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <script src="assets/js/typer.js"></script>
     <script src="/assets/js/custom.js"></script>
+
     @yield('js')
 </body>
 

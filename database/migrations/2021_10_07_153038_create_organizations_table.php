@@ -12,7 +12,7 @@ class CreateOrganizationsTable extends Migration
      * @return void
      */
     public function up()    {
-       
+        
     Schema::create('organizations', function (Blueprint $table) {
         $table->string('org_uid',50)->nullable()->default('');
         $table->string('org_type',50)->nullable()->default('');

@@ -14,6 +14,8 @@ use App\Models\Admins\Rankingslist;
 use App\Models\Admins\Slidepage;
 use App\Models\Admins\Sysinfo;
 use Illuminate\Http\Request;
+use App\Models\Admins\Organizations;
+
 
 class HomeController extends Controller
 {
@@ -286,9 +288,10 @@ class HomeController extends Controller
     {
 
         // $search='FEMALE';
-        $halloffames = Halloffames::where('content_status', 'Y')
-            ->orderBy('hof_index', 'desc')->get();
-        return view('frontend.pages.countries.index', compact('halloffames'));
+        $Organizations = Organizations::select('org_country_code','org_country_name')
+        ->where('org_status', 'Y')
+        ->groupBy('org_country_code')->groupBy('org_country_name')->orderBy('org_country_name')->get();
+        return view('frontend.pages.countries.index', compact('Organizations'));
 
     }
 
