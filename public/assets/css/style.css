@@ -8408,7 +8408,31 @@ span#topActionCartNumber {
 }
 
 
+.yl-header-cart-login .yl-top-cart-login button img {
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+}
+.dropdown-menu.dropdown-menu-right.profile.show {
+    display: block;
+    right: 1px;
+    left: auto;
+    top: 35px;
+}
 
+ 
+i.flag-icon.flag-icon-squared {
+    width: 1em;
+    font-size: 24px;
+    line-height: 1;
+    border-radius: 100%;
+    
+}
+
+.event-countries-section {
+    padding: 30px 0px;
+    background-color: #f2f2f4;
+}
 
 @media (min-width: 576px) {
 .dropdown-menu.dropdown-menu-right.profile.show:after {

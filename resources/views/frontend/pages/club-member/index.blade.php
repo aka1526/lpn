@@ -28,7 +28,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="mb-4 main-content-label">
-                                    <h4 style="color: #0A0A0A;">Organization Of Countries </h4>
+                                    <h4 style="color: #0A0A0A;"> Members' Club</h4>
                                 </div>
 
                              <div class="row">

@@ -20,6 +20,8 @@ use App\Http\Controllers\Admins\CertificatesController;
 use App\Http\Controllers\Admins\MemberkhansController;
 use App\Http\Controllers\Admins\RankingsController;
 use App\Http\Controllers\Admins\HalloffameController;
+use App\Http\Controllers\Admins\OrganizationsController;
+
 
 ###### frontend ###################
 Route::fallback(function () {
@@ -187,9 +189,7 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
 
  Route::get('/pageadmin/members/prosonal', [MembersController::class, 'index'])->name('members.index');
  Route::get('/pageadmin/members/prosonal/edit/{uid}', [MembersController::class, 'edit'])->name('members.edit');
- Route::get(' /pageadmin/members/organization', [MembersController::class, 'org'])->name('members.org');
-
-
+ 
  Route::get('/pageadmin/members/prosonal/register', [MembersController::class, 'register'])->name('members.register');
  Route::post('/pageadmin/members/prosonal/register/add', [MembersController::class, 'add'])->name('members.register.add');
  Route::post('/pageadmin/members/prosonal/register/update', [MembersController::class, 'update'])->name('members.register.update');
@@ -203,6 +203,23 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::get('/pageadmin/members/memberrenew/get', [MembersController::class, 'prosonal_renew_get'])->name('members.prosonal.renew.get');
 
  Route::post('/pageadmin/members/prosonal/renew/update', [MembersController::class, 'prosonal_renew_update'])->name('members.prosonal.renew.update');
+
+
+ Route::get('/pageadmin/members/organizations', [OrganizationsController::class, 'index'])->name('org.index');
+ Route::get('/pageadmin/members/organizations/new', [OrganizationsController::class, 'new'])->name('org.new');
+ Route::get('/pageadmin/members/organizations/edit/{uid}', [OrganizationsController::class, 'edit'])->name('org.edit');
+ Route::get('/pageadmin/members/organizations/get', [OrganizationsController::class, 'get'])->name('org.get');
+ Route::get('/pageadmin/members/organizations/getorganization', [OrganizationsController::class, 'getorganization'])->name('org.getorganization');
+
+ 
+
+ Route::post('/pageadmin/members/organizations/add', [OrganizationsController::class, 'add'])->name('org.add');
+ Route::post('/pageadmin/members/organizations/update', [OrganizationsController::class, 'update'])->name('org.update');
+ Route::post('/pageadmin/members/organizations/updatestatus', [OrganizationsController::class, 'updatestatus'])->name('org.updatestatus');
+ Route::post('/pageadmin/members/organizations/delete', [OrganizationsController::class, 'delete'])->name('org.delete');
+Route::post('/pageadmin/members/organizations/renew', [OrganizationsController::class, 'RenewMember'])->name('org.renew');
+          
+
 
 
  Route::get('/pageadmin/khans', [KhansController::class, 'index'])->name('khans.index');

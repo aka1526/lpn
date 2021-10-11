@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admins\Aboutus;
+
 use App\Models\Admins\Accessuid;
 use App\Models\Admins\User;
 use Carbon\Carbon;
@@ -12,6 +12,7 @@ use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Image;
+use App\Models\Admins\Aboutus;
 
 class AboutusController extends Controller
 {

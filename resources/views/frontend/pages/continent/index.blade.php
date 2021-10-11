@@ -12,23 +12,23 @@
 @endsection
 @section('content')
     <style>
-     a  {
-        text-decoration: none;
-      }
+        a {
+            text-decoration: none;
+        }
 
     </style>
 
     <!-- Start of breadcrumb section
-                                     ============================================= -->
+                                         ============================================= -->
     {{-- <section id="yl-breadcrumb" class="yl-breadcrumb-section position-relative" data-background="/assets/img/ct-bg.jpg">
         <span class="breadcrumb-overlay position-absolute"></span>
 
     </section> --}}
     <!-- End of breadcrumb section
-                                     ============================================= -->
+                                         ============================================= -->
 
     <!-- Start of event content section
-                                     ============================================= -->
+                                         ============================================= -->
     <section id="event-area" class="event-area-section">
 
         <div class="container">
@@ -89,93 +89,37 @@
         </div>
     </section>
     <!-- End of of event content section
-       
-       
-            ============================================= -->
-    <div class="modal yl-login-modal fade" name="mapModaldemo" id="mapModaldemo" tabindex="-1" role="dialog" aria-hidden="true"
+           
+           
+                ============================================= -->
+    <div class="modal yl-login-modal fade" name="mapModal" id="mapModal" tabindex="-1" role="dialog" aria-hidden="true"
         style="display: none;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header btn-primary"> 
+                <div class="modal-header btn-primary">
                     <h6 class="modal-title">MEMBERS OF COUNTRIES </h6>
-                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                            aria-hidden="true">×</span></button>
                 </div>
                 <div class="card">
-                        <table class="table table-striped table-bordered mb-0 text-sm-nowrap text-lg-nowrap text-xl-nowrap" style="padding: 10px">
-                            <thead>
-                                <tr>
-                                    <th class="wd-lg-25p">KHAN</th>
-                                    <th class="wd-lg-25p tx-right">MEMBERS</th>
-                                    <th class="wd-lg-25p tx-right">KHAN</th>
-                                    <th class="wd-lg-25p tx-right">STUDENTS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>KHAN 1</td>
-                                    <td class="tx-right tx-medium tx-inverse">34</td>
-                                    <td>KHAN 11</td>
-                                    <td class="tx-right tx-medium tx-danger">-$45.10</td>
-                                </tr>
-                                <tr>
-                                    <td>KHAN 2</td>
-                                    <td class="tx-right tx-medium tx-inverse">26</td>
-                                    <td>KHAN 12</td>
-                                    <td class="tx-right tx-medium tx-danger">-$15.02</td>
-                                </tr>
-                                <tr>
-                                    <td>KHAN 3</td>
-                                    <td class="tx-right tx-medium tx-inverse">34</td>
-                                    <td>KHAN 13</td>
-                                    <td class="tx-right tx-medium tx-danger">-$13.45</td>
-                                </tr>
-                                <tr>
-                                    <td>KHAN 4</td>
-                                    <td class="tx-right tx-medium tx-inverse">45</td>
-                                    <td>KHAN 14</td>
-                                    <td class="tx-right tx-medium tx-danger">-$24.22</td>
-                                </tr>
-                                <tr>
-                                    <td>KHAN 5</td>
-                                    <td class="tx-right tx-medium tx-inverse">31</td>
-                                    <td>KHAN 15</td>
-                                    <td class="tx-right tx-medium tx-danger">-$25.01</td>
-                                </tr>
-                                <tr>
-                                    <td>KHAN 6</td>
-                                    <td class="tx-right tx-medium tx-inverse">34</td>
-                                    <td>KHAN 16</td>
-                                    <td class="tx-right tx-medium tx-danger">-$45.10</td>
-                                </tr>
-                                <tr>
-                                    <td>KHAN 7</td>
-                                    <td class="tx-right tx-medium tx-inverse">26</td>
-                                    <td>KHAN 17</td>
-                                    <td class="tx-right tx-medium tx-danger">-$15.02</td>
-                                </tr>
-                                <tr>
-                                    <td>KHAN 8</td>
-                                    <td class="tx-right tx-medium tx-inverse">34</td>
-                                    <td>KHAN 18</td>
-                                    <td class="tx-right tx-medium tx-danger">-$13.45</td>
-                                </tr>
-                                <tr>
-                                    <td>KHAN 9</td>
-                                    <td class="tx-right tx-medium tx-inverse">45</td>
-                                    <td>KHAN 19</td>
-                                    <td class="tx-right tx-medium tx-danger">-$24.22</td>
-                                </tr>
-                                <tr>
-                                    <td>KHAN 10</td>
-                                    <td class="tx-right tx-medium tx-inverse">31</td>
-                                    <td>KHAN 20</td>
-                                    <td class="tx-right tx-medium tx-danger">-$25.01</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <table class="table table-striped table-bordered mb-0 text-sm-nowrap text-lg-nowrap text-xl-nowrap"
+                        style="padding: 10px">
+                        <thead>
+                            <tr>
+                                <th class="wd-lg-25p">No.</th>
+                                <th class="wd-lg-25p tx-right">Organization</th>
+                                <th class="wd-lg-25p tx-right">Teachers</th>
+                                <th class="wd-lg-25p tx-right">Website</th>
+                                <th class="wd-lg-25p tx-right">E-mail</th>
+                            </tr>
+                        </thead>
+                        <tbody id="databody">
+                          
+                        </tbody>
+                    </table>
 
-                    </div>
-                 
+                </div>
+
             </div>
         </div>
     </div>
@@ -201,6 +145,7 @@
     <script>
         var member_continent = {!! json_encode($member_continent) !!};
 
+
         jQuery('#map_world').vectorMap({
             map: 'world_en',
             backgroundColor: '#a5bfdd',
@@ -216,16 +161,17 @@
             selectedColor: '#c9dfaf',
             selectedRegions: null,
             showTooltip: true,
-            //values: sample_data,
             colors: member_continent,
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
-                $("#mapModal").modal('show');
 
+                getOrganization(code);
                 console.log(message);
             }
         });
+
+
 
         jQuery('#africa').vectorMap({
             map: 'africa_en',
@@ -383,8 +329,28 @@
                 console.log(message);
             }
         });
-    </script>
 
+        function getOrganization(code) {
+           
+            var url = "/pageadmin/members/organizations/getorganization";
+            $.ajax({
+                type: "get",
+                url: url,
+                data: {
+                    country_code: code,
+                    
+                    "_token": "{{ csrf_token() }}"
+                }, // serializes the form's elements.
+                success: function(data) {
+                    $("#mapModal").modal('show');
+                    $("#databody").html(data.data);
+                   // console.log(data.data);
+                }
+            });
+
+            
+        }
+    </script>
 
 
 @endsection

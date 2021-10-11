@@ -85,16 +85,16 @@ class MembersController extends Controller
         return view('admins.pages.members.index', compact('members'));
     }
 
-    public function org(Request $request)
-    {
-        if ($this->GetUserUid() == '') {
-            return redirect(url('/pageadmin/adminlogin'));
-        }
+    // public function org(Request $request)
+    // {
+    //     if ($this->GetUserUid() == '') {
+    //         return redirect(url('/pageadmin/adminlogin'));
+    //     }
 
-        $members = Members::where('member_group', '=', 'ORGANIZATION')->orderBy('member_no')->paginate($this->paging);
+    //     $members = Members::where('member_group', '=', 'ORGANIZATION')->orderBy('member_no')->paginate($this->paging);
 
-        return view('admins.pages.members_index', compact('members'));
-    }
+    //     return view('admins.pages.members_index', compact('members'));
+    // }
 
     public function register(Request $request)
     {
