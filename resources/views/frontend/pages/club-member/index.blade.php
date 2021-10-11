@@ -44,7 +44,7 @@
                                                 <th class="wd-lg-25p">Website</th> 
                                                 <th class="wd-lg-25p">E-mail</th> 
                                                 <th class="wd-lg-25p">Date Exp</th> 
-                                                <th class="wd-lg-25p">Status</th> 
+                                                  
 											</tr>
 										</thead>
 										<tbody>
@@ -57,7 +57,7 @@
 												<td>{{ $item->org_www}}</td>
                                                 <td>{{ $item->org_email}}</td>
                                                 <td>{{ $item->org_date_exp}}</td>
-                                                <td> <a class="btn btn-primary">Is Verify </div></td>
+                                                 
 											</tr> 
                                             @endforeach
 											
