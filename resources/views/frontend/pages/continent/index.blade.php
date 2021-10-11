@@ -97,7 +97,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header btn-primary">
-                    <h6 class="modal-title">MEMBERS OF COUNTRIES </h6>
+                    <h6 class="modal-title" id="country">  </h6>
                     <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
                             aria-hidden="true">×</span></button>
                 </div>
@@ -214,6 +214,7 @@
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
+                    getOrganization(code);
                 console.log(message);
             }
         });
@@ -236,6 +237,7 @@
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
+                    getOrganization(code);
                 console.log(message);
             }
         });
@@ -258,6 +260,7 @@
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
+                    getOrganization(code);
                 console.log(message);
             }
         });
@@ -281,6 +284,7 @@
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
+                    getOrganization(code);
                 console.log(message);
             }
         });
@@ -303,7 +307,7 @@
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
-
+                    getOrganization(code);
                 console.log(message);
             }
         });
@@ -326,6 +330,7 @@
             onRegionClick: function(element, code, region) {
                 var message = 'You clicked "' + region + '" which has the code: ' +
                     code.toUpperCase();
+                    getOrganization(code);
                 console.log(message);
             }
         });
@@ -342,8 +347,13 @@
                     "_token": "{{ csrf_token() }}"
                 }, // serializes the form's elements.
                 success: function(data) {
-                    $("#mapModal").modal('show');
+                    if(data.success){
+                        $("#mapModal").modal('show');
+                    
+                    $("#country").html(data.country);
                     $("#databody").html(data.data);
+                    }
+                   
                    // console.log(data.data);
                 }
             });

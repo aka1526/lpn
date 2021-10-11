@@ -55,12 +55,12 @@ class OrganizationsController extends Controller
             return redirect(url('/pageadmin/adminlogin'));
 
         }
-        $search =$request->search ;
-        
+        $search = $request->search;
+
         $organizations = Organizations::where(function ($query) use ($search) {
             if ($search != '') {
-                  $query->orwhere('org_name', 'like', '%' . $search . '%');
-                  $query->orwhere('org_country_name', 'like', '%' . $search . '%');
+                $query->orwhere('org_name', 'like', '%' . $search . '%');
+                $query->orwhere('org_country_name', 'like', '%' . $search . '%');
             }
         })->orderBy('org_name')->paginate($this->paging);
 
@@ -95,7 +95,7 @@ class OrganizationsController extends Controller
             $message = 'success';
             $response = [
                 'org_uid' => $member->org_uid,
-                'org_name' => $member->org_name ,
+                'org_name' => $member->org_name,
                 'org_date_validate' => $member->org_date_validate,
                 'org_date_exp' => $member->org_date_exp,
                 'org_logo' => '/images/logo/thumbnails/' . $member->org_logo,
@@ -104,7 +104,6 @@ class OrganizationsController extends Controller
 
         return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
     }
-
 
     public function add(Request $request)
     {
@@ -188,7 +187,7 @@ class OrganizationsController extends Controller
 
     public function update(Request $request)
     {
- 
+
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
@@ -309,7 +308,7 @@ class OrganizationsController extends Controller
         }
 
         $uid = $request->uid;
-        $status= $request->status;
+        $status = $request->status;
         $Organizations = Organizations::where('org_uid', '=', $uid)->first();
 
         $success = false;
@@ -320,14 +319,13 @@ class OrganizationsController extends Controller
 
             $message = 'success';
             $success = Organizations::where('org_uid', '=', $uid)->update([
-                "org_status" => $status
+                "org_status" => $status,
             ]);
 
         }
 
         return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
     }
-
 
     public function delete(Request $request)
     {
@@ -353,18 +351,16 @@ class OrganizationsController extends Controller
         return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
     }
 
-
     public function RenewMember(Request $request)
     {
-       
-        
+
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
 
         $uid = $request->org_uid;
-        $date_renew= $request->date_renew;
-        $date_exp =   Carbon::parse($date_renew)->addYears(1);
+        $date_renew = $request->date_renew;
+        $date_exp = Carbon::parse($date_renew)->addYears(1);
         $Organizations = Organizations::where('org_uid', '=', $uid)->first();
 
         $success = false;
@@ -375,59 +371,56 @@ class OrganizationsController extends Controller
 
             $message = 'success';
             $success = Organizations::where('org_uid', '=', $uid)->update([
-                "org_date_validate" =>  $date_renew,
+                "org_date_validate" => $date_renew,
                 "org_date_exp" => $date_exp,
             ]);
 
         }
 
         return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
-     
+
     }
 
     public function getorganization(Request $request)
     {
-       
-        
+
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
 
         $country_code = $request->country_code;
-        
-        $Organizations = Organizations::where('org_country_code', '=', $country_code)
-        ->orderBy('org_name')->get();
 
+        $Organizations = Organizations::where('org_country_code', '=', $country_code)
+            ->orderBy('org_name')->get();
+        //dd(count($Organizations));
         $success = false;
         $message = 'fail';
         $response = "";
-        if ($Organizations) {
+        $country = "";
+        if (count($Organizations) > 0) {
             $success = true;
-
             $message = 'success';
             $success = true;
-            
-               $i=0; 
-            foreach( $Organizations as $item){
+            $i = 0;
+            $country = ' <h6 class="modal-title" id="country">Organization of ' . $Organizations[0]->org_country_name . ' </h6>';
+
+            foreach ($Organizations as $item) {
                 $i++;
-                $response .='
+                $response .= '
                     <tr>
-                        <td>'. $i.'</td>
-                        <td class="tx-right tx-medium tx-inverse">'.$item->org_name.'</td>
-                        <td>'.$item->org_name_teachers.'</td>
-                        <td class="tx-right tx-medium tx-danger">'.$item->org_www.'</td>
-                        <td class="tx-right tx-medium tx-danger">'.$item->org_email.'</td>
+                        <td>' . $i . '</td>
+                        <td class="tx-right tx-medium tx-inverse">' . $item->org_name . '</td>
+                        <td>' . $item->org_name_teachers . '</td>
+                        <td class="tx-right tx-medium tx-danger">' . $item->org_www . '</td>
+                        <td class="tx-right tx-medium tx-danger">' . $item->org_email . '</td>
                     </tr>';
 
-            } 
-
+            }
 
         }
 
-        return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
-     
-    }
+        return response()->json(['success' => $success, 'message' => $message, 'data' => $response, 'country' => $country], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
 
-    
+    }
 
 }
