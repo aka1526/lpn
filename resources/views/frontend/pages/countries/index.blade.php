@@ -31,7 +31,7 @@
                             <div class="yl-blog-text yl-headline pera-content">
 
                                 <div class="yl-blog-title  text-center ">
-                                    <h3><a class="footer-logo-btn text-center text-uppercase" href="#">{{ $item->org_country_name }}</a></h3>
+                                    <h3><a onclick="getOrganization('{{ $item->org_country_code }}')" class="footer-logo-btn text-center text-uppercase" href="#">{{ $item->org_country_name }}</a></h3>
 
                                 </div>
                             </div>
@@ -47,18 +47,65 @@
     </section>
     <!-- End of Popular course section
                  ============================================= -->
+                 <div class="modal yl-login-modal fade" name="mapModal" id="mapModal" tabindex="-1" role="dialog" aria-hidden="true"
+                 style="display: none;">
+                 <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                         <div class="modal-header btn-primary">
+                             <h6 class="modal-title" id="country">  </h6>
+                             <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                                     aria-hidden="true">×</span></button>
+                         </div>
+                         <div class="card">
+                             <table class="table table-striped table-bordered mb-0 text-sm-nowrap text-lg-nowrap text-xl-nowrap"
+                                 style="padding: 10px">
+                                 <thead>
+                                     <tr>
+                                         <th class="wd-lg-25p">No.</th>
+                                         <th class="wd-lg-25p tx-right">Organization</th>
+                                         <th class="wd-lg-25p tx-right">Teachers</th>
+                                         <th class="wd-lg-25p tx-right">Website</th>
+                                         <th class="wd-lg-25p tx-right">E-mail</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody id="databody">
+                                   
+                                 </tbody>
+                             </table>
+         
+                         </div>
+         
+                     </div>
+                 </div>
+             </div>
 @endsection
 @section('js')
+ <script>
 
-    <!-- Internal Map -->
-    {{-- <script src="/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script> --}}
+function getOrganization(code) {
+           
+           var url = "/pageadmin/members/organizations/getorganization";
+           $.ajax({
+               type: "get",
+               url: url,
+               data: {
+                   country_code: code,
+                   
+                   "_token": "{{ csrf_token() }}"
+               }, // serializes the form's elements.
+               success: function(data) {
+                   if(data.success){
+                       $("#mapModal").modal('show');
+                   
+                   $("#country").html(data.country);
+                   $("#databody").html(data.data);
+                   }
+                  
+                  // console.log(data.data);
+               }
+           });
 
-    {{-- <!--Internal  index js -->
-		<script src="../../assets/js/index.js"></script>
-		<script src="../../assets/js/jquery.vmap.sampledata.js"></script>
-
-		<!-- custom js -->
-		<script src="../../assets/js/custom.js"></script>
-		<script src="../../assets/js/jquery.vmap.sampledata.js"></script> --}}
+           
+       }
+ </script>
 @endsection

@@ -74,7 +74,7 @@
                                             <th>Kru Name</th>
                                             <th class="text-center">country</th>
 
-                                            <th class="text-center">Www</th>
+                                           
                                             <th class="text-center">Certificate</th>
                                             <th class="text-center">Date Exp.</th>
                                             <th class="text-center">Status</th>
@@ -93,7 +93,7 @@
                                                 <td>{{ $row->org_name }}</td>
                                                 <td class="text-center">{{ $row->org_name_teachers }}</td>
                                                 <td class="text-center">{{ $row->org_country_name }}</td>
-                                                <td class="text-center">{{ $row->org_www }}</td>
+                                                
                                                 <td class="text-center">{{ $row->org_certificate_no }}</td>
                                                 <td class="text-center">{{ $row->org_date_exp }}</td>
 
@@ -126,8 +126,9 @@
                                                             title="Delete"><i class="far fa-trash-alt"></i></button>
 
                                                         <button type="button" data-uid="{{ $row->org_uid }}" id="renew"
-                                                            name="renew" class="btn btn-primary  ">
-                                                            <i class="far fa-clock"></i> RENEW</button>
+                                                            data-toggle="tooltip"   title="Renew"
+                                                            name="renew" class="btn btn-primary  btn-icon ">
+                                                            <i class="far fa-clock"></i> </button>
 
                                                     </div>
                                                 </td>

@@ -308,9 +308,9 @@ class HomeController extends Controller
     {
 
         // $search='FEMALE';
-        $halloffames = Halloffames::where('content_status', 'Y')
-            ->orderBy('hof_index', 'desc')->get();
-        return view('frontend.pages.club-member.index', compact('halloffames'));
+        $organizations = Organizations::where('org_status', 'Y')
+            ->orderBy('org_name')->paginate($this->paging);
+        return view('frontend.pages.club-member.index', compact('organizations'));
 
     }
 

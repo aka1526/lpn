@@ -37,33 +37,36 @@
 										<thead>
 											<tr>
                                                 
-                                                <th class="wd-lg-25p">Countries</th>
+                                                <th class="wd-lg-25p">No.</th>
                                                 <th class="wd-lg-25p">Logo</th>
 												<th class="wd-lg-25p">Club Name</th>
+                                                <th class="wd-lg-25p">Teachers</th>
                                                 <th class="wd-lg-25p">Website</th> 
+                                                <th class="wd-lg-25p">E-mail</th> 
+                                                <th class="wd-lg-25p">Date Exp</th> 
+                                                <th class="wd-lg-25p">Status</th> 
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-                                                <td><i class="flag-icon flag-icon-th flag-icon-squared"></i> Thailand</td>
-												<td>-</td>
-                                                <td>Muay Club</td>
-												<td>https://lpn.satangapp.in/</td> 
-											</tr>
+                                            @foreach ($organizations as $key => $item)
                                             <tr>
-                                                <td><i class="flag-icon flag-icon-us flag-icon-squared"></i> Us </td>
-												<td>-</td>
-                                                <td>Us Muay Club</td>
-												<td>https://lpn.satangapp.in/</td> 
-											</tr>
-                                            <tr>
-                                                <td><i class="flag-icon flag-icon-cn flag-icon-squared"></i> China</td>
-												<td>-</td>
-                                                <td>China Muay Club</td>
-												<td>https://lpn.satangapp.in/</td> 
-											</tr>
+                                                <th class="text-center">{{ $organizations->firstItem() + $key }}</th>
+                                                <td class="text-center"><img src="{{ $item->org_logo !='' ? '/images/logo/thumbnails/'.$item->org_logo : '' }}" onerror="this.src='/assets/img/no-logo.png'" width="120px" height="70px"></td>
+												<td>{{ $item->org_name}}</td>
+                                                <td>{{ $item->org_name_teachers}}</td>
+												<td>{{ $item->org_www}}</td>
+                                                <td>{{ $item->org_email}}</td>
+                                                <td>{{ $item->org_date_exp}}</td>
+                                                <td> <a class="btn btn-primary">Is Verify </div></td>
+											</tr> 
+                                            @endforeach
+											
+                                             
 										</tbody>
 									</table>
+                                    <div class="pt-2">
+                                        {{ $organizations->links('pagination.default', ['paginator' => $organizations, 'link_limit' => $organizations->perPage()]) }}
+                                    </div>
                                  </div>
                              </div>
 
