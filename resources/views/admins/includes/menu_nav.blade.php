@@ -193,7 +193,7 @@
                                             About us </a></li>
                                     <li aria-haspopup="true">
                                         <a href="{{ route('subscribe.index') }}" class="slide-item">
-                                        Subscribe</a></li>
+                                        Mail Subscribe</a></li>
     
     
                                 </ul>
