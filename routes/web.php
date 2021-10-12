@@ -91,6 +91,7 @@ Route::get('/course/{course_link}', [CourseFnController::class, 'index'])->name(
 Route::get('/course/{course_link}/{detail}', [CourseFnController::class, 'detail'])->name('fn.course_detail');
   
 Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('fn.subscribe');
+Route::post('/contact/message', [NewsletterController::class, 'contact'])->name('fn.message.contact');
 
 
 

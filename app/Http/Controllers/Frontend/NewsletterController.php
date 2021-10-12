@@ -55,21 +55,22 @@ class NewsletterController extends Controller
         $news_by_os= $request->header('User-Agent');
        // dd($news_by_os);
         $created_by = $this->username  !='' ? $this->username :'guest' ;
+        $useruid = $this->useruid  !='' ? $this->useruid :'-' ;
         $news_uid = $this->NewUid();
         $action = Newsletters::insert([
             'news_uid' => $news_uid
             , 'news_type' => 'subscribe'  // subscribe ,contact
-            , 'news_title' => 'subscribe'
+            , 'news_subject' => 'subscribe'
             , 'news_email' => $email
             , 'news_name'  => '-'
             , 'news_phone'=> '-'
             , 'news_date'=>  Carbon::now()
-            , 'news_message'=> ''
+            , 'news_message'=> 'subscribe'
             , 'news_message_reply'=> '-'
             ,'news_ref_uid' =>  $news_uid
             , 'news_by_ipaddress'=>   $ipaddress
             , 'news_by_os'=> $news_by_os
-            , 'news_member_id'=> ''
+            , 'news_member_id'=>  $useruid
             , 'news_status'=> 'Y'
             , 'created_by' => $created_by
             , 'updated_by' => $created_by
@@ -78,6 +79,56 @@ class NewsletterController extends Controller
         ]);
         return redirect()->back()->with('message', 'Thank You For Subscribing!');  
      }
+
+     public function contact(Request $request){
+        //  dd( $request);
+
+        $fields = $request->validate(
+            [
+
+                'email' => 'required|string',
+                'subject' => 'required',
+                'message' => 'required',
+
+            ],
+            [
+                'email.required' => 'E-mail Is Required ',
+                'subject.required' => 'subject Is Required ',
+                'message.required' => 'Message Is Required ',
+            ]
+        );
+
+          $email= $request->email;
+          $ipaddress =$request->ip();
+          $news_by_os= $request->header('User-Agent');
+         // dd($news_by_os);
+          $created_by = $this->username  !='' ? $this->username :'guest' ;
+          $useruid = $this->useruid  !='' ? $this->useruid :'-' ;
+          $news_uid = $this->NewUid();
+ 
+          $action = Newsletters::insert([
+              'news_uid' => $news_uid
+              , 'news_type' => 'contact'  // subscribe ,contact
+              , 'news_subject' => $request->subject
+              , 'news_email' => $email
+              , 'news_name'  =>  $request->name
+              , 'news_phone'=> $request->phone
+              , 'news_date'=>  Carbon::now()
+              , 'news_message'=>  $request->message
+              , 'news_message_reply'=> '-'
+              ,'news_ref_uid' =>  $news_uid
+              , 'news_by_ipaddress'=>   $ipaddress
+              , 'news_by_os'=> $news_by_os
+              , 'news_member_id'=> $useruid 
+              , 'news_status'=> 'Y'
+              , 'created_by' => $created_by
+              , 'updated_by' => $created_by
+              , 'created_at' => Carbon::now()
+              , 'updated_at' => Carbon::now()
+          ]);
+          return redirect()->back()->with('message', 'Thank You For Subscribing!');  
+       }
+     
 
      public function getIp(){
         foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){

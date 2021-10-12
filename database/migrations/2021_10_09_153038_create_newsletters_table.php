@@ -16,7 +16,7 @@ class CreateNewslettersTable extends Migration
     Schema::create('newsletters', function (Blueprint $table) {
         $table->string('news_uid',50)->primary();
         $table->string('news_type',50)->nullable()->default('subscribe');// subscribe ,contact
-        $table->string('news_title',50)->nullable()->default(''); 
+        $table->string('news_subject',50)->nullable()->default(''); 
         $table->string('news_email',200)->nullable()->default(''); 
         $table->string('news_name',200)->nullable()->default(''); 
         $table->string('news_phone',50)->nullable()->default(''); 
