@@ -5,24 +5,7 @@
 @section('content')
   
 
-      <!-- Start of contact map section
-         ============================================= -->   
-         <div class="yl-googlemap">
-            <div class="container">
-               <div id="yl_map" 
-               data-lat="43.653225" 
-               data-lon="-79.383186" 
-               data-zoom="12" 
-               data-info="Trinity Bellwoods Park" 
-               data-mlat="43.653225" 
-               data-mlon="-79.383186"
-                data-marker="assets/img/map-m.png">
-               </div>   
-            </div>
-         </div>
-      <!-- End of contact map section
-         ============================================= -->
-
+ 
       <!-- Start of contact content section
          ============================================= -->       
          <section id="contact-content" class="contact-content-section">
@@ -88,6 +71,5 @@
          ============================================= -->    
 @endsection
 @section('js')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk2HrmqE4sWSei0XdKGbOMOHN3Mm2Bf-M&ver=2.1.6"></script>
-<script src="assets/js/gmaps.min.js"></script>
+ 
 @endsection

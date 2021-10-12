@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CourseFnController;
+use App\Http\Controllers\Frontend\NewsletterController;
 
 use App\Http\Controllers\Admins\AdminHomeController;
 use App\Http\Controllers\Admins\AdminUserController;
@@ -89,7 +90,7 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('fn.contact');
 Route::get('/course/{course_link}', [CourseFnController::class, 'index'])->name('fn.course_index');
 Route::get('/course/{course_link}/{detail}', [CourseFnController::class, 'detail'])->name('fn.course_detail');
   
-
+Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('fn.subscribe');
 
 
 

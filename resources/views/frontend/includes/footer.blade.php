@@ -21,19 +21,36 @@
                       <h3 class="widget-title">Newsletter</h3>
                       <p>Subscribe our newsletter to get our
                          latest update & news
+                         
+                         @if(session()->has('message'))
+                         {{-- <div class="alert alert-success">
+                             {{ session()->get('message') }}
+                         </div> --}}
+                         <script>
+                            Swal.fire({
+                                 position: 'center',
+                                 icon: 'success',
+                                 title: '{{ session()->get('message') }}',
+                                 showConfirmButton: false,
+                                 timer: 3000
+                                 })
+                       </script>
+                        @endif
                       </p>
-                      <form action="#">
-                         <input type="email" placeholder="Your mail address">
+                     
+                      <form id="subscribe" name="subscribe" method="post" action="{{ route('fn.subscribe')}}">
+                        @csrf
+                        <input type="email" id="email" name="email" placeholder="Your mail address">
                          <button type="submit"><i class="far fa-paper-plane"></i></button>
                       </form>
-                      <div class="yl-footer-social ul-li">
+                      {{-- <div class="yl-footer-social ul-li">
                          <ul>
                             <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                             <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                             <li><a href="#"><i class="fab fa-behance"></i></a></li>
                             <li><a href="#"><i class="fab fa-youtube"></i></a></li>
                          </ul>
-                      </div>
+                      </div> --}}
                    </div>
                 </div>
              </div>

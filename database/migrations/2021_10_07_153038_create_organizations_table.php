@@ -14,9 +14,9 @@ class CreateOrganizationsTable extends Migration
     public function up()    {
         
     Schema::create('organizations', function (Blueprint $table) {
+        $table->string('org_name',200)->primary();
         $table->string('org_uid',50)->nullable()->default('');
         $table->string('org_type',50)->nullable()->default('');
-        $table->string('org_name',200)->nullable()->primary();
         $table->string('org_name_th',200)->nullable()->default('');
         $table->string('org_name_teachers',200)->nullable()->default('');
         $table->string('org_country_code',50)->nullable()->default('');

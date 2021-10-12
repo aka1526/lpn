@@ -12,6 +12,9 @@
 <link rel="stylesheet" href="/assets/css/odometer-theme-default.css">
 <link rel="stylesheet" href="/assets/css/owl.carousel.css">
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/plugins/sweetalert2/dist/sweetalert2.min.css">
+
+
 
 <link rel="shortcut icon" href="{{ asset('/assets/img/icon/web/favicon.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ asset('/assets/img/icon/web/favicon.ico') }}" type="image/x-icon">
@@ -23,3 +26,8 @@
     content="หน้าแรก | สนามมวยลุมพีนี  | โรงเรียนสอนศิลปะการต่อสู้ | โรงเรียนมวยไทยลุมพิน | Lumpinee academy muaythai">
 <meta property="og:description"
     content="สนามมวยลุมพีนี |  โรงเรียนสอนศิลปะการต่อสู้ | โรงเรียนมวยไทยลุมพินี | Lumpinee academy muaythai">
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<!--Internal  Sweet-Alert js-->
+<script src="/assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="/assets/plugins/sweetalert2/dist/sweetalert2.min.css">

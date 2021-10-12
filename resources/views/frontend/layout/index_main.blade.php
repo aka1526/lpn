@@ -31,8 +31,7 @@
 
     <!-- JS library -->
 
-    <script src="/assets/js/jquery.js"></script>
-    <script src="/assets/js/popper.min.js"></script>
+
     <script src="/assets/js/appear.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/wow.min.js"></script>
@@ -44,9 +43,11 @@
     <script src="/assets/js/odometer.js"></script>
     
  
-    <script src="assets/js/parallax-scroll.js"></script>
-    <script src="assets/js/jquery.nice-select.min.js"></script>
-    <script src="assets/js/typer.js"></script>
+    <script src="/assets/js/parallax-scroll.js"></script>
+    <script src="/assets/js/jquery.nice-select.min.js"></script>
+    <script src="/assets/js/typer.js"></script>
+
+    
     <script src="/assets/js/custom.js"></script>
 
     @yield('js')

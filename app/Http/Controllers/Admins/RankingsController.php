@@ -331,7 +331,7 @@ class RankingsController extends Controller
                 , 'created_by' => $created_by
                 , 'updated_by' => $created_by
                 , 'created_at' => Carbon::now()
-                , 'updated_at' => Carbon::now(),
+                , 'updated_at' => Carbon::now()
 
             ]);
 
