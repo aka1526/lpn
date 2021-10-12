@@ -72,6 +72,7 @@ class NewsletterController extends Controller
             , 'news_by_os'=> $news_by_os
             , 'news_member_id'=>  $useruid
             , 'news_status'=> 'Y'
+            ,'msg_inout' =>'IN'
             , 'created_by' => $created_by
             , 'updated_by' => $created_by
             , 'created_at' => Carbon::now()
@@ -121,6 +122,7 @@ class NewsletterController extends Controller
               , 'news_by_os'=> $news_by_os
               , 'news_member_id'=> $useruid 
               , 'news_status'=> 'Y'
+              ,'msg_inout'=>'IN'
               , 'created_by' => $created_by
               , 'updated_by' => $created_by
               , 'created_at' => Carbon::now()

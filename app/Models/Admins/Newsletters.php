@@ -30,6 +30,7 @@ class Newsletters extends Model
         , 'news_by_os'
         , 'news_member_id'
         , 'news_status'
+        , 'msg_inout'
         , 'created_by'
         , 'updated_by'
         , 'created_at'
