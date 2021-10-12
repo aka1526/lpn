@@ -77,7 +77,7 @@ class NewsletterController extends Controller
             , 'created_at' => Carbon::now()
             , 'updated_at' => Carbon::now()
         ]);
-        return redirect()->back()->with('message', 'Thank You For Message!');  
+        return redirect()->back()->with('message', 'Thank You For Subscribing!');  
      }
 
      public function contact(Request $request){
@@ -126,7 +126,7 @@ class NewsletterController extends Controller
               , 'created_at' => Carbon::now()
               , 'updated_at' => Carbon::now()
           ]);
-          return redirect()->back()->with('message', 'Thank You For Subscribing!');  
+          return redirect()->back()->with('message', 'Thank you Messages!');  
        }
      
 
