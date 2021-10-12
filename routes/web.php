@@ -22,6 +22,8 @@ use App\Http\Controllers\Admins\MemberkhansController;
 use App\Http\Controllers\Admins\RankingsController;
 use App\Http\Controllers\Admins\HalloffameController;
 use App\Http\Controllers\Admins\OrganizationsController;
+use App\Http\Controllers\Admins\SubscribeController;
+
 
 
 ###### frontend ###################
@@ -173,6 +175,11 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/aboutus/update', [AboutusController::class, 'update'])->name('aboutus.update');
  Route::post('/pageadmin/aboutus/delete', [AboutusController::class, 'delete'])->name('aboutus.delete');
  Route::post('/pageadmin/aboutus/upload', [AboutusController::class, 'uploadimg'])->name('aboutus.uploadimg');
+ 
+ Route::get('/pageadmin/subscribe', [SubscribeController::class, 'index'])->name('subscribe.index');
+
+ Route::post('/pageadmin/subscribe/delete', [SubscribeController::class, 'delete'])->name('subscribe.delete');
+ 
  
 
  
