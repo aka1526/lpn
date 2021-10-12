@@ -112,7 +112,7 @@
                                             </tr>
                                         @endforeach
 
-                                    </tbody>
+                                    </tbody> 
                                 </table>
                                 <div class="pt-2">
                                     {{ $Newsletters ->links('pagination.default', ['paginator' => $Newsletters, 'link_limit' => $Newsletters->perPage()]) }}
