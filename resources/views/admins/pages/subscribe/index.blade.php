@@ -34,7 +34,7 @@
                         <div class="card-header tx-medium bd-0 text-white bg-primary ">
                             <div class="d-flex justify-content-between">
                                 <h4 class="card-title mg-b-0 text-white">
-                                    <i class="fas fa-book-medical"></i> Subscribe Page
+                                    <i class="fas fa-book-medical"></i> Mail Subscribe Page
                                 </h4>
 
                                 {{-- <div class="d-flex my-xl-auto right-content">
