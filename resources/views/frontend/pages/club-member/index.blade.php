@@ -32,6 +32,14 @@
                                 </div>
 
                              <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group mb-2">
+                                        <input type="text" id="search" name="search" class="form-control" value="{{ Request::get('search') }}" placeholder="Searching.....">
+                                        <span class="input-group-append">
+                                            <button class="btn ripple btn-primary btn-search" type="button">Search</button>
+                                        </span>
+                                    </div>
+                                </div>
                                  <div class="col-12">
                                     <table class="table table-striped table-bordered mb-0 text-sm-nowrap text-lg-nowrap text-xl-nowrap">
 										<thead>
@@ -97,4 +105,18 @@
 		<!-- custom js -->
 		<script src="../../assets/js/custom.js"></script>
 		<script src="../../assets/js/jquery.vmap.sampledata.js"></script> --}}
+
+        
+<script>
+    $(document).on('click', '.btn-search', function() {
+        var search = $('#search').val();
+        var type = $('#type').val();
+        location.href = "/club-member?search=" + search; //redirection
+
+        
+
+    });
+</script>  
+
+        
 @endsection

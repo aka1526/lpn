@@ -155,6 +155,9 @@
                             <ul class="sub-menu">
                                 <li aria-haspopup="true"><a href="{{ route('news.home') }}" class="slide-item">
                                         News Home</a></li>
+                                       
+                                <li aria-haspopup="true"><a href="{{ route('news.catalog') }}" class="slide-item">
+                                            News catalog</a></li>      
                                 <li aria-haspopup="true"><a href="{{ route('news.index') }}" class="slide-item">
                                         News item</a></li>
 

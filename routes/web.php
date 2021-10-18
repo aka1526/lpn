@@ -35,6 +35,8 @@ Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('fn.aboutus');
 Route::get('/aboutus/{url}', [HomeController::class, 'aboutus_page'])->name('fn.aboutus_page');
 
 Route::get('/news', [HomeController::class, 'news'])->name('fn.news');
+Route::get('/news/detail/{detail}', [HomeController::class, 'news_detail'])->name('fn.news.detail');
+
 
 Route::get('/members', [HomeController::class, 'members'])->name('fn.members');
 Route::get('/members/teachers', [HomeController::class, 'members_teachers'])->name('fn.members.teachers');
@@ -190,10 +192,17 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/news/add', [NewsController::class, 'add'])->name('news.add');
  Route::post('/pageadmin/news/update', [NewsController::class, 'update'])->name('news.update');
  Route::post('/pageadmin/news/updatestatus', [NewsController::class, 'updatestatus'])->name('news.updatestatus');
- 
-
  Route::post('/pageadmin/news/delete', [NewsController::class, 'delete'])->name('news.delete');
  Route::post('/pageadmin/news/header', [NewsController::class, 'header'])->name('news.header'); 
+
+ Route::get('/pageadmin/news/catalog', [NewsController::class, 'catalog'])->name('news.catalog');
+ Route::get('/pageadmin/news/catalog/new', [NewsController::class, 'catalogNew'])->name('news.catalogNew');
+ Route::get('/pageadmin/news/catalog/edit/', [NewsController::class, 'catalogEdit'])->name('news.catalogEdit');
+
+ Route::post('/pageadmin/news/catalog/add', [NewsController::class, 'catalogAdd'])->name('news.catalogAdd');
+ Route::post('/pageadmin/news/catalog/delete', [NewsController::class, 'catalogDelete'])->name('news.catalogDelete');
+ Route::post('/pageadmin/news/catalog/updatestatus', [NewsController::class, 'catalogStatus'])->name('news.catalogStatus');
+ Route::post('/pageadmin/news/catalog/updates', [NewsController::class, 'catalogUpdate'])->name('news.catalogUpdate');
 
 
  Route::get('/pageadmin/members/prosonal', [MembersController::class, 'index'])->name('members.index');

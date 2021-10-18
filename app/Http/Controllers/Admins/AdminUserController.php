@@ -15,13 +15,15 @@ use Illuminate\Support\Str;
 use App\Models\Admins\User;
 use App\Models\Admins\Accessuid;
 
+use App\Models\Admins\Members;
+use App\Models\Admins\Khans;
 //use App\Http\Controllers\Admins\CheckLoginController;
 
 class AdminUserController extends Controller
 {
     protected  $paging = 10;
     protected  $useruid = '';
-
+    protected $username = '';
     
     public function GetUserUid(){
    
@@ -39,7 +41,7 @@ class AdminUserController extends Controller
         }
       
         $useruid = isset($user->uid) ? $user->uid :'';
-         
+        $this->username = isset($user->uid) ? $user->name : '';
         
          return $useruid ;
         }
@@ -56,10 +58,53 @@ class AdminUserController extends Controller
         if( $this->GetUserUid()==''){
             return  redirect(url('/pageadmin/adminlogin'))  ; 
           }
-   
-        $user = User::where('name', '!=', '')->orderBy('created_at')->paginate($this->paging);;
-      
-        return view('admins.pages.index', compact('user'));
+         $userAdmin= $this->username  ;
+         $totalMember =Members::where('member_status','Y')->count();
+         $totalMemberActive =Members::where('member_status','Y')->where('date_expiry','>',Carbon::now())->count();   
+         $totalMemberExp =Members::where('member_status','Y')->where('date_expiry','<=',Carbon::now())->count();   
+         $user_member =Members::where('member_status','Y')->where('user_type','=','MEMBERS')->count();    
+         $user_students =Members::where('member_status','Y')->where('user_type','=','STUDENTS')->count(); 
+         $user_teachers =Members::where('member_status','Y')->where('user_type','=','TEACHERS')->count(); 
+         $user = User::where('name', '!=', '')->orderBy('created_at')->paginate($this->paging);
+
+        
+
+         $user_countries =Members::select(DB::raw('count(*) as user_count,country_code,min(country_name)country_name'))
+            ->where('member_status','Y') 
+            ->groupBy('country_code')
+            ->orderby('user_count','desc')
+            ->take(10)
+            ->get(); 
+             
+
+//             $latestPosts = DB::table('posts')
+//                    ->select('user_id', DB::raw('MAX(created_at) as last_post_created_at'))
+//                    ->where('is_published', true)
+//                    ->groupBy('user_id');
+
+// $users = DB::table('users')
+//         ->joinSub($latestPosts, 'latest_posts', function ($join) {
+//             $join->on('users.id', '=', 'latest_posts.user_id');
+//         })->get();
+
+      $_students =Members::select(DB::raw('count(*) as user_count,khan_uid'))->where('member_status','Y')
+      ->where('user_type','=','STUDENTS')->groupBy('khan_uid'); 
+      $khan_students=Khans::where('khan_group','=','STUDENTS')
+        ->leftJoinSub($_students, 'members', function ($join) {
+              $join->on('khans.khan_uid', '=', 'members.khan_uid');
+           })->orderBY('khan_index')->get();
+
+    $_teachers =Members::select(DB::raw('count(*) as user_count,khan_uid'))->where('member_status','Y')
+    ->where('user_type','=','TEACHERS')->groupBy('khan_uid'); 
+    $khan_teachers=Khans::where('khan_group','=','TEACHERS')
+        ->leftJoinSub($_teachers, 'members', function ($join) {
+            $join->on('khans.khan_uid', '=', 'members.khan_uid');
+        })->orderBY('khan_index')->get();
+
+            
+        return view('admins.pages.dashboard.index', compact(
+            'user_member','user_students','user_teachers','user_countries','khan_students','khan_teachers',
+            'user','userAdmin','totalMember','totalMemberExp','totalMemberActive'));
     }
 
     public function user(Request $request)

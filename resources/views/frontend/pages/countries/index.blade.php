@@ -22,7 +22,7 @@
             <div class="yl-popular-course-content">
                 <div class="row">
                     @foreach ($Organizations as $item)
-                    <div class="owl-item " style="width: 370px; margin-right: 30px;">
+                    <div class="owl-item col-md-3 mb-2 mt-2" >
                         <div class="yl-blog-img-text">
                             <div class=" text-center">
                                 <img width="230px" class="flag" src="{{ '/assets/plugins/flag-icon-css/flags/4x3/'.$item->org_country_code.'.svg'}}"

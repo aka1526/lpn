@@ -40,7 +40,7 @@
                      
                       <form id="subscribe" name="subscribe" method="post" action="{{ route('fn.subscribe')}}">
                         @csrf
-                        <input type="email" id="email" name="email" placeholder="Your mail address">
+                        <input type="email" id="email" name="email" placeholder="Your mail address" required>
                          <button type="submit"><i class="far fa-paper-plane"></i></button>
                       </form>
                       {{-- <div class="yl-footer-social ul-li">

@@ -71,9 +71,20 @@ class HomeController extends Controller
     {
         $news = News::where('news_status', '=', 'Y')
             ->orderBy('news_datetime')->paginate(9);
-        return view('frontend.pages.news_index', compact('news'));
+        return view('frontend.pages.news.index', compact('news'));
 
     }
+
+    public function news_detail(Request $request,$detail=null){
+       //dd($detail);
+        $news = News::where('news_status', '=', 'Y')
+            ->where('news_url',$detail)->first();
+             
+        return view('frontend.pages.news.detail', compact('news'));
+
+    }
+    
+
 
     public function members(Request $request)
     {
@@ -307,9 +318,18 @@ class HomeController extends Controller
     public function club_member(Request $request)
     {
 
-        // $search='FEMALE';
-        $organizations = Organizations::where('org_status', 'Y')
-            ->orderBy('org_name')->paginate($this->paging);
+        $search = $request->search;
+      //  $organizations = Organizations::where('org_status', 'Y')
+       //     ->orderBy('org_name')->paginate($this->paging);
+         
+            $organizations = Organizations::where('org_status', 'Y')
+            ->where(function ($query) use ($search) {
+                if ($search != '') {
+                    $query->orwhere('org_name', 'like', '%' . $search . '%');
+                    $query->orwhere('org_country_name', 'like', '%' . $search . '%');
+                } 
+            })
+            ->orderBy('org_name')->paginate($this->paging);        
         return view('frontend.pages.club-member.index', compact('organizations'));
 
     }

@@ -44,7 +44,7 @@ style="background-image: url('/assets/img/ct-bg.jpg');">
                      </div>
                      <div class="yl-blog-title">
                         <h3>
-                           <a href="#">{{ $item->news_toppic }}</a> 
+                           <a href="/news/detail/{{ $item->news_url }}">{{ $item->news_toppic }}</a> 
                      </h3>
                      {!! $item->news_desc !!}
                      </div>

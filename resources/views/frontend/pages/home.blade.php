@@ -531,12 +531,19 @@
                   </div>
                   <div class="yl-blog-text yl-headline pera-content">
                      <div class="yl-blog-meta text-uppercase">
-                        <a href="#"><i class="far fa-user"></i> admin</a>
-                        <a href="#"><i class="far fa-folder-open"></i> training</a>
+                        
+                        @if ($itemNew->updated_by !='')
+                        <a href="#"><i class="far fa-user"></i> {{ $itemNew->updated_by }}</a>
+                        @endif
+
+                        @if ($itemNew->news_group !='')
+                        <a href="#"><i class="far fa-folder-open"></i> {{ $itemNew->news_group}}</a>
+                        @endif
+                      
                      </div>
                      <div class="yl-blog-title">
                         <h3>
-                           <a href="#">{{ $itemNew->news_toppic }}</a> 
+                           <a href="/news/detail/{{ $itemNew->news_url }}">{{ $itemNew->news_toppic }}</a> 
                      </h3>
                      {!! $itemNew->news_desc !!}
                      </div>
