@@ -438,7 +438,7 @@
 											<tr>
 												<th class="wd-lg-25p">NO</th>
 												<th class="wd-lg-25p tx-right">KHAN</th>
-												<th class="wd-lg-25p tx-right">TOTLA</th>
+												<th class="wd-lg-25p tx-right">TOTAL</th>
 												 
 											</tr>
 										</thead>
