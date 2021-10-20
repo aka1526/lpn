@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
        //  $schedule->command('CronJobSendMailSubscribe')->everyTenMinutes(); //10 นาที่
-        $schedule->command('SendMailSubscribe')->everyTwoMinutes(); //2 นาที่
+        $schedule->command('SendMailSubscribe')->everyTenMinutes(); //2 นาที่
       //  $schedule->exec("php artisan schedule:run >> schedule_logs.log")->everyTwoMinutes(); //2 นาที่
     }
 

@@ -20,6 +20,7 @@ class Mailsends extends Model
         , 'send_email'
         , 'send_uid_subject'
         , 'send_subject'
+        , 'send_subject_date'
         , 'send_type'
         , 'send_status'
         , 'created_by'
