@@ -315,4 +315,5 @@ Route::post('/pageadmin/mailsetup/add', [MailsetupController::class, 'add'])->na
 
  Route::get('/pageadmin/mailsubscribe', [MailsetupController::class, 'subscribe_index'])->name('mailsetup.subscribe.index');
  Route::post('/pageadmin/mailsubscribe/add', [MailsetupController::class, 'subscribe_add'])->name('mailsetup.subscribe.add');
+ Route::post('/pageadmin/mailsubscribe/test', [MailsetupController::class, 'MailSendSubscribeTest'])->name('mailsetup.subscribe.test');
  

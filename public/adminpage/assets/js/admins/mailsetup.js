@@ -179,4 +179,47 @@ $('.sendmail-subscribe').on('click', function(e) {
             $("#emailtest").focus();
         });
     }
+
+
+
+    var uid = $(this).data('uid');
+    var mailto = $("#emailtest").val();
+    var mail_subject = $("#mail_subject").val();
+    var msg_subscribe = $("#msg_subscribe").val();
+
+    var url = "/pageadmin/mailsubscribe/test";
+    $.ajax({
+        type: "post",
+        url: url,
+        data: {
+            uid: uid,
+            mailto: mailto,
+            mail_subject: mail_subject,
+            msg_subscribe: msg_subscribe,
+            "_token": $('meta[name=_token]').attr('content')
+        },
+        success: function(data) {
+            Swal.fire({
+                title: 'Send Mail Test Success.',
+                text: "",
+                icon: 'success',
+                showCancelButton: false,
+                timer: 1200,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+            });
+
+        },
+        error: function(xhr, status, error) {
+            var errMsg = '';
+            $.each(xhr.responseJSON.errors, function(key, item) {
+                errMsg += '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Error! </strong>' + item + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+
+            });
+
+            $("#errors").append(errMsg);
+        }
+
+    });
+
 });
