@@ -12,7 +12,8 @@
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "milon/barcode": "^8.0"
+        "milon/barcode": "^8.0",
+        "phpmailer/phpmailer": "^6.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -100,6 +100,9 @@
                                 <li aria-haspopup="true" class="sub-menu-sub"><a href="/pageadmin/members/prosonal">
                                         Prosonal Member</a>
                                     <ul class="sub-menu">
+                                        
+                                        <li aria-haspopup="true"><a href="/pageadmin/members/prosonal"
+                                            class="slide-item">Show All Membership</a></li>
                                         <li aria-haspopup="true"><a href="/pageadmin/members/prosonal/register"
                                                 class="slide-item">New Membership</a></li>
                                         <li aria-haspopup="true"><a href="/pageadmin/members/prosonal/renew"
@@ -240,6 +243,13 @@
                                 <li aria-haspopup="true">
                                     <a href="{{ route('menu.index') }}" class="slide-item">Menu List</a>
                                 </li>
+                                <li aria-haspopup="true">
+                                    <a href="{{ route('mailsetup.index') }}" class="slide-item">Mail Server Setup</a>
+                                </li>
+                                <li aria-haspopup="true">
+                                    <a href="{{ route('mailsetup.subscribe.index') }}" class="slide-item">Mail Subscribe Setup</a>
+                                </li>
+                               
 
 
                             </ul>

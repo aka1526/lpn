@@ -23,7 +23,7 @@ use App\Http\Controllers\Admins\RankingsController;
 use App\Http\Controllers\Admins\HalloffameController;
 use App\Http\Controllers\Admins\OrganizationsController;
 use App\Http\Controllers\Admins\SubscribeController;
-
+use App\Http\Controllers\Admins\MailsetupController;
 
 
 ###### frontend ###################
@@ -300,4 +300,19 @@ Route::post('/pageadmin/members/organizations/renew', [OrganizationsController::
  Route::post('/pageadmin/halloffame/updatestatus', [HalloffameController::class, 'updatestatus'])->name('halloffame.updatestatus');
  Route::post('/pageadmin/halloffame/delete', [HalloffameController::class, 'delete'])->name('halloffame.delete');
  Route::post('/pageadmin/halloffame/addlist', [HalloffameController::class, 'add_list'])->name('halloffame.add.list');
+ 
+
+ Route::get('/pageadmin/mailsetup', [MailsetupController::class, 'index'])->name('mailsetup.index');
+ Route::get('/pageadmin/mailsetup/new', [MailsetupController::class, 'new'])->name('mailsetup.new'); 
+ Route::get('/pageadmin/mailsetup/edit/{uid}', [MailsetupController::class, 'get'])->name('mailsetup.get');
+ Route::get('/pageadmin/mailsetup/mailtest', [MailsetupController::class, 'MailSendTest'])->name('mailsetup.mailtest');
+
+Route::post('/pageadmin/mailsetup/add', [MailsetupController::class, 'add'])->name('mailsetup.add');
+ Route::post('/pageadmin/mailsetup/store', [MailsetupController::class, 'store'])->name('mailsetup.store');
+ Route::post('/pageadmin/mailsetup/update', [MailsetupController::class, 'update'])->name('mailsetup.update');
+ Route::post('/pageadmin/mailsetup/status', [MailsetupController::class, 'status'])->name('mailsetup.status');
+ Route::post('/pageadmin/mailsetup/delete', [MailsetupController::class, 'delete'])->name('mailsetup.delete');
+
+ Route::get('/pageadmin/mailsubscribe', [MailsetupController::class, 'subscribe_index'])->name('mailsetup.subscribe.index');
+ Route::post('/pageadmin/mailsubscribe/add', [MailsetupController::class, 'subscribe_add'])->name('mailsetup.subscribe.add');
  

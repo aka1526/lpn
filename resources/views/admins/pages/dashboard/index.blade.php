@@ -437,7 +437,7 @@
 										<thead>
 											<tr>
 												<th class="wd-lg-25p">NO</th>
-												<th class="wd-lg-25p tx-right">KHAN</th>
+												<th class="wd-lg-25p tx-left">KHAN</th>
 												<th class="wd-lg-25p tx-right">TOTAL</th>
 												 
 											</tr>
@@ -452,7 +452,12 @@
 											</tr>
 											@endforeach
 											
-											 
+											<tr>
+												<td>- </td>
+												<td class="tx-left tx-medium tx-inverse"> -</td>
+												<td class="tx-right tx-medium tx-inverse">- </td>
+												 
+											</tr>
 										</tbody>
 									</table>
 								</div>
