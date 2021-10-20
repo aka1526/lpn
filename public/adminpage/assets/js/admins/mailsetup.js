@@ -223,3 +223,104 @@ $('.sendmail-subscribe').on('click', function(e) {
     });
 
 });
+
+
+
+$('.btn-status-subscribe').on('click', function(e) {
+
+    e.preventDefault();
+    var uid = $(this).data('uid');
+    var status = $(this).data('status');
+    var url = "/pageadmin/mailsubscribe/status";
+
+    if (status == 'Y') {
+        var mtext = 'Yes, Enable it!';
+    } else {
+
+        var mtext = 'Yes, Disable it!';
+
+    }
+
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to Disable this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: mtext
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "post",
+                url: url,
+                data: { uid: uid, status: status, "_token": $('meta[name=_token]').attr('content') },
+                success: function(data) {
+
+                    if (data.success) {
+
+                        Swal.fire({
+                            title: 'Update Status Success.',
+                            text: "",
+                            icon: 'success',
+                            showCancelButton: false,
+                            timer: 1200,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                        }).then(() => {
+                            location.reload();
+                        });
+                    }
+                }
+
+            });
+        }
+    })
+
+});
+
+$('.btn-delete-subscribe').on('click', function() {
+
+    var uid = $(this).data('uid');
+    var url = "/pageadmin/mailsubscribe/delete";
+    var mtext = 'Yes, Delete it!';
+
+    Swal.fire({
+        title: 'Are you sure?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: mtext
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "post",
+                url: url,
+                data: { uid: uid, "_token": $('meta[name=_token]').attr('content') },
+                success: function(data) {
+
+                    if (data.success) {
+
+                        Swal.fire({
+                            title: 'Delete  Success.',
+                            text: "",
+                            icon: 'success',
+                            showCancelButton: false,
+                            timer: 1200,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                        }).then(() => {
+                            location.reload();
+                        });
+                    }
+                }
+
+            });
+        }
+    });
+
+
+});

@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use PHPMailer\PHPMailer\PHPMailer;
-
+use DB;
 class CronJobSendMailSubscribe extends Command
 {
     /**
@@ -58,6 +58,9 @@ class CronJobSendMailSubscribe extends Command
 
         $date_start = Carbon::now()->format('Y-m-d');
 
+        $uid_subject = "";
+        $uid_subject_date = "";
+
         foreach ($MailList as $email) {
 
             $mailsubscribe = Mailsubscribe::where('email_date_start', '<=', $date_start)
@@ -65,20 +68,21 @@ class CronJobSendMailSubscribe extends Command
 
             if (count($mailsubscribe) > 0) {
 
-                //  $this->info('Successfully sent daily quote to everyone.');
                 foreach ($mailsubscribe as $subscribe) {
+                    $uid_subject = $subscribe->email_uid;
+                    $uid_subject_date = $subscribe->email_date_start;
 
-                    $CountMail = Mailsends::where('send_uid_subject', '=', $subscribe->email_uid)
-                        ->where('send_subject_date', '=', $subscribe->email_date_start)
+                    $CountMail = Mailsends::where('send_uid_subject', '=', $uid_subject)
+                        ->where('send_subject_date', '=', $uid_subject_date)
                         ->where('send_email', '=', $email->news_email)->count();
                     if ($CountMail == 0) {
 
                         Mailsends::insert([
                             'send_uid' => $this->NewUid()
                             , 'send_email' => $email->news_email
-                            , 'send_uid_subject' => $subscribe->email_uid
+                            , 'send_uid_subject' => $uid_subject
                             , 'send_subject' => $subscribe->email_subject
-                            , 'send_subject_date' => $subscribe->email_date_start
+                            , 'send_subject_date' => $uid_subject_date
                             , 'send_type' => 'Subscribe'
                             , 'send_status' => 'N'
                             , 'created_by' => 'AUTO'
@@ -88,10 +92,10 @@ class CronJobSendMailSubscribe extends Command
                         ]);
                     }
 
-                    $email_total = Mailsends::where('send_uid_subject', '=', $subscribe->email_uid)
-                        ->where('send_subject_date', '=', $subscribe->email_date_start)->count();
+                    $email_total = Mailsends::where('send_uid_subject', '=', $uid_subject)
+                        ->where('send_subject_date', '=', $uid_subject_date)->count();
 
-                    Mailsubscribe::where('email_date_start', '=', $subscribe->email_date_start)->update([
+                    Mailsubscribe::where('email_date_start', '=', $uid_subject_date)->update([
                         'email_total' => $email_total,
 
                     ]);
@@ -102,40 +106,64 @@ class CronJobSendMailSubscribe extends Command
 
         }
 
-            $mailsubscribe = Mailsubscribe::where('email_date_start', '<=', $date_start)
-                ->where('email_status', '=', 'Y')
-                ->orderBy('updated_at')->get();
+        $mailsubscribe = Mailsubscribe::where('email_date_start', '<=', $date_start)
+            ->where('email_status', '=', 'Y')
+            ->orderBy('updated_at')->take(1)->get();
 
-            foreach ($mailsubscribe as $subscribe) {
+        foreach ($mailsubscribe as $subscribe) {
 
-                $mailto = Mailsends::where('send_uid_subject', '=', $subscribe->email_uid)
-                    ->where('send_subject_date', '=', $subscribe->email_date_start)
-                    ->where('send_status', '=', 'N')->first();
-                if (isset($mailto)) {
+            $uid_subject = $subscribe->email_uid;
+            $uid_subject_date = $subscribe->email_date_start;
 
-                    $send_uid = $mailto->send_uid;
-                    $send_to_mail = $mailto->send_email;
-                    $send_subject = $subscribe->email_subject;
-                    $send_email_body = $subscribe->email_body;
+            $mailto = Mailsends::where('send_uid_subject', '=', $uid_subject)
+                ->where('send_subject_date', '=', $uid_subject_date)
+                ->where('send_status', '=', 'N')->first();
 
-                    $action = $this->MailSend($send_to_mail, $send_subject, $send_email_body);
-                    if ($action) {
-                       // $this->info('Successfully sent daily quote to =>' . $send_uid . '::' . $send_to_mail);
-                        Mailsends::where('send_uid', '=', $send_uid)->update([
-                            'send_status' => 'Y'
-                            , 'updated_at' => Carbon::now(),
-                        ]);
-                    }
-                    return 0;
+            $this->info('Successfully  =>' . $uid_subject . ' =>' . $uid_subject_date);
+            if (isset($mailto)) {
+
+                $send_uid = $mailto->send_uid;
+                $send_to_mail = $mailto->send_email;
+                $send_subject = $subscribe->email_subject;
+                $send_email_body = $subscribe->email_body;
+
+                $action = $this->MailSend($send_to_mail, $send_subject, $send_email_body);
+                if ($action) {
+
+                    Mailsends::where('send_uid', '=', $send_uid)->update([
+                        'send_status' => 'Y'
+                        , 'updated_at' => Carbon::now(),
+                    ]);
+
+                    $email_send_total = Mailsends::where('send_uid_subject', '=', $uid_subject)
+                        ->where('send_subject_date', '=', $uid_subject_date)
+                        ->where('send_status', '=', 'Y')->count();
+
+                    Mailsubscribe::where('email_uid', '=', $uid_subject)
+                        ->where('email_date_start', '=', $uid_subject_date)->update([
+                        "email_send_total" => $email_send_total,
+                    ]);
+
                 }
-
+                DB::statement(" update mailsubscribe set email_status='N' 
+                where email_total=email_send_total and email_send_total>0 ;");
+                // Mailsubscribe::where('email_uid','!=','')
+                // ->where('email_send_total','>',0)->update([
+                //     "email_status" => "N"
+                // ]);
+                return $action;
             }
 
-  
+        }
+        DB::statement(" update mailsubscribe set email_status='N' 
+            where email_total=email_send_total and email_send_total>0 ;");
 
-        //$this->MailSend('akachai@satangapp.in', 'Test SendSubscribe','Test SendSubscribe');
+        // Mailsubscribe::where('email_uid','!=','')
 
-        //$this->info('Successfully sent daily quote to everyone.');
+        //         ->where('email_send_total','>',0)->update([
+        //             "email_status" => "N"
+        //         ]);
+
     }
 
     public function MailSend($to = '', $Subject = '', $msgBody = '')

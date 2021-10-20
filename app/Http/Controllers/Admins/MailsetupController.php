@@ -449,5 +449,46 @@ class MailsetupController extends Controller
 
     }
      
+    public function Subscribestatus(Request $request )
+    {
+
+        if( $this->GetUserUid()==''){
+            return  redirect(url('/pageadmin/adminlogin'))  ; 
+          }
+          
+            $uid =   $request->uid ;
+            $status =   $request->status ;
+            $action=false;
+          
+            $action = Mailsubscribe::where('email_uid','=',$uid )->update([
+                'email_status' => $status 
+            ]);
+
+     return response()->json(['success' => $action], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
+
+    }
+
+    public function Subscribedelete(Request $request )
+    {
+
+        if( $this->GetUserUid()==''){
+            return  redirect(url('/pageadmin/adminlogin'))  ; 
+          }
+          
+            $uid =   $request->uid ;
+            
+            $action=false;
+          
+            $action = Mailsubscribe::where('email_uid','=',$uid )->delete();
+
+     return response()->json(['success' => $action], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
+
+    }
+    
    
+    
+
+
 }

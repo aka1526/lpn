@@ -149,28 +149,28 @@
                                     
                                     <td class="text-center">{{  $row->email_total }}</td>
                                     <td class="text-center">{{  $row->email_send_total }}</td>
-                                    <td class="text-center">{{ $row->email_tota- $row->email_send_total }}</td>
+                                    <td class="text-center">{{ ($row->email_total - $row->email_send_total) }}</td>
                                     <td class="text-center">{{  $row->email_status }}</td>
                                     <td class="text-center">{{ $row->updated_at }}</td>
                                     <td class="text-center">{{ $row->updated_by }}</td>
                                     <td class="text-center">
                                         <div class="btn-icon-list">
-
+          
                                             <button
-                                                class="btn    btn-icon btn-sm btn-disable 
-                                                {{ $row->member_status == 'Y' ? 'bg-secondary' : 'bg-success' }} "
-                                                data-uid="{{ $row->	email_uid  }}"
-                                                data-status="{{ $row->member_status == 'Y' ? 'N' : 'Y' }}"
+                                                class="btn    btn-icon btn-sm btn-status-subscribe 
+                                                {{ $row->email_status != 'Y' ? 'bg-secondary' : 'bg-success' }} "
+                                                data-uid="{{ $row->email_uid  }}"
+                                                data-status="{{ $row->email_status != 'Y' ? 'Y' : 'N' }}"
                                                 data-toggle="tooltip" title="Status">  
-                                                <i class="{{ $row->member_status == 'Y' ? 'fas fa-eye-slash' : 'fas fa-eye' }}"></i> 
+                                                <i class="{{ $row->email_status != 'Y' ? 'fas fa-ban' : 'fas fa-paper-plane' }}"></i> 
                                             </button>
                                                     
-                                            <a href="/pageadmin/mailsubscribe?search={{ $row->	email_uid }}" 
+                                            <a href="/pageadmin/mailsubscribe?search={{ $row->email_uid }}" 
                                                 class="btn btn-indigo btn-icon btn-sm" data-toggle="tooltip"                                                           
                                                 title="Edit"> <i class="fa fa-edit"></i></a>
 
-                                            <button class="btn btn-danger btn-icon btn-sm btn-delete"
-                                                data-uid="{{ $row->	email_uid  }}" data-toggle="tooltip"
+                                            <button class="btn btn-danger btn-icon btn-sm btn-delete-subscribe"
+                                                data-uid="{{ $row->email_uid  }}" data-toggle="tooltip"
                                                 title="Delete"><i class="far fa-trash-alt"></i></button>
 
                                    
