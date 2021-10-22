@@ -72,7 +72,7 @@ style="background-image: url('/assets/img/ct-bg.jpg');">
                      <div class="ed-more-event-content">
                         <div class="row">
                            @foreach ($randomnews as $item)
-                           <div class="col-lg-4 col-md-6">
+                           <div class="col-lg-4 col-md-6"> 
                               <div class="yl-event-innerbox yl-headline">
                                  <div class="yl-event-img">
                                     <img src="{{ '/images/news/'. $item->news_url.'/'.$item->news_img}}" alt="">

@@ -39,8 +39,14 @@ style="background-image: url('/assets/img/ct-bg.jpg');">
                   </div>
                   <div class="yl-blog-text yl-headline pera-content">
                      <div class="yl-blog-meta text-uppercase">
-                        <a href="#"><i class="far fa-user"></i> admin</a>
-                        <a href="#"><i class="far fa-folder-open"></i> training</a>
+                        @if ($item->news_group !='')
+                        <a href="/news/detail/{{ $item->news_url }}"><i class="far fa-folder-open"></i> {{ $item->news_group}}</a>
+                        @endif
+                        
+                        @if ($item->news_location !='')
+                        <a href="/news/detail/{{ $item->news_url }}"><i class="fas fa-map-marker-alt"></i> {{ $item->news_location}}</a>
+                        @endif
+                      
                      </div>
                      <div class="yl-blog-title">
                         <h3>

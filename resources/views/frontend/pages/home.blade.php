@@ -539,6 +539,10 @@
                         @if ($itemNew->news_group !='')
                         <a href="#"><i class="far fa-folder-open"></i> {{ $itemNew->news_group}}</a>
                         @endif
+                        
+                        @if ($itemNew->news_location !='')
+                        <a href="#"><i class="fas fa-map-marker-alt"></i> {{ $itemNew->news_location}}</a>
+                        @endif
                       
                      </div>
                      <div class="yl-blog-title">
