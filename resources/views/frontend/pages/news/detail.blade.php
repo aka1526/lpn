@@ -53,11 +53,11 @@ style="background-image: url('/assets/img/ct-bg.jpg');">
                                     <span> {{  date('H:i A', strtotime($news->news_datetime))}}</span>
                                  </div>
                                  <div class="ed-inner-widget">
-                                    <div class="ed-inner-title"><i class="far fa-address-book"></i> Catalog:</div>
+                                    <div class="ed-inner-title"><i class="far fa-folder-open"></i> Catalog:</div>
                                     <span> {{ $news->news_group}}</span>
                                  </div>
                                  <div class="ed-inner-widget">
-                                    <div class="ed-inner-title"><i class="fas fa-map-marker-alt"></i> Catalog:</div>
+                                    <div class="ed-inner-title"><i class="fas fa-map-marker-alt"></i> Location:</div>
                                     <span> {{ $news->news_location}}</span>
                                  </div>
                               </div>
