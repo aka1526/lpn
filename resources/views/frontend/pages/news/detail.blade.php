@@ -31,7 +31,7 @@ style="background-image: url('/assets/img/ct-bg.jpg');">
                      <div class="col-lg-9">
                         <div class="event-details-text-wrap">
                            <div class="event-details-img">
-                              <img src="assets/img/event/ed1.jpg" alt="">
+                              <img src="{{ '/images/news/'. $news->news_url.'/'.$news->news_img}}" alt="">
                            </div>
                            <div class="event-details-text yl-headline pera-content">
                               <h3>{{ $news->news_toppic}}</h3>
@@ -46,45 +46,24 @@ style="background-image: url('/assets/img/ct-bg.jpg');">
                               <div class="event-details-widget-item">
                                  <div class="ed-inner-widget">
                                     <div class="ed-inner-title"><i class="fas fa-calendar-alt"></i> Date:</div>
-                                    <span>December 10, 2020</span>
+                                    <span> {{   date('d-m-Y', strtotime($news->news_datetime)) }}</span>
                                  </div>
                                  <div class="ed-inner-widget">
-                                    <div class="ed-inner-title"><i class="fas fa-clock"></i> Time:</div>
-                                    <span>10.00am - 02.00pm</span>
+                                    <div class="ed-inner-title"><i class="fas fa-clock"></i>Create Time:</div>
+                                    <span> {{  date('H:i A', strtotime($news->news_datetime))}}</span>
                                  </div>
                                  <div class="ed-inner-widget">
-                                    <div class="ed-inner-title"><i class="fas fa-map-marker-alt"></i> Location:</div>
-                                    <span>ThemeXriver HQ
-                                    Khulna, BD</span>
+                                    <div class="ed-inner-title"><i class="far fa-address-book"></i> Catalog:</div>
+                                    <span> {{ $news->news_group}}</span>
                                  </div>
                                  <div class="ed-inner-widget">
-                                    <div class="ed-inner-title"><i class="fas fa-dollar-sign"></i> Fees:</div>
-                                   <b>Free</b>
+                                    <div class="ed-inner-title"><i class="fas fa-map-marker-alt"></i> Catalog:</div>
+                                    <span> {{ $news->news_location}}</span>
                                  </div>
                               </div>
-                              <a class="ed-book-btn text-center" href="#">Book your seat</a>
+                              
                            </div>
-                           <div class="yl-event-widget ul-li yl-headline">
-                              <h3 class="widget-title">Organizer</h3>
-                              <div class="event-details-widget-item">
-                                 <div class="ed-inner-widget">
-                                    <div class="ed-inner-title"><i class="fas fa-calendar-alt"></i> Name:</div>
-                                    <span>ThemeXriver</span>
-                                 </div>
-                                 <div class="ed-inner-widget">
-                                    <div class="ed-inner-title"><i class="fas fa-map-marker-alt"></i> Address:</div>
-                                    <span>100, Jassore Raod, Khulna</span>
-                                 </div>
-                                 <div class="ed-inner-widget">
-                                    <div class="ed-inner-title"><i class="fas fa-envelope"></i> Email:</div>
-                                    <span>hello@themexriver.com</span>
-                                 </div>
-                                 <div class="ed-inner-widget">
-                                    <div class="ed-inner-title"><i class="fas fa-phone"></i> Phone:</div>
-                                    <span>+880 1234 567890 </span>
-                                 </div>
-                              </div>
-                           </div>
+                           
                         </div>
                      </div>
                   </div>
@@ -92,60 +71,27 @@ style="background-image: url('/assets/img/ct-bg.jpg');">
                      <h3>More Events Like This</h3>
                      <div class="ed-more-event-content">
                         <div class="row">
+                           @foreach ($randomnews as $item)
                            <div class="col-lg-4 col-md-6">
                               <div class="yl-event-innerbox yl-headline">
                                  <div class="yl-event-img">
-                                    <img src="assets/img/event/ev1.jpg" alt="">
+                                    <img src="{{ '/images/news/'. $item->news_url.'/'.$item->news_img}}" alt="">
                                  </div>
                                  <div class="yl-event-text position-relative">
                                     <div class="event-date text-center">
-                                       09
-                                       <span>dec</span>
+                                       {{   date('d', strtotime($item->news_datetime)) }}
+                                       <span>{{   date('M', strtotime($item->news_datetime)) }}</span>
                                     </div>
-                                    <h3><a href="#">A day long workshop on music production</a></h3>
+                                    <h3><a href="/news/detail/{{ $item->news_url}}">{{ $item->news_toppic}}</a></h3>
                                     <div class="yl-event-meta">
-                                       <a href=""><i class="fas fa-map-marker-alt"></i> Florida University</a>
-                                       <a href=""><i class="far fa-clock"></i> 10.00am - 12.00pm</a>
+                                       <a href=""><i class="fas fa-map-marker-alt"></i> {{ $item->news_location}}</a>
+                                       <a href=""><i class="far fa-clock"></i> {{  date('d-m-Y H:i A', strtotime($item->news_datetime))}}</a>
                                     </div>
                                  </div>
                               </div>
                            </div>
-                           <div class="col-lg-4 col-md-6">
-                              <div class="yl-event-innerbox yl-headline">
-                                 <div class="yl-event-img">
-                                    <img src="assets/img/event/ev2.jpg" alt="">
-                                 </div>
-                                 <div class="yl-event-text position-relative">
-                                    <div class="event-date text-center">
-                                       09
-                                       <span>dec</span>
-                                    </div>
-                                    <h3><a href="#">Put your hands dirty with user experience</a></h3>
-                                    <div class="yl-event-meta">
-                                       <a href=""><i class="fas fa-map-marker-alt"></i> Florida University</a>
-                                       <a href=""><i class="far fa-clock"></i> 10.00am - 12.00pm</a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-lg-4 col-md-6">
-                              <div class="yl-event-innerbox yl-headline">
-                                 <div class="yl-event-img">
-                                    <img src="assets/img/event/ev3.jpg" alt="">
-                                 </div>
-                                 <div class="yl-event-text position-relative">
-                                    <div class="event-date text-center">
-                                       09
-                                       <span>dec</span>
-                                    </div>
-                                    <h3><a href="#">Hadns on workshop to starting a new course</a></h3>
-                                    <div class="yl-event-meta">
-                                       <a href=""><i class="fas fa-map-marker-alt"></i> Florida University</a>
-                                       <a href=""><i class="far fa-clock"></i> 10.00am - 12.00pm</a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
+                           @endforeach
+                           
                         </div>
                      </div>
                   </div>

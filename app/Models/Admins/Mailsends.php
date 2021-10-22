@@ -21,6 +21,8 @@ class Mailsends extends Model
         , 'send_uid_subject'
         , 'send_subject'
         , 'send_subject_date'
+        , 'send_member_no'
+        , 'send_member_name'
         , 'send_type'
         , 'send_status'
         , 'created_by'
@@ -28,6 +30,7 @@ class Mailsends extends Model
         , 'created_at'
         , 'updated_at'
     ];
+ 
 }
 
  

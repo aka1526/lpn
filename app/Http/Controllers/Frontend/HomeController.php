@@ -79,8 +79,10 @@ class HomeController extends Controller
        //dd($detail);
         $news = News::where('news_status', '=', 'Y')
             ->where('news_url',$detail)->first();
+       $randomnews = News::where('news_status', '=', 'Y')
+            ->where('news_url','!=',$detail)->inRandomOrder(3)->get();
              
-        return view('frontend.pages.news.detail', compact('news'));
+        return view('frontend.pages.news.detail', compact('news','randomnews'));
 
     }
     

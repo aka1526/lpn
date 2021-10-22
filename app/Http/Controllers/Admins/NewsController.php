@@ -76,6 +76,7 @@ class NewsController extends Controller
                 'pageheader_title' => 'required|string',
                 'pageheader_header' => 'required|string',
                 'pageheader_detail' => 'required|string',
+                
                
             ],
             [
@@ -161,12 +162,15 @@ class NewsController extends Controller
             [
 
                 'news_toppic' => 'required|string|unique:news,news_toppic',
-                
+                'news_group' => 'required',
+                'news_location' => 'required',
                
             ],
             [
                 'news_toppic.required' => 'Toppic Name Is Required ',
                 'news_toppic.unique' => 'Toppic Name Is Duplicate ',
+                'news_group.required' => 'Location Is Required ',
+                'news_location.required' => 'Location Is Required ',
                   ]
         );
 
@@ -181,6 +185,7 @@ class NewsController extends Controller
             'news_uid'=> $uid,
             'news_index' => $news_index,
             'news_group' => $request->news_group,
+            'news_location' => $request->news_location,
             'news_toppic' =>$request->news_toppic,
             'news_desc' =>$request->news_desc,
             'news_url'  => $url ,
@@ -224,6 +229,21 @@ class NewsController extends Controller
             return  redirect(url('/pageadmin/adminlogin'))  ; 
           }
 
+          $fields = $request->validate(
+            [
+
+                'news_toppic' => 'required',
+                'news_group' => 'required',
+                'news_location' => 'required',
+               
+            ],
+            [
+                'news_toppic.required' => 'Toppic Name Is Required ',
+                'news_group.required' => 'Location Is Required ',
+                'news_location.required' => 'Location Is Required ',
+                  ]
+        );
+
           $uid = $request->news_uid;
           $url= $request->news_url !='' ? $request->news_url  :  str_replace(' ', '-', $request->news_toppic)  ;
           $url= strtolower($url);
@@ -232,6 +252,7 @@ class NewsController extends Controller
             $action = News::where('news_uid','=',$uid)->update([
                 'news_toppic' =>$request->news_toppic,
                 'news_group' =>$request->news_group,
+                'news_location' =>$request->news_location,
                 'news_desc' =>$request->news_desc,
                 'news_url'  => $url ,
                 'news_datetime' =>Carbon::parse($request->news_datetime)->format('Y-m-d H:i')  ,

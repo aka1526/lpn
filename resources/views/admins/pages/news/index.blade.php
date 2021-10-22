@@ -53,8 +53,11 @@
                                         <tr class="bg-info ">
                                             <th class="text-center">NO</th>
                                             <th>image</th>
+                                            <th>Catalog</th>
                                             <th>Toppic</th>
+                                           
                                             <th>Description</th>
+                                            <th>Location</th>
                                             <th>Even-Time</th>
                                             
                                             <th class="text-center">Status</th>
@@ -67,10 +70,11 @@
                                                 <th class="text-center" scope="row"> {{ $news->firstItem() + $key }}
                                                 </th>
                                                 <td><img src="{{ '/images/news/'.$row->news_url.'/thumbnails/'. $row->news_img }}" width="110px" alt=""></td>
-                                               
+                                                <td>{{ $row->news_group }}</td>
                                                 <td>{{ $row->news_toppic }}</td>
-
+                                               
                                                 <td>{!! $row->news_desc !!}</td>
+                                                <td>{{ $row->news_location }}</td>
                                                 <td>{{  \Carbon\Carbon::parse($row->news_datetime)->diffForHumans() }}</td>
                                                  
                                               

@@ -54,7 +54,25 @@
 
                         </div>
                         <div class="card-body">
-                            <div id="errors"></div>
+                            
+
+                            @if ($errors->any())
+                            <div class="card custom-card" id="dismiss-alerts">
+                                <div class="card-body">
+                                        @foreach ($errors->all() as $error)
+                                            
+                                        <div class="alert alert-solid-danger mg-b-0" role="alert">
+                                            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                                            <span aria-hidden="true">&times;</span></button>
+                                            <strong>Oh snap!</strong> {{ $error }}
+                                        </div>
+
+                                         
+                                            
+                                        @endforeach
+                                    </div>
+                                </div>
+                                @endif
                         {{-- Start Row --}}
                         <div class="row row-sm">
                             
@@ -78,6 +96,13 @@
                                 </div>
                             </div>
 
+                            <div class="col-9">
+                                <div class="form-group ">
+                                    <label for="news_location">Location <span class="tx-danger">*</span></label>
+                                    <input type="text" class="form-control" id="news_location" name="news_location"
+                                        placeholder="Enter Location">
+                                </div>
+                            </div>
                         </div>
 
                         {{-- End Row --}}

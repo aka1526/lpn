@@ -18,7 +18,8 @@ class News extends Model
     protected $fillable = [
         'news_uid',
         'news_index',
-        'news_group', 
+        'news_group',
+        'news_location', 
         'news_toppic',
         'news_desc',
         'news_url',

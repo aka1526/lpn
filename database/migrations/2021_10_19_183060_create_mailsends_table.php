@@ -19,6 +19,8 @@ class CreateMailSendsTable extends Migration
         $table->string('send_email',200)->nullable()->default('');
         $table->string('send_uid_subject',50)->nullable()->default('');
         $table->string('send_subject',200)->nullable()->default('');
+        $table->string('send_member_no',50)->nullable()->default('');
+        $table->string('send_member_name',200)->nullable()->default('');
         $table->string('send_type',50)->nullable()->default('');
         $table->string('send_status',50)->nullable()->default('');
         $table->string('created_by',200)->nullable()->default('');
