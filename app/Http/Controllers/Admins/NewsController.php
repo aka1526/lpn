@@ -170,7 +170,7 @@ class NewsController extends Controller
                 'news_toppic.required' => 'Toppic Name Is Required ',
                 'news_toppic.unique' => 'Toppic Name Is Duplicate ',
                 'news_group.required' => 'Location Is Required ',
-                'news_location.required' => 'Location Is Required ',
+                'news_location.required' => 'Catalog Is Required ',
                   ]
         );
 
@@ -239,7 +239,7 @@ class NewsController extends Controller
             ],
             [
                 'news_toppic.required' => 'Toppic Name Is Required ',
-                'news_group.required' => 'Location Is Required ',
+                'news_group.required' => 'Catalog Is Required ',
                 'news_location.required' => 'Location Is Required ',
                   ]
         );
