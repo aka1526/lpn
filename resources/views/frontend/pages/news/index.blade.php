@@ -29,7 +29,7 @@ style="background-image: url('/assets/img/ct-bg.jpg');">
       <div class="course-page-courses-item">
          <div class="row">
             @foreach ($news as $item)
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 mb-4">
                <div class="yl-blog-img-text">
                   <div class="yl-blog-img text-center position-relative">
                      <img src="{{ $item->news_img !='' ? '/images/news/'.$item->news_url.'/thumbnails/'.$item->news_img :'assets/img/blg1.jpg' }}" alt="">

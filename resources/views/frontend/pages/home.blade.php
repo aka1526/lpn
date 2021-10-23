@@ -511,7 +511,7 @@
                   <h2>{{ isset($news) ? $news->pageheader_header : 'header'}}</h2>
                </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 mb-5">
                <div class="yl-course-title-text">
                   <span>{{ isset($news) ? $news->pageheader_detail : 'detail'}}</span>
                </div>
