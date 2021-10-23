@@ -15,7 +15,7 @@ use App\Models\Admins\Slidepage;
 use App\Models\Admins\Sysinfo;
 use Illuminate\Http\Request;
 use App\Models\Admins\Organizations;
-
+use App\Models\Admins\NewsGallery;
 
 class HomeController extends Controller
 {
@@ -81,8 +81,9 @@ class HomeController extends Controller
             ->where('news_url',$detail)->first();
        $randomnews = News::where('news_status', '=', 'Y')
             ->where('news_url','!=',$detail)->inRandomOrder()->limit(3)->get();
-             
-        return view('frontend.pages.news.detail', compact('news','randomnews'));
+            $NewsGallery =NewsGallery::where('gallery_url',$detail)->get();
+
+        return view('frontend.pages.news.detail', compact('news','randomnews','NewsGallery'));
 
     }
     

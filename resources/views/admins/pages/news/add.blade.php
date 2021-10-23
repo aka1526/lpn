@@ -104,6 +104,21 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row row-sm">
+                            <div class="col-sm-9 col-md-9 col-lg-9">
+                                   <label for="course_item_duration">Image Show (Size 868x480 px)</label>
+                                   <div class="input-group file-browser">
+                                       <input type="text" class="form-control border-right-0 browse-file" placeholder="choose" readonly="">
+                                       <label class="input-group-btn">
+                                           <span class="btn btn-default">
+                                               Browse <input type="file" id="fileupload" name="fileupload" style="display: none;" 
+                                               accept=".jpg, .png, image/jpeg, image/png" >
+                                           </span>
+                                       </label>
+                                   </div>
+                               </div>
+                               
+                           </div>
 
                         {{-- End Row --}}
 
@@ -124,25 +139,7 @@
                         
 
                         {{-- End Row --}}
-                        <div class="row row-sm">
-                         <div class="col-sm-8 col-md-8 col-lg-8">
-                                <label for="course_item_duration">Image Show (Size 868x480 px)</label>
-                                <div class="input-group file-browser">
-                                    <input type="text" class="form-control border-right-0 browse-file" placeholder="choose" readonly="">
-                                    <label class="input-group-btn">
-                                        <span class="btn btn-default">
-                                            Browse <input type="file" id="fileupload" name="fileupload" style="display: none;"  >
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            {{-- <div class="course-details-tab-area">
-                                <div class="course-details-main-img">
-                                    <img src="{{ '/images/course/'.$courseItem->course_item_uid.'/'. $courseItem->course_item_detail_img }}" alt="">
-                                </div>
-                          
-                             </div> --}}
-                        </div>
+                        
  
                             <label for="course_item_duration">Even Date Time.</label>
                             <div class="row row-sm">
@@ -153,6 +150,23 @@
                                         </div>
                                     </div>
                                     <input class="form-control" id="news_datetime" name="news_datetime" type="text" value="{{ Carbon\Carbon::now()}}">
+                                </div>
+                            </div>
+
+                            <div class="row row-sm">
+                                <div class="col-sm-12 col-md-12 col-lg-12 mg-t-20">
+                                    <label for="course_item_duration">Gallery Image   (Size 868x480 px)</label>
+                                    <div class="input-group file-browser">
+                                        <input type="text" class="form-control border-right-0 browse-file"
+                                            placeholder="choose" readonly="">
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-default">
+                                                Browse <input type="file" id="fileuploads" name="fileuploads[]"
+                                                accept=".jpg, .png, image/jpeg, image/png"  style="display: none;" multiple>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    
                                 </div>
                             </div>
 

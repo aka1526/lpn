@@ -194,6 +194,9 @@ Route::post('/pageadmin/user/delete', [AdminUserController::class, 'userdelete']
  Route::post('/pageadmin/news/updatestatus', [NewsController::class, 'updatestatus'])->name('news.updatestatus');
  Route::post('/pageadmin/news/delete', [NewsController::class, 'delete'])->name('news.delete');
  Route::post('/pageadmin/news/header', [NewsController::class, 'header'])->name('news.header'); 
+ Route::post('/pageadmin/news/fancyuploderupload', [NewsController::class, 'fancyuploderupload'])->name('news.fancyuploderupload');
+ Route::post('/pageadmin/news/img/delete', [NewsController::class, 'img_delete'])->name('news.img.delete');
+
 
  Route::get('/pageadmin/news/catalog', [NewsController::class, 'catalog'])->name('news.catalog');
  Route::get('/pageadmin/news/catalog/new', [NewsController::class, 'catalogNew'])->name('news.catalogNew');

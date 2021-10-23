@@ -3,47 +3,46 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Cookie;
-use DB;
-use Carbon\Carbon;
-use Illuminate\Support\Str;
-use App\Models\Admins\User;
 use App\Models\Admins\Accessuid;
-use App\Models\Admins\Pageheader;
-
-use Image;
-use File;
-
 use App\Models\Admins\News;
 use App\Models\Admins\NewsCatalog;
+use App\Models\Admins\Pageheader;
+use App\Models\Admins\User;
+use Carbon\Carbon;
+use Cookie;
+use File;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Image;
+use App\Models\Admins\NewsGallery;
 
 class NewsController extends Controller
 {
-    protected  $paging = 5;
-    protected  $useruid = '';
+    protected $paging = 5;
+    protected $useruid = '';
     protected $username = '';
-    
-    public function GetUserUid(){
-   
-        $loginuid =  Cookie::get('loginuid') !=''  ?  Cookie::get('loginuid') : '';
-        $useruid=''; 
-        $Accessuid=0;
-        $Accessuid = Accessuid::where('uid_login', '=',$loginuid)->count();
-        if($Accessuid>0){
-            $user = User::where('uid_login', '=',$loginuid)
-            ->where('user_status','=','Y')->first();
-            
+
+    public function GetUserUid()
+    {
+
+        $loginuid = Cookie::get('loginuid') != '' ? Cookie::get('loginuid') : '';
+        $useruid = '';
+        $Accessuid = 0;
+        $Accessuid = Accessuid::where('uid_login', '=', $loginuid)->count();
+        if ($Accessuid > 0) {
+            $user = User::where('uid_login', '=', $loginuid)
+                ->where('user_status', '=', 'Y')->first();
+
         } else {
             Cookie::queue(Cookie::forget('loginuid'));
-            
+
         }
-      
-        $useruid = isset($user->uid) ? $user->uid :'';
+
+        $useruid = isset($user->uid) ? $user->uid : '';
         $this->username = isset($user->uid) ? $user->name : '';
-        
-         return $useruid ;
-        }
+
+        return $useruid;
+    }
 
     public function NewUid()
     {
@@ -51,58 +50,55 @@ class NewsController extends Controller
         $uuid = str_replace("-", "", $uuid);
         return $uuid;
     }
- 
+
     public function home(Request $request)
     {
-        if( $this->GetUserUid()==''){
-            return  redirect(url('/pageadmin/adminlogin'))  ; 
-          }
-   
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
         $news = Pageheader::where('pageheader_type', '=', 'news')->first();
-          
+
         return view('admins.pages.news.home', compact('news'));
     }
 
     public function header(Request $request)
     {
-       
-        if( $this->GetUserUid()==''){
-            return  redirect(url('/pageadmin/adminlogin'))  ; 
-          }
-   
-          $fields = $request->validate(
+
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+        $fields = $request->validate(
             [
 
                 'pageheader_title' => 'required|string',
                 'pageheader_header' => 'required|string',
                 'pageheader_detail' => 'required|string',
-                
-               
+
             ],
             [
                 'pageheader_title.required' => 'Title Is Required ',
                 'pageheader_header.required' => 'Header Is Required ',
                 'pageheader_detail.required' => 'Detail Is Required ',
-                
 
             ]
         );
 
+        $pageheader_type = 'news';
 
-        $pageheader_type='news';
+        $pageheader = Pageheader::where('pageheader_type', '=', $pageheader_type)->first();
 
-        $pageheader =Pageheader::where('pageheader_type','=',$pageheader_type)->first();
-       
         $success = false;
         $message = 'fail';
         $response = [];
-        
-        if($pageheader){
 
-            $action =  Pageheader::where('pageheader_uid','=',$request->pageheader_uid)->update([
-                'pageheader_title' =>$request->pageheader_title, 
-                'pageheader_header'=>$request->pageheader_header, 
-                 'pageheader_detail'=>$request->pageheader_detail
+        if ($pageheader) {
+
+            $action = Pageheader::where('pageheader_uid', '=', $request->pageheader_uid)->update([
+                'pageheader_title' => $request->pageheader_title,
+                'pageheader_header' => $request->pageheader_header,
+                'pageheader_detail' => $request->pageheader_detail,
 
             ]);
 
@@ -110,21 +106,21 @@ class NewsController extends Controller
 
             $pageheader_uid = $this->NewUid();
             $action = Pageheader::insert([
-                'pageheader_uid' => $pageheader_uid ,
+                'pageheader_uid' => $pageheader_uid,
                 'pageheader_type' => $pageheader_type,
-                'pageheader_title' =>$request->pageheader_title, 
-                'pageheader_header'=>$request->pageheader_header, 
-                 'pageheader_detail'=>$request->pageheader_detail,
-                 'pageheader_status' => 'Y',
+                'pageheader_title' => $request->pageheader_title,
+                'pageheader_header' => $request->pageheader_header,
+                'pageheader_detail' => $request->pageheader_detail,
+                'pageheader_status' => 'Y',
 
             ]);
 
         }
-        
-        $news =Pageheader::where('pageheader_type','=',$pageheader_type)->first();   
-       
-        return view('admins.pages.news.home', compact('news'));  
-        
+
+        $news = Pageheader::where('pageheader_type', '=', $pageheader_type)->first();
+
+        return view('admins.pages.news.home', compact('news'));
+
         //return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
     }
 
@@ -135,219 +131,223 @@ class NewsController extends Controller
         }
 
         $news = News::where('news_status', '!=', '')
-        ->orderBy('news_index','desc')->paginate($this->paging);
-        
-        return view('admins.pages.news.index', compact('news'));  
+            ->orderBy('news_index', 'desc')->paginate($this->paging);
+
+        return view('admins.pages.news.index', compact('news'));
     }
 
-    public function new(Request $request)
-    {
+    function new (Request $request) {
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
 
-       $NewsCatalog= NewsCatalog::where('catalog_status','Y')->orderBy('catalog_index')->get();
+        $NewsCatalog = NewsCatalog::where('catalog_status', 'Y')->orderBy('catalog_index')->get();
 
-        return view('admins.pages.news.add',compact('NewsCatalog'));  
+        return view('admins.pages.news.add', compact('NewsCatalog'));
     }
 
     public function add(Request $request)
     {
-        
+
         if ($this->GetUserUid() == '') {
             return redirect(url('/pageadmin/adminlogin'));
         }
-       // dd($request);
+        // dd($request);
         $fields = $request->validate(
             [
 
                 'news_toppic' => 'required|string|unique:news,news_toppic',
                 'news_group' => 'required',
                 'news_location' => 'required',
-               
+
             ],
             [
                 'news_toppic.required' => 'Toppic Name Is Required ',
                 'news_toppic.unique' => 'Toppic Name Is Duplicate ',
                 'news_group.required' => 'Location Is Required ',
                 'news_location.required' => 'Catalog Is Required ',
-                  ]
+            ]
         );
 
-        $uid =   $this->NewUid();
+        $uid = $this->NewUid();
 
-       
-        $url= $request->news_url !='' ? $request->news_url  :  str_replace(' ', '-', $request->news_toppic)  ;
-        $url= strtolower($url);
-        $url= str_replace('/', '-', $url);
-        $url=str_replace('.', '', $url);
-        
-        $news_index= News::max('news_index')+1;   
+        $url = $request->news_url != '' ? $request->news_url : str_replace(' ', '-', $request->news_toppic);
+        $url = strtolower($url);
+        $url = str_replace('/', '-', $url);
+        $url = str_replace('.', '', $url);
+
+        $news_index = News::max('news_index') + 1;
         $action = News::insert([
-            'news_uid'=> $uid,
+            'news_uid' => $uid,
             'news_index' => $news_index,
             'news_group' => $request->news_group,
             'news_location' => $request->news_location,
-            'news_toppic' =>$request->news_toppic,
-            'news_desc' =>$request->news_desc,
-            'news_url'  => $url ,
-            'news_status' =>"Y",
-            'news_icon' =>"",
-            'news_datetime' =>Carbon::parse($request->news_datetime)->format('Y-m-d H:i')  ,
+            'news_toppic' => $request->news_toppic,
+            'news_desc' => $request->news_desc,
+            'news_url' => $url,
+            'news_status' => "Y",
+            'news_icon' => "",
+            'news_datetime' => Carbon::parse($request->news_datetime)->format('Y-m-d H:i'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-          
 
         ]);
-        $new_img = $this->uploadFile($request, $url ) ;
+        $new_img = $this->uploadFile($request, $url);
 
-        if ($new_img !='') {
-            News::where('news_uid','=',$uid)->update([
-                'news_img'=> $new_img
+        if ($new_img != '') {
+            News::where('news_uid', '=', $uid)->update([
+                'news_img' => $new_img,
             ]);
-           
+
         }
-         
-      return redirect()->route('news.index') ;  
+        if($request->hasFile('fileuploads')){
+            //dd('dfsdf');
+         $this->uploadFileTogallery( $request, $url ,$uid);
+        }
+        return redirect()->route('news.index');
     }
 
-    public function edit(Request $request,$uid='')
+    public function edit(Request $request, $uid = '')
     {
-        if( $this->GetUserUid()==''){
-            return  redirect(url('/pageadmin/adminlogin'))  ; 
-          }
-   
-          if($uid!='') {
-            $news = News::where('news_uid', '=',$uid)->first();
-          }
-       
-          $NewsCatalog= NewsCatalog::where('catalog_status','Y')->orderBy('catalog_index')->get();
-        return view('admins.pages.news.edit', compact('news','NewsCatalog'));
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+        if ($uid != '') {
+            $news = News::where('news_uid', '=', $uid)->first();
+        }
+        
+        $NewsGallery =NewsGallery::where('gallery_uid_ref',$uid)->get();
+
+        $NewsCatalog = NewsCatalog::where('catalog_status', 'Y')->orderBy('catalog_index')->get();
+        return view('admins.pages.news.edit', compact('news', 'NewsCatalog','NewsGallery'));
     }
 
-    public function update(Request $request )
+    public function update(Request $request)
     {
-        if( $this->GetUserUid()==''){
-            return  redirect(url('/pageadmin/adminlogin'))  ; 
-          }
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
 
-          $fields = $request->validate(
+        
+        
+        $fields = $request->validate(
             [
 
                 'news_toppic' => 'required',
                 'news_group' => 'required',
                 'news_location' => 'required',
-               
+
             ],
             [
                 'news_toppic.required' => 'Toppic Name Is Required ',
                 'news_group.required' => 'Catalog Is Required ',
                 'news_location.required' => 'Location Is Required ',
-                  ]
+            ]
         );
-
-          $uid = $request->news_uid;
-          $url= $request->news_url !='' ? $request->news_url  :  str_replace(' ', '-', $request->news_toppic)  ;
-          $url= strtolower($url);
-          $url= str_replace('/', '-', $url);
-          $url=str_replace('.', '', $url);
-          if($uid!='') {
-            $action = News::where('news_uid','=',$uid)->update([
-                'news_toppic' =>$request->news_toppic,
-                'news_group' =>$request->news_group,
-                'news_location' =>$request->news_location,
-                'news_desc' =>$request->news_desc,
-                'news_url'  => $url ,
-                'news_datetime' =>Carbon::parse($request->news_datetime)->format('Y-m-d H:i')  ,
+       // dd($request);
+        $uid = $request->news_uid;
+        $url = $request->news_url != '' ? $request->news_url : str_replace(' ', '-', $request->news_toppic);
+        $url = strtolower($url);
+        $url = str_replace('/', '-', $url);
+        $url = str_replace('.', '', $url);
+        if ($uid != '') {
+            $action = News::where('news_uid', '=', $uid)->update([
+                'news_toppic' => $request->news_toppic,
+                'news_group' => $request->news_group,
+                'news_location' => $request->news_location,
+                'news_desc' => $request->news_desc,
+                'news_url' => $url,
+                'news_datetime' => Carbon::parse($request->news_datetime)->format('Y-m-d H:i'),
                 'updated_at' => Carbon::now(),
             ]);
-            $new_img = $this->uploadFile($request, $url ) ;
-    
-            if ($new_img !='') {
-                News::where('news_uid','=',$uid)->update([
-                    'news_img'=> $new_img
-                ]);
-               
-            }
-          }
-       
-          
-          return redirect()->route('news.index') ;  
-    }
-     
+            $new_img = $this->uploadFile($request, $url);
 
-    public function delete(Request $request )
-    {
-        if( $this->GetUserUid()==''){
-            return  redirect(url('/pageadmin/adminlogin'))  ; 
-          }
-          
-          $uid = $request->uid;
-          $action=false;
-          $message="fail";
-          
-          if($uid!='') {
-            $action = News::where('news_uid','=',$uid)->delete();
-            $message="success";
-            
-          }
-       
-          return response()->json(['success' => $action, 'message' => $message  ], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
-          //return redirect()->route('news.index') ;  
+            if ($new_img != '') {
+                News::where('news_uid', '=', $uid)->update([
+                    'news_img' => $new_img,
+                ]);
+
+            }
+        }
+ 
+       if($request->hasFile('fileuploads')){
+           //dd('dfsdf');
+        $this->uploadFileTogallery( $request, $url ,$uid);
+       }
+
+      return redirect()->route('news.edit',['uid'=>$uid]);
     }
-     
+
+    public function delete(Request $request)
+    {
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+        $uid = $request->uid;
+        $action = false;
+        $message = "fail";
+
+        if ($uid != '') {
+            $action = News::where('news_uid', '=', $uid)->delete();
+            $message = "success";
+
+        }
+
+        return response()->json(['success' => $action, 'message' => $message], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+        //return redirect()->route('news.index') ;
+    }
 
     public function updatestatus(Request $request)
     {
-        if( $this->GetUserUid()==''){
-            return  redirect(url('/pageadmin/adminlogin'))  ; 
-          }
-         
-        $uid =  $request->uid;
-        
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+        $uid = $request->uid;
+
         $course = News::where('news_uid', '=', $uid)->first();
-        $course_total= 0;
+        $course_total = 0;
         $success = false;
         $message = 'fail';
         $response = [];
         if ($course) {
             $success = true;
-             $message = 'success';
-              
-            $success =  News::where('news_uid', '=', $uid)->update([
-                "news_status" =>  $request->status,
+            $message = 'success';
+
+            $success = News::where('news_uid', '=', $uid)->update([
+                "news_status" => $request->status,
             ]);
             $response = [
-                "success" =>  $success,
+                "success" => $success,
             ];
-           
+
         }
-        
-        return response()->json(['success' => $success, 'message' =>  $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
+        return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
     }
 
-
-    
-    public function catalog(Request $request,$uid='')
+    public function catalog(Request $request, $uid = '')
     {
-        if( $this->GetUserUid()==''){
-            return  redirect(url('/pageadmin/adminlogin'))  ; 
-          }
-        $catalog = NewsCatalog::orderBy('catalog_index','desc')->paginate($this->paging);
-              
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+        $catalog = NewsCatalog::orderBy('catalog_index', 'desc')->paginate($this->paging);
+
         return view('admins.pages.news.catalog', compact('catalog'));
     }
 
-    public function catalogNew(Request $request )
+    public function catalogNew(Request $request)
     {
-        if( $this->GetUserUid()==''){
-            return  redirect(url('/pageadmin/adminlogin'))  ; 
-          }
-      //  $catalog = NewsCatalog::orderBy('catalog_index','desc')->paginate($this->paging);
-         $html='
-         <form class="form-horizontal" id="frm" name="frm" method="post" 
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+        //  $catalog = NewsCatalog::orderBy('catalog_index','desc')->paginate($this->paging);
+        $html = '
+         <form class="form-horizontal" id="frm" name="frm" method="post"
          action="/pageadmin/news/catalog/add">
-         <input type="hidden" name="_token" value="'.csrf_token().'">							 
+         <input type="hidden" name="_token" value="' . csrf_token() . '">
          <div class="form-group">
              <label for="catalog_index">Catalog No</label>
              <input type="number" class="form-control" id="catalog_index" name="catalog_index" min="1" value="1" placeholder="No">
@@ -357,233 +357,246 @@ class NewsController extends Controller
              <label for="catalog_name">Catalog Name</label>
              <input type="text" class="form-control" id="catalog_name" name="catalog_name" placeholder="catalog name" required>
          </div>
-      
+
          <div class="form-group mb-0 mt-3 justify-content-end">
              <div>
              <button aria-label="Close" class="btn ripple btn-close btn-danger pd-x-25" data-dismiss="modal" type="button">Close</button>
                  <button type="submit" class="btn btn-primary">Save</button>
-                
+
              </div>
          </div>
      </form>';
 
-     $success = false;
-     $message = 'fail';
-     $response = [];
-     if ($html !='') {
-         $success = true;
-          $message = 'success';
-           
-        //  $success =  News::where('news_uid', '=', $uid)->update([
-        //      "news_status" =>  $request->status,
-        //  ]);
-         $response = [
-             "success" =>  $html,
-         ];
-        
-     }
-     
-     return response()->json(['success' => $success, 'message' =>  $message, 'data' => $html], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
- }
+        $success = false;
+        $message = 'fail';
+        $response = [];
+        if ($html != '') {
+            $success = true;
+            $message = 'success';
 
- public function catalogAdd(Request $request)
- {
-    // dd( $request);
-     
-     if ($this->GetUserUid() == '') {
-         return redirect(url('/pageadmin/adminlogin'));
-     }
+            //  $success =  News::where('news_uid', '=', $uid)->update([
+            //      "news_status" =>  $request->status,
+            //  ]);
+            $response = [
+                "success" => $html,
+            ];
 
-     $fields = $request->validate(
-         [
+        }
 
-             'catalog_name' => 'required|string|unique:news_catalog,catalog_name',
-             
-            
-         ],
-         [
-             'catalog_name.required' => 'Catalog Name Is Required ',
-             'catalog_name.unique' => 'Catalog Name Is Duplicate ',
-               ]
-     );
+        return response()->json(['success' => $success, 'message' => $message, 'data' => $html], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
 
-     $uid =   $this->NewUid();
+    public function catalogAdd(Request $request)
+    {
+        // dd( $request);
 
-    $created_by= $this->username;
-      
-     $news_index= NewsCatalog::max('catalog_index')+1;   
-     $action = NewsCatalog::insert([
-         'catalog_uid'=> $uid,
-         'catalog_index' => $news_index,
-         'catalog_name' => $request->catalog_name ,
-         'catalog_status' =>"Y",
-         'created_by'  => $created_by,
-         'updated_by' =>$created_by ,
-         'created_at' => Carbon::now(),
-         'updated_at' => Carbon::now(),
-       
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
 
-     ]);
-     
-      
-   return redirect()->route('news.catalog') ;  
- } 
- 
- public function catalogDelete(Request $request)
- {
-     if( $this->GetUserUid()==''){
-         return  redirect(url('/pageadmin/adminlogin'))  ; 
-       }
-      
-     $uid =  $request->uid;
-     
-     $course = NewsCatalog::where('catalog_uid', '=', $uid)->first();
-     $course_total= 0;
-     $success = false;
-     $message = 'fail';
-     $response = [];
-     if ($course) {
-         $success = true;
-          $message = 'success';
-         $success =  NewsCatalog::where('catalog_uid', '=', $uid)->delete();
-         $response = [
-             "success" =>  $success,
-         ];
-        
-     }
-     
-     return response()->json(['success' => $success, 'message' =>  $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
- }
+        $fields = $request->validate(
+            [
 
- 
- public function catalogStatus(Request $request)
- {
-     if( $this->GetUserUid()==''){
-         return  redirect(url('/pageadmin/adminlogin'))  ; 
-       }
-      
-     $uid =  $request->uid;
-     $status =  $request->status;
-     $course = NewsCatalog::where('catalog_uid', '=', $uid)->first();
-     $course_total= 0;
-     $success = false;
-     $message = 'fail';
-     $response = [];
-     if ($course) {
-         $success = true;
-          $message = 'success';
-         $success =  NewsCatalog::where('catalog_uid', '=', $uid)->update([
-             "catalog_status"=> $status
-         ]);
-         $response = [
-             "success" =>  $success,
-         ];
-        
-     }
-     
-     return response()->json(['success' => $success, 'message' =>  $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
- }
+                'catalog_name' => 'required|string|unique:news_catalog,catalog_name',
 
- 
- 
- public function catalogEdit(Request $request )
- {
-     if( $this->GetUserUid()==''){
-         return  redirect(url('/pageadmin/adminlogin'))  ; 
-       }
-       $uid = $request->uid;
-       $catalog = NewsCatalog::where('catalog_uid',$uid)->first();
-       
-       $html="";
-       if($catalog ){
-        $html .='
-        <form class="form-horizontal" id="frm" name="frm" method="post" 
+            ],
+            [
+                'catalog_name.required' => 'Catalog Name Is Required ',
+                'catalog_name.unique' => 'Catalog Name Is Duplicate ',
+            ]
+        );
+
+        $uid = $this->NewUid();
+
+        $created_by = $this->username;
+
+        $news_index = NewsCatalog::max('catalog_index') + 1;
+        $action = NewsCatalog::insert([
+            'catalog_uid' => $uid,
+            'catalog_index' => $news_index,
+            'catalog_name' => $request->catalog_name,
+            'catalog_status' => "Y",
+            'created_by' => $created_by,
+            'updated_by' => $created_by,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+
+        ]);
+
+        return redirect()->route('news.catalog');
+    }
+
+    public function catalogDelete(Request $request)
+    {
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+        $uid = $request->uid;
+
+        $course = NewsCatalog::where('catalog_uid', '=', $uid)->first();
+        $course_total = 0;
+        $success = false;
+        $message = 'fail';
+        $response = [];
+        if ($course) {
+            $success = true;
+            $message = 'success';
+            $success = NewsCatalog::where('catalog_uid', '=', $uid)->delete();
+            $response = [
+                "success" => $success,
+            ];
+
+        }
+
+        return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function catalogStatus(Request $request)
+    {
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+        $uid = $request->uid;
+        $status = $request->status;
+        $course = NewsCatalog::where('catalog_uid', '=', $uid)->first();
+        $course_total = 0;
+        $success = false;
+        $message = 'fail';
+        $response = [];
+        if ($course) {
+            $success = true;
+            $message = 'success';
+            $success = NewsCatalog::where('catalog_uid', '=', $uid)->update([
+                "catalog_status" => $status,
+            ]);
+            $response = [
+                "success" => $success,
+            ];
+
+        }
+
+        return response()->json(['success' => $success, 'message' => $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function catalogEdit(Request $request)
+    {
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+        $uid = $request->uid;
+        $catalog = NewsCatalog::where('catalog_uid', $uid)->first();
+
+        $html = "";
+        if ($catalog) {
+            $html .= '
+        <form class="form-horizontal" id="frm" name="frm" method="post"
         action="/pageadmin/news/catalog/updates">
-        <input type="hidden" name="_token" value="'.csrf_token().'">	
-        <input type="hidden" name="uid" value="'.$uid.'">						 
+        <input type="hidden" name="_token" value="' . csrf_token() . '">
+        <input type="hidden" name="uid" value="' . $uid . '">
         <div class="form-group">
             <label for="catalog_index">Catalog No</label>
-            <input type="number" class="form-control" id="catalog_index" name="catalog_index" min="1" value="'.$catalog->catalog_index.'" placeholder="No">
+            <input type="number" class="form-control" id="catalog_index" name="catalog_index" min="1" value="' . $catalog->catalog_index . '" placeholder="No">
         </div>
-  
+
         <div class="form-group">
             <label for="catalog_name">Catalog Name</label>
-            <input type="text" class="form-control" id="catalog_name" name="catalog_name" placeholder="catalog name" value="'.$catalog->catalog_name.'" required>
+            <input type="text" class="form-control" id="catalog_name" name="catalog_name" placeholder="catalog name" value="' . $catalog->catalog_name . '" required>
         </div>
-     
+
         <div class="form-group mb-0 mt-3 justify-content-end">
             <div>
             <button aria-label="Close" class="btn ripple btn-close btn-danger pd-x-25" data-dismiss="modal" type="button">Close</button>
                 <button type="submit" class="btn btn-primary">Save</button>
-               
+
             </div>
         </div>
     </form>';
-     
-       }
-     
-  $success = false;
-  $message = 'fail';
-  $response = [];
-  if ($html !='') {
-      $success = true;
-       $message = 'success';
-        
-     //  $success =  News::where('news_uid', '=', $uid)->update([
-     //      "news_status" =>  $request->status,
-     //  ]);
-      $response = [
-          "success" =>  $html,
-      ];
-     
-  }
-  
-  return response()->json(['success' => $success, 'message' =>  $message, 'data' => $html], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
-}
 
+        }
 
-public function catalogUpdate(Request $request)
-{
-    if( $this->GetUserUid()==''){
-        return  redirect(url('/pageadmin/adminlogin'))  ; 
-      }
-     
-    $uid =  $request->uid;
-     
-    $NewsCatalog = NewsCatalog::where('catalog_uid', '=', $uid)->first();
-    $catalog_name =$request->catalog_name;
-    $catalog_index =$request->catalog_index;
-     
-    $success = false;
-    $message = 'fail';
-    $response = [];
-    if ($NewsCatalog) {
-        $success = true;
-         $message = 'success';
-        $success =  NewsCatalog::where('catalog_uid', '=', $uid)->update([
-            "catalog_name"=> $catalog_name
-            ,"catalog_index"=> $catalog_index
-        ]);
-        $response = [
-            "success" =>  $success,
-        ];
-       
+        $success = false;
+        $message = 'fail';
+        $response = [];
+        if ($html != '') {
+            $success = true;
+            $message = 'success';
+
+            //  $success =  News::where('news_uid', '=', $uid)->update([
+            //      "news_status" =>  $request->status,
+            //  ]);
+            $response = [
+                "success" => $html,
+            ];
+
+        }
+
+        return response()->json(['success' => $success, 'message' => $message, 'data' => $html], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
     }
-    return redirect()->route('news.catalog') ; 
-   // return response()->json(['success' => $success, 'message' =>  $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
-}
 
+    public function catalogUpdate(Request $request)
+    {
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
 
-    public function uploadFile(Request $request,$url='')
+        $uid = $request->uid;
+
+        $NewsCatalog = NewsCatalog::where('catalog_uid', '=', $uid)->first();
+        $catalog_name = $request->catalog_name;
+        $catalog_index = $request->catalog_index;
+
+        $success = false;
+        $message = 'fail';
+        $response = [];
+        if ($NewsCatalog) {
+            $success = true;
+            $message = 'success';
+            $success = NewsCatalog::where('catalog_uid', '=', $uid)->update([
+                "catalog_name" => $catalog_name
+                , "catalog_index" => $catalog_index,
+            ]);
+            $response = [
+                "success" => $success,
+            ];
+
+        }
+        return redirect()->route('news.catalog');
+        // return response()->json(['success' => $success, 'message' =>  $message, 'data' => $response], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function fancyuploderupload(Request $request)
+    {
+
+        if ($request->hasFile('imgfiles')) {
+            $file = $request->file('imgfiles');
+            $location = public_path("/images/news/19");
+            if (!File::exists($location)) {
+
+                File::makeDirectory($location, 0755, true, true);
+            }
+            //  dd($file->getclientoriginalname());
+            $file->move($location, $file->getclientoriginalname());
+            $success=true;
+        } else {
+            $success= false;
+        }
+
+        return response()->json(['success' => $success], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+
+    }
+
+    public function uploadFile(Request $request, $url = '')
     {
         $image = $request->file('fileupload');
-       
+
         $imagename = '';
         if ($image) {
             $imagename = time() . '.' . $image->extension();
 
-            $filePath = public_path('/images/news/'.$url);
-            $filePath_thumbnails = public_path('/images/news/'.$url.'/thumbnails');
+            $filePath = public_path('/images/news/' . $url);
+            $filePath_thumbnails = public_path('/images/news/' . $url . '/thumbnails');
             if (!File::exists($filePath_thumbnails)) {
 
                 File::makeDirectory($filePath_thumbnails, 0755, true, true);
@@ -592,13 +605,94 @@ public function catalogUpdate(Request $request)
             $image_thumbnail = Image::make($image->getRealPath());
             $image_thumbnail->resize(370, 230); //
             $image_thumbnail->save($filePath_thumbnails . '/' . $imagename);
-            
+
             $image_resize = Image::make($image->getRealPath());
             $image_resize->resize(868, 480); //
             $image_resize->save($filePath . '/' . $imagename);
-            
+
         }
 
         return $imagename;
     }
+
+    public function uploadFileTogallery(Request $request, $url = '',$uid)
+    {
+        $action =false ;
+        foreach($request->file('fileuploads') as $image){
+            
+              
+                $imagename = '';
+                 $imagename =$this->NewUid(). '.' . $image->extension();
+     
+                 $filePathGallery = public_path('/images/news/' . $url.'/gallery');
+                
+                 if (!File::exists($filePathGallery)) {
+     
+                     File::makeDirectory($filePathGallery, 0755, true, true);
+                 }
+     
+                
+                 $image_resize = Image::make($image->getRealPath());
+                 $image_resize->resize(868, 480); //
+                 $image_resize->save($filePathGallery . '/' . $imagename);
+                 $action =true ;
+                $created_by = $this->username;
+                $gallery_uid = $this->NewUid();
+                 NewsGallery::insert([
+                    'gallery_uid' =>  $gallery_uid 
+                    , 'gallery_uid_ref' => $uid
+                    , 'gallery_filename' => $imagename
+                    , 'gallery_url'  =>  $url
+                    , 'created_by' => $created_by
+                    , 'updated_by' => $created_by
+                    , 'created_at' => Carbon::now()
+                    , 'updated_at' => Carbon::now()
+
+                 ]);
+             
+              
+         }
+
+       
+
+        return $action;
+    }
+
+
+    public function img_delete(Request $request)
+    {
+        if ($this->GetUserUid() == '') {
+            return redirect(url('/pageadmin/adminlogin'));
+        }
+
+        $uid = $request->uid;
+        $action = false;
+        $message = "fail";
+
+        if ($uid != '') {
+            $getfile = Newsgallery::where('gallery_uid', '=', $uid)->first();
+           
+
+            $deleteFile =  public_path('images/news/'.$getfile->gallery_url.'/gallery/'.$getfile->gallery_filename) ;
+         //  dd( $deleteFile );
+             
+         if(File::exists($deleteFile)){
+            //File::delete($deleteFile);
+            unlink($deleteFile);
+            Newsgallery::where('gallery_uid', '=', $uid)->delete();
+            $message = "success";
+            $action=true;
+        }
+
+           
+           
+        }
+
+        return response()->json(['success' => $action, 'message' => $message], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+        //return redirect()->route('news.index') ;
+    }
+
+
 }
+
+ 

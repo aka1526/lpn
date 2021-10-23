@@ -133,6 +133,52 @@ $('.btn-delete').on('click', function() {
 
 
 
+$('.btn-delete-img').on('click', function(e) {
+    e.preventDefault();
+    var uid = $(this).data('uid');
+    var url = "/pageadmin/news/img/delete";
+    var mtext = 'Yes, Delete it!';
+
+    Swal.fire({
+        title: 'Are you sure?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: mtext
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "post",
+                url: url,
+                data: { uid: uid, "_token": $('meta[name=_token]').attr('content') },
+                success: function(data) {
+
+                    if (data.success) {
+
+                        Swal.fire({
+                            title: 'Delete  Success.',
+                            text: "",
+                            icon: 'success',
+                            showCancelButton: false,
+                            timer: 1200,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                        }).then(() => {
+                            location.reload();
+                        });
+                    }
+                }
+
+            });
+        }
+    })
+
+
+});
+
+
 $(document).on('change', ':file', function() {
     var input = $(this),
         numFiles = input.get(0).files ? input.get(0).files.length : 1,
