@@ -79,11 +79,15 @@ class HomeController extends Controller
        //dd($detail);
         $news = News::where('news_status', '=', 'Y')
             ->where('news_url',$detail)->first();
-       $randomnews = News::where('news_status', '=', 'Y')
+        $randomnews = News::where('news_status', '=', 'Y')
             ->where('news_url','!=',$detail)->inRandomOrder()->limit(3)->get();
-            $NewsGallery =NewsGallery::where('gallery_url',$detail)->get();
+        $NewsGallery =NewsGallery::where('gallery_url',$detail)->get();
+        
+        $RecentNews= News::where('news_status', '=', 'Y')
+        ->orderBy('created_at','desc')->limit(3)->get();
+        $NewsGallery =NewsGallery::where('gallery_url',$detail)->get();
 
-        return view('frontend.pages.news.detail', compact('news','randomnews','NewsGallery'));
+        return view('frontend.pages.news.detail', compact('news','randomnews','NewsGallery','RecentNews'));
 
     }
 

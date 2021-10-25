@@ -66,7 +66,24 @@
                                 </div>
 
                             </div>
+                            <div class="yl-blog-widget-wrap">
+                                <div class="yl-recent-blog-widget clearfix">
+                                   <h3 class="widget-title">Recent News</h3>
+                                    @foreach ($RecentNews as $item)
+                                    <div class="yl-recent-blog-img-text">
+                                        <div class="yl-recent-blog-img float-left">
+                                           <img src="{{ '/images/news/'.$item->news_url.'/thumbnails/'.$item->news_img}}" alt="">
+                                        </div>
+                                        <div class="yl-recent-blog-text">
+                                           <span>{{ \Carbon\Carbon::parse($item->news_datetime)->format('M d, Y')  }}</span>
+                                           <h3><a href="/news/detail/{{ $item->news_url}}"> {{ $item->news_toppic}}</a></h3>
+                                        </div>
+                                     </div>
+                                    @endforeach
 
+                                  
+                                </div>
+                             </div>
                         </div>
                     </div>
                 </div>
