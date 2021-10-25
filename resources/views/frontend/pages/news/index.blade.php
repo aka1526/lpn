@@ -40,11 +40,11 @@ style="background-image: url('/assets/img/ct-bg.jpg');">
                   <div class="yl-blog-text yl-headline pera-content">
                      <div class="yl-blog-meta text-uppercase">
                         @if ($item->news_group !='')
-                        <a href="/news/detail/{{ $item->news_url }}"><i class="far fa-folder-open"></i> {{ $item->news_group}}</a>
+                        <a href="/news/catalog/{{ $item->news_group }}"><i class="far fa-folder-open"></i> {{ $item->news_group}}</a>
                         @endif
                         
                         @if ($item->news_location !='')
-                        <a href="/news/detail/{{ $item->news_url }}"><i class="fas fa-map-marker-alt"></i> {{ $item->news_location}}</a>
+                        <a href="/news/location/{{ $item->news_location }}"><i class="fas fa-map-marker-alt"></i> {{ $item->news_location}}</a>
                         @endif
                       
                      </div>

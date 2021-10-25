@@ -115,13 +115,13 @@
                                     </li>
 
                                     <li class="dropdown">
-                                        <a href="#">Rankings</a>
+                                        <a href="">Rankings</a>
                                         <ul class="clearfix dropdown-menu">
-                                            <li><a target="" href="#">Rankings</a></li>
+                                            <li><a target="" href="">Rankings</a></li>
 
 
                                             <li class="dropdown">
-                                                <a target="" href="#">Champion</a>
+                                                <a target="" href="">Champion</a>
                                                 <ul class="clearfix dropdown-menu">
                                                     <li><a target="" href="#">Male</a></li>
                                                     <li><a target="" href="#">Female</a></li>
@@ -129,7 +129,7 @@
 
                                                 </ul>
                                             </li>
-                                            <li><a target="" href="#">Hall of Fame</a></li>
+                                            <li><a target="" href="">Hall of Fame</a></li>
 
 
                                         </ul>
@@ -179,7 +179,7 @@
                             <a href="/members">Members</a>
                             <ul class="clearfix dropdown-menu">
                                 <li class="dropdown">
-                                    <a target="" href="#">Personal</a>
+                                    <a target="" href="">Personal</a>
                                     <ul class="clearfix dropdown-menu">
                                         {{-- <li><a target="" href="#">Members</a></li> --}}
                                         <li><a target="" href="/members/teachers">Teachers</a></li>
@@ -188,7 +188,7 @@
                                 </li>
 
                                 <li class="dropdown">
-                                    <a target="" href="#">Organization</a>
+                                    <a target="" href="">Organization</a>
                                     <ul class="clearfix dropdown-menu">
                                         <li><a target="" href="/continent">Continent</a></li>
                                         <li><a target="" href="/countries">Countries</a></li>
@@ -203,7 +203,7 @@
                         </li>
 
                         <li class="dropdown">
-                            <a href="#">Rankings</a>
+                            <a href="/rankings/male">Rankings</a>
                             <ul class="clearfix dropdown-menu">
                                 <li class="dropdown">
                                     <a target="" href="/rankings">Rankings</a>
@@ -213,14 +213,14 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a target="" href="#"> WORLD CHAMPIONS</a>
+                                    <a target="" href="/champions/world/male"> WORLD CHAMPIONS</a>
                                     <ul class="clearfix dropdown-menu">
                                         <li><a target="" href="/champions/world/male">Male CHAMPIONS</a></li>
                                         <li><a target="" href="/champions/world/female">Female CHAMPIONS</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a target="" href="#">INTERNATIONAL CHAMPIONS</a>
+                                    <a target="" href="/champions/international/male">INTERNATIONAL CHAMPIONS</a>
                                     <ul class="clearfix dropdown-menu">
                                         <li><a target="" href="/champions/international/male">Male CHAMPIONS</a></li>
                                         <li><a target="" href="/champions/international/female">Female CHAMPIONS</a>

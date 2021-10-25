@@ -36,6 +36,8 @@ Route::get('/aboutus/{url}', [HomeController::class, 'aboutus_page'])->name('fn.
 
 Route::get('/news', [HomeController::class, 'news'])->name('fn.news');
 Route::get('/news/detail/{detail}', [HomeController::class, 'news_detail'])->name('fn.news.detail');
+Route::get('/news/location/{loca}', [HomeController::class, 'news_location'])->name('fn.news.location');
+Route::get('/news/catalog/{loca}', [HomeController::class, 'news_catalog'])->name('fn.news.catalog');
 
 
 Route::get('/members', [HomeController::class, 'members'])->name('fn.members');

@@ -537,11 +537,11 @@
                         @endif
 
                         @if ($itemNew->news_group !='')
-                        <a href="/news/detail/{{ $itemNew->news_url }}"><i class="far fa-folder-open"></i> {{ $itemNew->news_group}}</a>
+                        <a href="/news/catalog/{{ $itemNew->news_group }}"><i class="far fa-folder-open"></i> {{ $itemNew->news_group}}</a>
                         @endif
                         
                         @if ($itemNew->news_location !='')
-                        <a href="/news/detail/{{ $itemNew->news_url }}"><i class="fas fa-map-marker-alt"></i> {{ $itemNew->news_location}}</a>
+                        <a href="/news/location/{{ $itemNew->news_location }}"><i class="fas fa-map-marker-alt"></i> {{ $itemNew->news_location}}</a>
                         @endif
                       
                      </div>

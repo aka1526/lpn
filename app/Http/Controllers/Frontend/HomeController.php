@@ -86,8 +86,23 @@ class HomeController extends Controller
         return view('frontend.pages.news.detail', compact('news','randomnews','NewsGallery'));
 
     }
-    
 
+    public function news_location(Request $request,$news_location=null){
+        $news = News::where('news_status', '=', 'Y')
+        ->where('news_location','=',$news_location)
+        ->orderBy('news_datetime')->paginate(9);
+    return view('frontend.pages.news.index', compact('news'));
+ 
+     }
+
+     public function news_catalog(Request $request,$news_group=null){
+       
+        $news = News::where('news_status', '=', 'Y')
+        ->where('news_group','=',$news_group)
+        ->orderBy('news_datetime')->paginate(9);
+        return view('frontend.pages.news.index', compact('news'));
+     }
+ 
 
     public function members(Request $request)
     {
