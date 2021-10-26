@@ -1,4 +1,4 @@
-@extends('admins.layout.index_main')
+@extends('frontend.layout.index_main')
 @section('title')
     Admin Page
 @endsection
