@@ -118,7 +118,7 @@
                                                <span class="blog-share-slug text-uppercase">Share</span>
                                                 
                                                {!!  \Share::page("https://lpn.satangapp.in/news/detail/". $item->news_url."/",".$item->news_toppic .")
-                                          ->facebook() ;  !!}
+                                          ->facebook()->twitter();  !!}
                                                
                                             </div>
                                          </div>
