@@ -175,7 +175,8 @@ class NewsController extends Controller
         $url = strtolower($url);
         $url = str_replace('/', '-', $url);
         $url = str_replace('.', '', $url);
-
+        $url = str_replace(',', '_', $url);
+        $url = str_replace('&', '_', $url);
         $news_index = News::max('news_index') + 1;
         $action = News::insert([
             'news_uid' => $uid,
@@ -251,6 +252,8 @@ class NewsController extends Controller
         $url = strtolower($url);
         $url = str_replace('/', '-', $url);
         $url = str_replace('.', '', $url);
+        $url = str_replace(',', '_', $url);
+        $url = str_replace('&', '_', $url);
         if ($uid != '') {
             $action = News::where('news_uid', '=', $uid)->update([
                 'news_toppic' => $request->news_toppic,
