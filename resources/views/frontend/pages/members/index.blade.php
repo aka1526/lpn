@@ -50,7 +50,7 @@
                                      {{  str_pad($item->khan_no, 2, '0', STR_PAD_LEFT) }}
                                     <span>khan</span>
                                 </div>
-                                <h3><a href="#">{{ $item->full_name}}</a></h3>
+                                <h3><a href="/members/profile/{{ $item->member_no}}">{{ $item->full_name}}</a></h3>
                                 <div class="yl-event-meta">
                                     <a href=""><i class="fas fa-map-marker-alt"></i> {{ $item->country_name}}</a>
                                     <a href=""><i class="fas fa-bell"></i> Exp. {{ $item->date_expiry}}</a>

@@ -6763,6 +6763,35 @@ select:visited {
     background-color: rgba(0, 0, 255, 0.7);
 }
 
+.yl-modal-header-login {
+    z-index: 1;
+    padding: 30px 0px;
+}
+
+.yl-modal-header-login:after {
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    content: "";
+   // height: 100%;
+       height: 200px;
+    position: absolute;
+    //background-color: rgba(0, 0, 255, 0.7);
+}
+
+.yl-modal-header-login p {
+    color: #000;
+    font-size: 15px;
+    padding-top: 15px;
+}
+
+.yl-modal-header-login .yl-login-head {
+    margin: 0 auto;
+    max-width: 310px;
+	 height: 200px;
+	
+}
+
 .yl-modal-header p {
     color: #fff;
     font-size: 15px;
@@ -8432,6 +8461,12 @@ i.flag-icon.flag-icon-squared {
 .event-countries-section {
     padding: 30px 0px;
     background-color: #f2f2f4;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #1d88f3;
 }
 
 @media (min-width: 576px) {

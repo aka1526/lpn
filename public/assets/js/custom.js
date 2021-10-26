@@ -16,9 +16,6 @@ Author:
     // Shows header dropdown while hiding others
 
 
-    $('#main-nav').on('click', function(e) {
-        $('.dropdown-menu-right').removeClass('show');
-    });
 
     $('.yl-top-cart-login').on('click', function(e) {
         e.preventDefault();
@@ -96,11 +93,11 @@ Author:
                     }, 800);
                     return false;
                 });
-                if ($('select').length) {
-                    $(document).ready(function() {
-                        $('select').niceSelect();
-                    });
-                };
+                /* if ($('select').length) {
+                     $(document).ready(function() {
+                         $('select').niceSelect();
+                     });
+                 };*/
             },
             BackgroundImage: function() {
                 $('[data-background]').each(function() {
@@ -626,5 +623,8 @@ Author:
 
 
     });
+
+
+
 
 })();

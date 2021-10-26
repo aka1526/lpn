@@ -140,7 +140,7 @@ class MembersController extends Controller
         //$url= $request->aboutus_url !='' ? $request->aboutus_url  :  str_replace(' ', '-', $request->aboutus_name)  ;
         // $url =strtolower($url);
 
-        $max_no = Members::max('max_no') + 1;
+         
         $_date = $request->date_register;
         $date_register = Carbon::parse($_date)->format('Y-m-d');
         $member_year = Carbon::parse($_date)->format('Y');

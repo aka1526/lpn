@@ -49,8 +49,16 @@
 
     
     <script src="/assets/js/custom.js"></script>
+    <script>
+      $(document).on('click', '.btn-signup', function(e) {
 
+    alert('sdasd');
+
+    });
+  </script>
     @yield('js')
+    
+
 </body>
 
 </html>

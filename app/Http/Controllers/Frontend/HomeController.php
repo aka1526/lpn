@@ -16,7 +16,7 @@ use App\Models\Admins\Sysinfo;
 use Illuminate\Http\Request;
 use App\Models\Admins\Organizations;
 use App\Models\Admins\NewsGallery;
-
+use App\Models\Admins\NewsCatalog;
 class HomeController extends Controller
 {
 
@@ -74,6 +74,18 @@ class HomeController extends Controller
         return view('frontend.pages.news.index', compact('news'));
 
     }
+    public function list(Request $request)
+    {
+        $news = News::where('news_status', '=', 'Y')
+            ->orderBy('news_datetime')->paginate(3);
+            $RecentNews= News::where('news_status', '=', 'Y')
+            ->orderBy('created_at','desc')->limit(3)->get(); 
+            $NewsCatalog= NewsCatalog::where('catalog_status', '=', 'Y')
+            ->orderBy('catalog_index')->get();        
+        return view('frontend.pages.news.list', compact('news','RecentNews','NewsCatalog'));
+
+    }
+    
 
     public function news_detail(Request $request,$detail=null){
        //dd($detail);
@@ -169,6 +181,53 @@ class HomeController extends Controller
         return view('frontend.pages.members.index', compact('members'));
 
     }
+
+    public function members_profile(Request $request,$member_no)
+    {
+        //  dd($request);
+      //  $member_no = isset($request->search) ? $request->search : '';
+        $member = Members::where('isdelete', '=', 'N')
+            ->where('member_no', $member_no)
+            ->first();
+            // ->where(function ($query) use ($search) {
+            //     if ($search != '') {
+            //         return $query->where('member_no', 'like', '%' . $search . '%')
+            //             ->orWhere('first_name', 'like', '%' . $search . '%')
+            //             ->orWhere('last_name', 'like', '%' . $search . '%')
+            //             ->orWhere('full_name', 'like', '%' . $search . '%')
+            //         ;
+
+            //     }
+            // })
+           // ->orderBy('max_no')->first();
+        return view('frontend.pages.members.profile', compact('member'));
+
+    }
+
+    public function members_update_profile(Request $request,$member_no)
+    {
+        //  dd($request);
+      //  $member_no = isset($request->search) ? $request->search : '';
+        $member = Members::where('isdelete', '=', 'N')
+            ->where('member_no', $member_no)
+            ->first();
+            // ->where(function ($query) use ($search) {
+            //     if ($search != '') {
+            //         return $query->where('member_no', 'like', '%' . $search . '%')
+            //             ->orWhere('first_name', 'like', '%' . $search . '%')
+            //             ->orWhere('last_name', 'like', '%' . $search . '%')
+            //             ->orWhere('full_name', 'like', '%' . $search . '%')
+            //         ;
+
+            //     }
+            // })
+           // ->orderBy('max_no')->first();
+        return view('frontend.pages.members.profile', compact('member'));
+
+    }
+    
+
+
 
     public function rankings_index(Request $request)
     {

@@ -1,10 +1,11 @@
+ 
 <header id="yl-header" class="yl-header-main">
     <div class="clearfix yl-header-top">
         <div class="container">
             <div class="float-left yl-brand-logo">
                 <a href="#"><img src="/assets/img/logo/logo1.png" alt=""></a>
             </div>
-
+ 
             @foreach (App\Models\Admins\Sysinfo::orderBy('sys_name', 'asc')->get() as $companyinfo)
                 <div class="clearfix float-right yl-header-top-cta ul-li">
                     <ul>
@@ -255,47 +256,16 @@
                 </ul>
             </div>
             <div class="float-right yl-header-cart-login">
+                @if (App\Models\Admins\Members::where('uid_login','=',Cookie::get('loginuid'))->first())
+                    
                 <div class="yl-top-cart-login" id="cart">
                     <button><i class="fas fa-shopping-cart"></i>
-                        {{-- <span class="cart-num" id="topActionCartNumber" data-spm-anchor-id="a2o4m.cart.dcart.i0.26576108ZdXKkQ" style="display: block;">
-                            28</span>
-                        </button> --}}
-                    {{-- <div class="dropdown-menu dropdown-menu-right cart"   aria-labelledby="crm-navbar-user">
-                        <div class="navbar-header">
-                            <a class="navbar-avatar-inside" href="https://themexriver.helpviser.com/customer-profile"
-                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="https://lpn.satangapp.in/assets/img/course/cm1.jpg">
-                            </a>
-                            <span class="avatar"><span
-                                    style="background:url('https://lpn.satangapp.in/assets/img/course/cm1.jpg') no-repeat center center;"></span></span>
-
-                            <span class="navbar-username-mail">
-                                <a href="https://themexriver.helpviser.com/customer-profile"
-                                    id="navbar-username">akachai pijan</a>
-                                <a href="https://themexriver.helpviser.com/customer-profile"
-                                    id="navbar-mail">akachai1526@hotmail.com</a>
-                            </span>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="https://themexriver.helpviser.com/customer-profile">Update
-                            Profile</a>
-                        <a class="dropdown-item" href="https://themexriver.helpviser.com/login/logout">Logout</a>
-                        <div class="dropdown-divider"></div>
-                        <span id="navbar-footer">
-                            <a class="color-accent" target="_blank" rel="nofollow noopener noreferrer"
-                                href="https://www.helpviser.com/terms-conditions" id="navbar-learning">Terms &amp;
-                                Conditions</a>
-                            <a class="color-accent" target="_blank" rel="nofollow noopener noreferrer"
-                                href="https://www.helpviser.com/privacy-policy" id="navbar-privacy">Privacy Policy</a>
-                        </span>
-                    </div> --}}
                 </div>
                 <div class="yl-top-cart-login" id="profile">
-                    <button data-toggle="modal" data-target="#exampleModal"><i class="fas fa-user"></i></button>
-                    {{-- <a class="navbar-avatar-login" href="https://themexriver.helpviser.com/customer-profile"  >
-                        <img class="avatar" src="https://lpn.satangapp.in/assets/img/course/cm1.jpg">
-                    </a> --}}
-                    <div class="dropdown-menu dropdown-menu-right profile"   aria-labelledby="crm-navbar-user">
+                    <button data-toggle="modal" data-target="#exampleModal">
+                        <img src="https://lpn.satangapp.in/assets/img/course/cm1.jpg">
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right profile" aria-labelledby="crm-navbar-user">
                         <div class="navbar-header">
                             <a class="navbar-avatar-inside" href="https://themexriver.helpviser.com/customer-profile"
                                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -312,24 +282,134 @@
                             </span>
                         </div>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item " href="https://themexriver.helpviser.com/customer-profile">Update
-                            Profile</a>
-                            <div class="dropdown-divider"></div>
-                        <a class="dropdown-item " href="https://themexriver.helpviser.com/login/logout">Logout</a>
+                        <a class="dropdown-item "
+                             href="https://themexriver.helpviser.com/customer-profile">
+                            Update Profile
+                        </a>
                         <div class="dropdown-divider"></div>
-                        <span id="navbar-footer">
-                            <a class="color-accent" target="_blank" rel="nofollow noopener noreferrer"
-                                href="https://www.helpviser.com/terms-conditions" id="navbar-learning">Terms &amp;
-                                Conditions</a>
-                            <a class="color-accent" target="_blank" rel="nofollow noopener noreferrer"
-                                href="https://www.helpviser.com/privacy-policy" id="navbar-privacy">Privacy Policy</a>
-                        </span>
-                   
+                        <a class="dropdown-item "
+                        href="https://themexriver.helpviser.com/customer-profile">
+                       Update Students
+                   </a>
+                       <div class="dropdown-divider"></div>
+                      
+                        <a class="dropdown-item "
+                             href="https://themexriver.helpviser.com/customer-profile">
+                            Update Youtube Videos
+                        </a>
+                            <div class="dropdown-divider"></div>
+                        <a  onclick="location.href='/members/logout';"  class="dropdown-item" href="#">Logout</a>
+                         
                     </div>
 
                    
                 </div>
+                @else
+                    <div class="yl-top-cart-login" id="login">
+                        <button data-toggle="modal" data-target="#frmModallogin"><i class="fas fa-user"></i> Login</button>
+                    </div>
+                @endif
+                
+               
+
+              
+              
+               
             </div>
         </div>
     </div>
 </header>
+ 
+ 
+
+ <!-- Login-Sign Form -->
+ <div class="modal yl-login-modal fade" id="frmModallogin" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="l-modal-header-login position-relative"
+          style=" background-color:'';" data-background="/assets/img/ct-bg.jpg">
+             <div class="yl-login-head text-center pera-content">
+                <a href="#">
+                    <img src="/assets/img/logo/logo1.png" alt="" style="height: 90px">
+                </a>
+                <p style="color: aliceblue; background-color : #ff5520">{{ App\Models\Admins\Sysinfo::where('sys_status', 'Y')->first()->sys_slogan }}</p>
+             </div>
+          </div>
+          <div class="modal-body">
+             <div class="yl-modal-signup-login-tab">
+                <div class="yl-faq-tab-btn ul-li">
+                   <ul id="tabs" class="nav text-center nav-tabs faq-tab-btn-area">
+                      <li class="nav-item"><a href="#" data-target="#actlogin" data-toggle="tab" class="nav-link text-capitalize active">Login</a></li>
+                      <li class="nav-item"><a href="#" data-target="#actsignUp" data-toggle="tab" class="nav-link text-capitalize">Sign Up</a></li>
+                   </ul>
+                </div>
+                <div id="tabsContent" class="tab-content">
+                   <div id="actlogin" class="tab-pane fade active show">
+                      <div class="yl-login-content pera-content text-center">
+                         <form id="frmactlogin" name="frmactlogin"  action="{{route('fn.members.login')}}" method="post">
+                          @csrf
+                            <input type="text" id="txtemail" name="txtemail" placeholder="Email address" required>
+                            <input type="text" id="txtpassword" name="txtpassword" placeholder="Password" required>
+                            <div class="yl-login-label clearfix">
+                              
+                               <a href="#">Forget Password?</a>
+                            </div>
+                            <button type="button" class="btn-close" style="width: 45%;background-color: #777576;" data-dismiss="modal">Close</button>
+                            <button type="submit" style="width: 45%;" >Submit</button>
+                         </form>
+                         
+                      </div>
+                   </div>
+                   <div id="actsignUp" class="tab-pane fade">
+                      <div class="yl-sign-up-content pera-content text-center">
+                         <form id="frmactsignUp" name="frmactsignUp" action="/members/register" method="post">
+                            @csrf
+                            <input type="text" id="txtFirstname" name="txtFirstname"  placeholder="First Name" required>
+                            <input type="text" id="txtLastname" name="txtLastname"placeholder="Last Name">
+                            <input type="email"  id="txtemail" name="txtemail" style="width: 94%;" placeholder="Email address" required>
+                            <input type="text" id="txtpassword" name="txtpassword"placeholder="Password" required>
+                            <input type="text" id="txtConfirmPassword" name="txtConfirmPassword" placeholder="Confirm password" required>
+                            
+                            <div class="form-group">
+                                 
+                                <select class="form-control" id="txtgender" name="txtgender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="MALE">MALE</option>
+                                    <option value="FEMALE">FEMALE</option>
+                                    
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                 
+                                <select class="form-control" id="txtcountry" name="txtcountry" required>
+                                    <option value="">Select Country</option>
+                                    @foreach (App\Models\Admins\Country::orderBy('country_name', 'asc')->get() as $Country)
+                                    <option value="{{ $Country->country_code }}">{{ $Country->country_name}}</option>
+                                    @endforeach
+                                  
+                                    
+                                </select>
+                              </div>   
+                                 
+                                 
+                                    
+                            {{-- <div class="yl-login-label clearfix">
+                                <span>
+                                <input type="checkbox">By clicking signup you are agree to our terms of service</span>
+                            </div>   --}}
+                            <button type="button" class="btn-close" style="width: 45%;background-color: #777576;" data-dismiss="modal">Close</button>
+                            <button type="submit" calss="btn-signup" style="width: 45%;">Submit</button>
+                         </form>
+                         
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>  
+
+ 
+

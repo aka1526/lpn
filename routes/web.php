@@ -3,6 +3,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CourseFnController;
 use App\Http\Controllers\Frontend\NewsletterController;
+use App\Http\Controllers\Frontend\MemberUserController;
+
+
 
 use App\Http\Controllers\Admins\AdminHomeController;
 use App\Http\Controllers\Admins\AdminUserController;
@@ -35,6 +38,7 @@ Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('fn.aboutus');
 Route::get('/aboutus/{url}', [HomeController::class, 'aboutus_page'])->name('fn.aboutus_page');
 
 Route::get('/news', [HomeController::class, 'news'])->name('fn.news');
+Route::get('/news/list', [HomeController::class, 'list'])->name('fn.news.list');
 Route::get('/news/detail/{detail}', [HomeController::class, 'news_detail'])->name('fn.news.detail');
 Route::get('/news/location/{loca}', [HomeController::class, 'news_location'])->name('fn.news.location');
 Route::get('/news/catalog/{loca}', [HomeController::class, 'news_catalog'])->name('fn.news.catalog');
@@ -43,6 +47,13 @@ Route::get('/news/catalog/{loca}', [HomeController::class, 'news_catalog'])->nam
 Route::get('/members', [HomeController::class, 'members'])->name('fn.members');
 Route::get('/members/teachers', [HomeController::class, 'members_teachers'])->name('fn.members.teachers');
 Route::get('/members/students', [HomeController::class, 'members_students'])->name('fn.members.students');
+Route::get('/members/profile/{memberno}', [HomeController::class, 'members_profile'])->name('fn.members.profile');
+Route::get('/members/update/{memberno}', [HomeController::class, 'members_update_profile'])->name('fn.members.update.profile');
+
+Route::post('/members/login', [MemberUserController::class, 'login'])->name('fn.members.login');
+Route::post('/members/register', [MemberUserController::class, 'register'])->name('fn.members.register');
+Route::get('/members/logout', [MemberUserController::class, 'logout'])->name('fn.members.logout');
+ 
 
 Route::get('/rankings', [HomeController::class, 'rankings_index'])->name('fn.rankings_index');
 Route::get('/rankings/male', [HomeController::class, 'rankings_m'])->name('fn.rankings_m');

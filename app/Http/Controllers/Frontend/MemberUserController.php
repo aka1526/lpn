@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admins;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Redirect;
 use Cookie;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Models\Admins\User;
 use App\Models\Admins\Members;
 use App\Models\Admins\Accessuid;
+use App\Models\Admins\Country; 
+use App\Http\Controllers\Admins\MembersController;
 
- 
 class MemberUserController extends Controller
 {
     protected  $paging = 10;
@@ -60,6 +62,148 @@ class MemberUserController extends Controller
         $user = User::where('name', '!=', '')->orderBy('created_at')->paginate($this->paging);;
       
         return view('admins.pages.index', compact('user'));
+    }
+
+    public function login(Request $request)
+    {
+        
+        $checkstatus=0;
+        $loginuid = Cookie::get('loginuid') !='' ? Cookie::get('loginuid') : '';
+       
+        if($loginuid !=''){
+          
+            $checkstatus= Members::where('uid_login','=',$loginuid)->count();
+            if($checkstatus==0){
+                Cookie::queue(Cookie::forget('loginuid'));
+                return view('frontend.pages.members.error')->withErrors("Please try to login again.");
+              }  
+        }
+        
+        $fields = $request->validate([
+            'txtemail' => 'required|string',
+            'txtpassword' => 'required|string'
+        ]);
+       
+       
+        $Member = Members::where('user_email', $fields['txtemail'])
+        ->where('member_status','=','Y')->first();
+        //dd(Hash::check(trim($fields['txtpassword']), $Member->password));
+      
+        if (!$Member || !Hash::check(trim($fields['txtpassword']), $Member->password)) {
+            // return response([
+            //     'message' => 'Deine hasan'
+            // ], 401);
+           // dd("No data");
+           return view('frontend.pages.members.error')->withErrors("Please try to login again.");
+            
+        }
+       // dd( $Member->user_email);
+       // $token = $user->createToken('myapptoken')->plainTextToken;
+       $loginuid = $this->NewUid();
+       $action = Members::where('member_uid', '=', $Member->member_uid)->update([
+        'uid_login' => $loginuid
+         ]);
+
+       Accessuid::insert([
+            'uid' => $this->NewUid(),
+            'uid_login' =>  $loginuid,
+            'last_used_at' => Carbon::now()
+        ]);
+
+        Cookie::queue('loginuid',$loginuid);
+          
+        return  redirect(url('/'))  ;
+      
+    }
+    
+    public function  register(Request $request) {
+      
+
+        $rules = [
+            'txtFirstname'    => 'required', 
+            'txtemail' => 'required|string|unique:members,user_email',
+            'txtpassword' => 'required|string|min:4',
+            'txtConfirmPassword' => 'required|min:4|same:txtpassword',
+            'txtcountry'    => 'required', 
+            'txtgender'    => 'required', 
+            
+        ];
+        $messageerror=[
+                    'txtFirstname.required'    => 'First Name Is Required For Your Information ',
+                    'txtemail.required'      => 'E-mail Is Required For Your Information',
+                    'txtemail.unique'      => 'Sorry, This Email Address Is Already Used By Another User',
+                    'txtpassword.required' => 'Password Is Required For Your Information Safety.',
+                    'txtpassword.min' => 'Password Is Mininum 4 .',
+                    'txtConfirmPassword.same' => 'Password Is not Match.',
+                    'txtcountry.required'      => 'Country Is Required For Your Information',
+                    'txtgender.required'      => 'Gender Is Required For Your Information',
+                ];
+    
+        $validator = Validator::make($request->all(), $rules, $messageerror);
+    
+        if ($validator->fails()) {
+      
+            return view('frontend.pages.members.error')->withErrors($validator);
+ 
+        }  
+         
+      $uid = $this->NewUid();
+      $_date =Carbon::now()->format('Y-m-d');
+      $date_register = Carbon::now()->format('Y-m-d');
+      $member_year = Carbon::now()->format('Y');
+      $member_month = Carbon::now()->format('m');
+      $khan_uid ="";
+
+      $country_code = $request->txtcountry;
+      $country = Country::where('country_code', '=', $country_code)->first();
+
+      $user_type = "MEMBERS";
+      $member_group = "PERSON";
+      $max_no = Members::max('max_no') + 1;
+   
+      $MembersCtl= new MembersController();
+      $member_no = $MembersCtl->getIdCard($max_no, 'PLN-' . $member_year);
+     // dd($member_no);
+        $action = Members::create([
+            'member_uid' => $uid 
+            ,'first_name' => strtoupper($request->txtFirstname)
+            , 'last_name' => strtoupper($request->txtLastname)
+            , 'full_name' => strtoupper($request->txtFirstname . ' ' . $request->txtLastname)
+            , 'gender' => $request->txtgender
+            , 'dateofbirth' => $request->dateofbirth
+            , 'country_uid' => $country->country_uid
+            , 'country_code' => $country->country_code
+            , 'country_name' => $country->country_name
+            , 'user_email' => $request->txtemail
+            , 'user_type' => $user_type
+            , 'created_at' => Carbon::now()
+            , 'updated_at' => Carbon::now()
+            , 'member_status' => "Y"
+            , 'member_group' => $member_group
+            , 'date_register' => $date_register
+            , 'member_year' => $member_year
+            , 'member_month' => $member_month
+            , 'member_no' => $member_no
+            ,'member_active' => 'Y'
+            ,'max_no' => $max_no
+            ,'password' =>bcrypt(trim($request->txtpassword))
+            
+        ]);
+        return view('frontend.pages.members.error')->withsuccess("Create user login success .");
+       // return  redirect(url('/'))  ; 
+    }
+
+    public function logout(Request $request)
+    {
+         
+       // auth()->user()->tokens()->delete();
+       $loginuid = Cookie::get('loginuid') !='' ? Cookie::get('loginuid') :'';
+       $success = Accessuid::where('uid_login','=',$loginuid)->delete();
+            if($success){
+                Cookie::queue(Cookie::forget('loginuid'));
+                return  redirect(url('/'))  ; 
+            }
+   
     }
 
     // public function user(Request $request)
