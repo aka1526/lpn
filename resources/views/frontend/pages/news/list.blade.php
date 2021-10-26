@@ -116,8 +116,8 @@
                                             <a class="yl-blog-more float-left text-uppercase" href="/news/detail/{{ $item->news_url}}">Read more <span>+</span></a>
                                             <div class="yl-blog-list-share float-right">
                                                <span class="blog-share-slug text-uppercase">Share</span>
-                                               <h2>{{ $item->news_toppic }}</h2>
-                                               {!!  \Share::page('https://lpn.satangapp.in/news/detail/'. $item->news_url.'/',".$item->news_toppic .")
+                                                
+                                               {!!  \Share::page("https://lpn.satangapp.in/news/detail/". $item->news_url."/",".$item->news_toppic .")
                                           ->facebook()
                                           ->twitter()
                                           ->linkedin()
