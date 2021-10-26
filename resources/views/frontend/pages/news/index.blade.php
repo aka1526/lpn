@@ -2,6 +2,42 @@
 @section('title')
     หน้าหลัก
 @endsection
+
+@section('css')
+<style>
+#social-links ul{
+    padding-left: 0;
+}
+#social-links ul li {
+    display: inline-block;
+} 
+#social-links ul li a {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 1px;
+    font-size: 25px;
+}
+#social-links .fa-facebook{
+     color: #0d6efd;
+}
+#social-links .fa-twitter{
+     color: deepskyblue;
+}
+#social-links .fa-linkedin{
+     color: #0e76a8;
+}
+#social-links .fa-whatsapp{
+    color: #25D366
+}
+#social-links .fa-reddit{
+    color: #FF4500;;
+}
+#social-links .fa-telegram{
+    color: #0088cc;
+}
+</style>
+@endsection
 @section('content')
 
 
@@ -72,8 +108,10 @@
                                 <div class="yl-blog-list-bottom clearfix ">
                                   <div class="yl-blog-list-share float-right">
                                     <span class="blog-share-slug text-uppercase">Share</span>
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('fn.news.detail',['detail'=> $item->news_url]) }}&display=popup"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    {{-- <a href="https://www.facebook.com/sharer/sharer.php?u={{ route('fn.news.detail',['detail'=> $item->news_url]) }}&display=popup"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a> --}}
+                                     {!!  \Share::page("https://lpn.satangapp.in/news/detail/". $item->news_url."/",".$item->news_toppic .")
+                                          ->facebook()->twitter();  !!}
                                  </div>
                                  </div>
                             </div>
