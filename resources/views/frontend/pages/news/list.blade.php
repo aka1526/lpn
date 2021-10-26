@@ -79,7 +79,7 @@
                                             <a class="yl-blog-more float-left text-uppercase" href="/news/detail/{{ $item->news_url}}">Read more <span>+</span></a>
                                             <div class="yl-blog-list-share float-right">
                                                <span class="blog-share-slug text-uppercase">Share</span>
-                                               <a href="https://www.facebook.com/sharer/sharer.php?u=https://lpn.satangapp.in/news/detail/{{ $item->news_url }}&display=popup"><i class="fab fa-facebook-f"></i></a>
+                                               <a href="https://www.facebook.com/sharer/sharer.php?u=https://lpn.satangapp.in&display=popup"><i class="fab fa-facebook-f"></i></a>
                                                <a href="#"><i class="fab fa-twitter"></i></a>
                                                
                                             </div>
