@@ -360,8 +360,13 @@ class MailsetupController extends Controller
         $mailto=$mailto;
         $subject ="Reset Password";
         $url='/members/resetpwdpage?tokenkey='.$token ;
-        $mailbody ="<h4>We have e-mailed your password reset link!</h4> <br/>
-              <a href=".url($url).">Click To Reset Password </a>  <br/>
+        $mailbody ="<h4>We have e-mailed your password reset link!</h4> <br/> <br/>
+              <a href=".url($url)." 
+              style='text-decoration:none; color:#fff; background:#F84F32; 
+              border-width:9px 10px 10px; border-radius:5px; border-style:solid; 
+              border-color:#F84F32; font-size:16px; text-transform:uppercase'
+              
+              >Click To Reset Password </a>  <br/> <br/> <br/>
               If you are having trouble, try copying and pasting the following URL into your browser:<br/><br/>
               ".url($url)."<br/><br/>
 
@@ -369,7 +374,6 @@ class MailsetupController extends Controller
 
            <h3> Thanks,</h3><br/>
             ".$Sysinfo->sys_name ."<br/>
-          
             Tel. : ".$Sysinfo->sys_phone1."<br/>
             E-mail  : ".$Sysinfo->sys_email1."<br/>
             " ;
