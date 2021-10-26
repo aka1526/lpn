@@ -2,7 +2,12 @@
 @section('title')
     หน้าหลัก
 @endsection
+
+@section('css')
+ 
+@endsection
 @section('content')
+
 <style>
     .yl-blog-img-text-2 .yl-blog-img-2 .yl-blog-date-2 {
     left: 25px;
@@ -14,7 +19,39 @@
     position: absolute;
     background-color: #e95108;
 }
-</style>
+ 
+     #social-links ul{
+          padding-left: 0;
+     }
+     #social-links ul li {
+          display: inline-block;
+     } 
+     #social-links ul li a {
+          padding: 6px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          margin: 1px;
+          font-size: 25px;
+     }
+     #social-links .fa-facebook{
+           color: #0d6efd;
+     }
+     #social-links .fa-twitter{
+           color: deepskyblue;
+     }
+     #social-links .fa-linkedin{
+           color: #0e76a8;
+     }
+     #social-links .fa-whatsapp{
+          color: #25D366
+     }
+     #social-links .fa-reddit{
+          color: #FF4500;;
+     }
+     #social-links .fa-telegram{
+          color: #0088cc;
+     }
+     </style>
 <div id="fb-root"></div>
  
     <section id="yl-breadcrumb" class="yl-breadcrumb-section position-relative" data-background="/assets/img/ct-bg.jpg"
@@ -79,8 +116,14 @@
                                             <a class="yl-blog-more float-left text-uppercase" href="/news/detail/{{ $item->news_url}}">Read more <span>+</span></a>
                                             <div class="yl-blog-list-share float-right">
                                                <span class="blog-share-slug text-uppercase">Share</span>
-                                               <a href="https://www.facebook.com/sharer/sharer.php?u=https://lpn.satangapp.in&display=popup"><i class="fab fa-facebook-f"></i></a>
-                                               <a href="#"><i class="fab fa-twitter"></i></a>
+                                               
+                                               {!!  \Share::page('https://lpn.satangapp.in/news/detail/'. $item->news_url)
+                                          ->facebook()
+                                          ->twitter()
+                                          ->linkedin()
+                                          ->telegram()
+                                          ->whatsapp() 
+                                          ->reddit();  !!}
                                                
                                             </div>
                                          </div>
@@ -165,3 +208,7 @@
          ============================================= -->   
 
 @endsection
+@section('js')
+<script src="{{ asset('js/share.js') }}"></script>
+@endsection
+

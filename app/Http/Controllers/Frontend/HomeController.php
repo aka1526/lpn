@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use App\Models\Admins\Organizations;
 use App\Models\Admins\NewsGallery;
 use App\Models\Admins\NewsCatalog;
+
+use Share;
 class HomeController extends Controller
 {
 
@@ -82,7 +84,44 @@ class HomeController extends Controller
             ->orderBy('created_at','desc')->limit(3)->get(); 
             $NewsCatalog= NewsCatalog::where('catalog_status', '=', 'Y')
             ->orderBy('catalog_index')->get();        
-        return view('frontend.pages.news.list', compact('news','RecentNews','NewsCatalog'));
+
+              // Share button 1
+              $shareButtons1 = Share::page(
+                'https://makitweb.com/datatables-ajax-pagination-with-search-and-sort-in-laravel-8/'
+          )
+          ->facebook()
+          ->twitter()
+          ->linkedin()
+          ->telegram()
+          ->whatsapp() 
+          ->reddit();
+
+          // Share button 2
+          $shareButtons2 = Share::page(
+                'https://makitweb.com/how-to-make-autocomplete-search-using-jquery-ui-in-laravel-8/'
+          )
+          ->facebook()
+          ->twitter()
+          ->linkedin()
+          ->telegram();
+
+          // Share button 3
+          $shareButtons3 = Share::page(
+                 'https://makitweb.com/how-to-upload-multiple-files-with-vue-js-and-php/'
+          )
+          ->facebook()
+          ->twitter()
+          ->linkedin()
+          ->telegram()
+          ->whatsapp() 
+          ->reddit();
+
+           
+
+        return view('frontend.pages.news.list', compact('news','RecentNews','NewsCatalog'))
+        ->with('shareButtons1',$shareButtons1 )
+        ->with('shareButtons2',$shareButtons2 )
+        ->with('shareButtons3',$shareButtons3 );
 
     }
     

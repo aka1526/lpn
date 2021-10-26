@@ -4,6 +4,7 @@
 <head>
     @include('frontend.includes.header')
     @yield('css')
+    
 </head>
 
 <body class="yl-home">
@@ -49,13 +50,7 @@
 
     
     <script src="/assets/js/custom.js"></script>
-    <script>
-      $(document).on('click', '.btn-signup', function(e) {
-
-    alert('sdasd');
-
-    });
-  </script>
+   
     @yield('js')
     
 
