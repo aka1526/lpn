@@ -21,11 +21,11 @@
 
 {{-- <meta property="og:image" content="{{ asset('/assets/img/socialimg/bg11.jpg') }}">
 <meta property="og:url" content="{{ URL::to('/') }}">
-<meta property="og:type" content="website"> --}}
+<meta property="og:type" content="website">
 <meta property="og:title"
     content="หน้าแรก | สนามมวยลุมพีนี  | โรงเรียนสอนศิลปะการต่อสู้ | โรงเรียนมวยไทยลุมพิน | Lumpinee academy muaythai">
 <meta property="og:description"
-    content="สนามมวยลุมพีนี |  โรงเรียนสอนศิลปะการต่อสู้ | โรงเรียนมวยไทยลุมพินี | Lumpinee academy muaythai">
+    content="สนามมวยลุมพีนี |  โรงเรียนสอนศิลปะการต่อสู้ | โรงเรียนมวยไทยลุมพินี | Lumpinee academy muaythai"> --}}
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/popper.min.js"></script>
 <!--Internal  Sweet-Alert js-->
