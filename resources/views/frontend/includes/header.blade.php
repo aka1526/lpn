@@ -20,7 +20,13 @@
 <meta property="og:url" content="@yield('og_url', URL::to('/') )">
 <meta property="og:title" content="@yield('og_title','หน้าแรก | สนามมวยลุมพีนี  | โรงเรียนสอนศิลปะการต่อสู้ | โรงเรียนมวยไทยลุมพิน | Lumpinee academy muaythai')">
 <meta property="og:description"  content="@yield('og_description','สนามมวยลุมพีนี |  โรงเรียนสอนศิลปะการต่อสู้ | โรงเรียนมวยไทยลุมพินี | Lumpinee academy muaythai')">  
-    
+<meta property="og:image:width" content="600" />
+<meta property="og:image:height" content="600" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:width" content="600">
+<meta property="og:image" content=""/>
+<meta name="twitter:image" content="">
+
 <script src="/assets/js/jquery.js"></script>
 <script src="/assets/js/popper.min.js"></script>
 <!--Internal  Sweet-Alert js-->
