@@ -1,7 +1,5 @@
 @extends('frontend.layout.index_main')
-@section('title')
- หน้าหลัก 
- @endsection
+@section('title','หน้าหลัก')    
 @section('content')
 <section id="slider-4" class="slider-section-4  position-relative">
    <div class="bubble-dotted">

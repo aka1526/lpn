@@ -53,7 +53,14 @@ Route::get('/members/update/{memberno}', [HomeController::class, 'members_update
 Route::post('/members/login', [MemberUserController::class, 'login'])->name('fn.members.login');
 Route::post('/members/register', [MemberUserController::class, 'register'])->name('fn.members.register');
 Route::get('/members/logout', [MemberUserController::class, 'logout'])->name('fn.members.logout');
- 
+Route::get('/members/forget', [MemberUserController::class, 'forget'])->name('fn.members.forget');
+
+Route::post('/members/forgetpwd', [MemberUserController::class, 'forgetpwd'])->name('fn.members.forgetpwd');
+Route::get('/members/resetpwdpage', [MemberUserController::class, 'resetpwdpage'])->name('fn.members.resetpwdpage');
+
+Route::post('/members/resetpwdurl', [MemberUserController::class, 'resetpwdurl'])->name('fn.members.resetpwdurl');
+        
+
 
 Route::get('/rankings', [HomeController::class, 'rankings_index'])->name('fn.rankings_index');
 Route::get('/rankings/male', [HomeController::class, 'rankings_m'])->name('fn.rankings_m');

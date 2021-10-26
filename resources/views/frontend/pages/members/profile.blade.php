@@ -149,10 +149,13 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card">
-                                    <iframe src="{{ url('https://www.youtube.com/embed/5Peo-ivmupE') }}" frameborder="0"
-                                        allowfullscreen>
-                                    </iframe>
-                                     
+                                   
+                                    <iframe 
+                                    src="{{ url('https://www.youtube.com/embed/5Peo-ivmupE') }}" 
+                                    frameborder="0" 
+                                    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
                                 </div>
                                 <p class="">websitename.com</p>
                             </div>

@@ -18,6 +18,7 @@ use App\Models\Admins\Members;
 use App\Models\Admins\Accessuid;
 use App\Models\Admins\Country; 
 use App\Http\Controllers\Admins\MembersController;
+use App\Http\Controllers\Admins\MailsetupController;
 
 class MemberUserController extends Controller
 {
@@ -184,9 +185,9 @@ class MemberUserController extends Controller
             , 'member_year' => $member_year
             , 'member_month' => $member_month
             , 'member_no' => $member_no
-            ,'member_active' => 'Y'
-            ,'max_no' => $max_no
-            ,'password' =>bcrypt(trim($request->txtpassword))
+            , 'member_active' => 'Y'
+            , 'max_no' => $max_no
+            , 'password' =>bcrypt(trim($request->txtpassword))
             
         ]);
         return view('frontend.pages.members.error')->withsuccess("Create user login success .");
@@ -205,6 +206,92 @@ class MemberUserController extends Controller
             }
    
     }
+
+    public function forget(Request $request)
+    {
+         
+        return view('frontend.pages.members.forget');
+    }
+    
+    public function forgetpwd(Request $request)
+    {
+        $request->validate([
+            'txtemail' => 'required|email',
+        ]);
+         
+         $txtemail = $request->txtemail;
+         $Member =Members::where('user_email',$txtemail)->first();
+        if($Member){
+            
+            $token = Str::random(64);
+                 DB::table('password_resets')->insert([
+                'email' => $txtemail, 
+                'token' => $token, 
+                'member_id' => $Member->member_no,
+                'status' => 'N',
+                'created_at' => Carbon::now()
+              ]);
+              
+           $MailSend= new MailsetupController;
+           $act=  $MailSend->MailSendResetPwd($txtemail,$token);
+
+              $message='We have sent you an email with your a link in order to reset your password';
+           return view('frontend.pages.members.checkmail',compact('message','act')) ;
+        } else {
+            $message='E-mail not find!!!. ';
+            $act=false;
+            return view('frontend.pages.members.checkmail',compact('message','act')) ;
+        }
+        
+        
+    }
+    
+    public function resetpwdpage(Request $request)
+    {
+         
+        return view('frontend.pages.members.resetpwdpage');
+    }
+    public function resetpwdurl(Request $request)
+    {
+
+        
+        $request->validate([
+            'keytoken' => 'required',
+            'newpassword' => 'required',
+            'confirmpassword' => 'required',
+        ]);
+
+        $keytoken = $request->keytoken;
+        $newpassword = $request->newpassword;
+        $update=false;
+        $message='Update Password Error.';
+        $_count = DB::table('password_resets')->where('token','=',$keytoken )->count();
+
+
+       $resets = DB::table('password_resets')->where('token','=',$keytoken )
+        ->where('status','N')->first();
+        if($resets){
+            $message='token Password Expire.';
+            $update = DB::table('password_resets')->where('token','=',$keytoken )->update([
+                'status' => 'Y'
+            ]);
+            if( $update){
+                $message='Update Password success.';
+                Members::where('member_no','=',$resets->member_id)->update([
+                    'password' => bcrypt(trim($newpassword ))
+                ]);
+            }
+           
+        } else {
+
+            if($_count>0){
+                $message='token Password Expire.';
+            }
+        }
+        return response()->json(['success' => $update, 'message' =>  $message ], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);  
+        
+    }
+    
 
     // public function user(Request $request)
     // {

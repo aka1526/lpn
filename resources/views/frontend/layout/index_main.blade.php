@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    @include('frontend.includes.header')
-    @yield('css')
-    
+@include('frontend.includes.header')
+@yield('css') 
 </head>
-
 <body class="yl-home">
     <!-- preloader - start -->
     <div id="yl-preloader"></div>

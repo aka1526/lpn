@@ -352,7 +352,7 @@
                             <input type="text" id="txtpassword" name="txtpassword" placeholder="Password" required>
                             <div class="yl-login-label clearfix">
                               
-                               <a href="#">Forget Password?</a>
+                               <a href="/members/forget">Forget Password?</a>
                             </div>
                             <button type="button" class="btn-close" style="width: 45%;background-color: #777576;" data-dismiss="modal">Close</button>
                             <button type="submit" style="width: 45%;" >Submit</button>

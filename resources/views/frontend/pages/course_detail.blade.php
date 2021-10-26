@@ -2,6 +2,10 @@
 @section('title')
  หน้าหลัก 
  @endsection
+ @section('og_img', URL::to('/images/course/'.$courses_item->course_item_url.'/'. $courses_item->course_item_header_img ))
+@section('og_url', URL::to('/course/'. $courses_item->course_item_url) )
+@section('og_title',  $courses_item->course_item_name)
+@section('og_description', $courses_item->course_item_name)
 @section('content')
    <!-- Start of breadcrumb section
          ============================================= -->

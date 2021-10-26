@@ -14,12 +14,12 @@ use App\Models\Admins\Pageheader;
 
 use Image;
 use File;
-
+use URL;
 use App\Models\Admins\Mailsetups;
 use PHPMailer\PHPMailer\PHPMailer;  
 use PHPMailer\PHPMailer\Exception;  
 use App\Models\Admins\Mailsubscribe;
-
+use App\Models\Admins\Sysinfo;
 
 class MailsetupController extends Controller
 {
@@ -353,6 +353,66 @@ class MailsetupController extends Controller
   
       }
       
+      public function MailSendResetPwd($mailto='',$token=""){     
+        //  $uid =  $request->uid;
+         
+        $Sysinfo=Sysinfo::where('sys_status','Y')->first();
+        $mailto=$mailto;
+        $subject ="Reset Password";
+        $url='/members/resetpwdpage?tokenkey='.$token ;
+        $mailbody ="<h4>We have e-mailed your password reset link!</h4> <br/>
+              <a href=".url($url).">Click To Reset Password </a>  <br/>
+              If you are having trouble, try copying and pasting the following URL into your browser:<br/><br/>
+              ".url($url)."<br/><br/>
+
+            If you did not request this reset, you can ignore this email.<br/>
+
+           <h3> Thanks,</h3><br/>
+            ".$Sysinfo->sys_name ."<br/>
+          
+            Tel. : ".$Sysinfo->sys_phone1."<br/>
+            E-mail  : ".$Sysinfo->sys_email1."<br/>
+            " ;
+        
+          // dd($uid);
+          $Mailsetups = Mailsetups::where('email_status', '=','Y')->first();
+          $mail = new PHPMailer;
+          $mail->isSMTP();
+          $mail->SMTPDebug = 0;
+          $mail->Debugoutput = 'html';
+          $mail->Host =$Mailsetups->smtp_host;//"mail.satangapp.in";// "mail.krumuaythai.or.th";
+          //Set the SMTP port number - likely to be 25, 465 or 587
+          $mail->Port = $Mailsetups->smtp_port;//587; 
+          
+          $mail->SMTPAutoTLS = false;
+          $mail->SMTPSecure = true;
+          //$mail->SMTPSecure = 'tls';
+          if($Mailsetups->smtp_auth=="true"){
+              $mail->SMTPAuth = true;
+          } else {
+              $mail->SMTPAuth = false;
+          }
+      
+          $mail->Username =$Mailsetups->email_address;// "akachai@satangapp.in";//"noreply@krumuaythai.or.th";
+          $mail->Password =$Mailsetups->email_password;//'$t2q51Ap';// "Nm5ULoEI@#%2528587";
+          $mail->setFrom("$Mailsetups->email_from","$Mailsetups->email_from_alia");
+          $mail->AddAddress("$mailto");
+          //$mail->AddCC('memberregister@krumuaythai.or.th'); // memberregister@krumuaythai.or.th pwd=VZAAXzMOl
+          //$mail->addBcc('memberregister@krumuaythai.or.th');
+          $mail->Subject = $subject;
+          $mail->msgHTML($mailbody);
+          
+          if (!$mail->send()) {
+              $success = false;
+          } else {
+              $success =true;
+              
+          }	
+          return $success;
+      // return response()->json(['success' => $success], 200, array('Content-Type' => 'application/json;charset=utf8'), JSON_UNESCAPED_UNICODE);
+  
+      }
+
 
     public function subscribe_index(Request $request)
     {

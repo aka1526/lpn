@@ -2,9 +2,12 @@
 @section('title')
     หน้าหลัก
 @endsection
-
+@section('og_img', URL::to('/images/news/' . $news->news_url . '/' . $news->news_img))
+@section('og_url', URL::to('/news/detail/'. $news->news_url) )
+@section('og_title',  $news->news_toppic )
+@section('og_description',  $news->news_desc)
 @section('css')
-    <link href="/adminpage/assets/plugins/gallery/gallery.css" rel="stylesheet">
+<link href="/adminpage/assets/plugins/gallery/gallery.css" rel="stylesheet">
 @endsection
 @section('content')
 
